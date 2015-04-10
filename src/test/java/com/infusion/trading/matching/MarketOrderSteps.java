@@ -19,8 +19,8 @@ public class MarketOrderSteps {
 		totalShares-=quantity;
 	}
 	
-	@Then(".+(\\d+) shares left.+")
+	@Then(".+ be (\\d+) shares left.+")
 	public void doNothing(int qunatityRemaining) {
-		assertEquals(200, totalShares);
+		assertEquals(qunatityRemaining, totalShares);
 	}
 }
