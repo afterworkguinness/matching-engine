@@ -47,7 +47,7 @@ formatter.match({
   "location": "MarketOrderSteps.addLimitOrderToOrderBook(String,int,int)"
 });
 formatter.result({
-  "duration": 76230148,
+  "duration": 154288368,
   "status": "passed"
 });
 formatter.match({
@@ -64,21 +64,20 @@ formatter.match({
   "location": "MarketOrderSteps.addMarketOrder(String,int)"
 });
 formatter.result({
-  "duration": 76027,
+  "duration": 158896,
   "status": "passed"
 });
 formatter.match({
   "arguments": [
     {
-      "val": "0",
-      "offset": 18
+      "val": "100",
+      "offset": 16
     }
   ],
   "location": "MarketOrderSteps.doNothing(int)"
 });
 formatter.result({
-  "duration": 1614437,
-  "error_message": "java.lang.AssertionError: expected:\u003c200\u003e but was:\u003c100\u003e\r\n\tat org.junit.Assert.fail(Assert.java:88)\r\n\tat org.junit.Assert.failNotEquals(Assert.java:834)\r\n\tat org.junit.Assert.assertEquals(Assert.java:645)\r\n\tat org.junit.Assert.assertEquals(Assert.java:631)\r\n\tat com.infusion.trading.matching.MarketOrderSteps.doNothing(MarketOrderSteps.java:24)\r\n\tat ✽.Then There should be 100 shares left in the order book(com/infusion/trading/matching/marketOrder.feature:6)\r\n",
-  "status": "failed"
+  "duration": 3863700,
+  "status": "passed"
 });
 });
