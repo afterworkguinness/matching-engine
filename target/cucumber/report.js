@@ -26,7 +26,7 @@ formatter.step({
 });
 formatter.step({
   "line": 6,
-  "name": "There should be 100 shares left in the order book",
+  "name": "There should be 50 shares left in the order book",
   "keyword": "Then "
 });
 formatter.match({
@@ -47,7 +47,7 @@ formatter.match({
   "location": "MarketOrderSteps.addLimitOrderToOrderBook(String,int,int)"
 });
 formatter.result({
-  "duration": 57638162,
+  "duration": 51307693,
   "status": "passed"
 });
 formatter.match({
@@ -64,20 +64,21 @@ formatter.match({
   "location": "MarketOrderSteps.incomingMarketOrder(String,int)"
 });
 formatter.result({
-  "duration": 108245,
+  "duration": 188451,
   "status": "passed"
 });
 formatter.match({
   "arguments": [
     {
-      "val": "100",
+      "val": "50",
       "offset": 16
     }
   ],
   "location": "MarketOrderSteps.verifyOrderBookState(int)"
 });
 formatter.result({
-  "duration": 1337627,
-  "status": "passed"
+  "duration": 2004412,
+  "error_message": "java.lang.AssertionError: expected:\u003c100\u003e but was:\u003c50\u003e\n\tat org.junit.Assert.fail(Assert.java:88)\n\tat org.junit.Assert.failNotEquals(Assert.java:834)\n\tat org.junit.Assert.assertEquals(Assert.java:645)\n\tat org.junit.Assert.assertEquals(Assert.java:631)\n\tat com.infusion.trading.matching.MarketOrderSteps.verifyOrderBookState(MarketOrderSteps.java:48)\n\tat ✽.Then There should be 50 shares left in the order book(com/infusion/trading/matching/marketOrder.feature:6)\n",
+  "status": "failed"
 });
 });
