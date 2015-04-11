@@ -5,6 +5,7 @@ public class LimitOrder implements Order {
 	private int quantity;
 	private double limitPrice;
 	private OrderSide side;
+	private boolean completed=false;
 
 	public LimitOrder(int quanity, double limitPrice, OrderSide side) {
 		this.quantity=quanity;
@@ -31,5 +32,24 @@ public class LimitOrder implements Order {
 	
 	public OrderSide getSide() {
 		return side;
+	}
+	
+	public void reduceRemainingQuantity(int transactionQuantity) {
+		quantity-=transactionQuantity;
+		
+		if (quantity == 0) {
+			completed = true;
+		}
+	}
+	
+	public void fill(MarketOrder order) {
+		quantity = Math.max(0, quantity-order.getQuantity());
+		if(quantity == 0) {
+			completed=true;
+		}
+	}
+	
+	public boolean isCompleted() {
+		return completed;
 	}
 }

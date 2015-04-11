@@ -2,6 +2,20 @@ package com.infusion.trading.matching.domain;
 
 public enum OrderSide {
 
-	BUY,
-	SELL
+	BUY {
+		
+		@Override
+		public OrderSide getOppositeSide() {
+			return SELL;
+		}
+
+	},
+	SELL {
+		
+		@Override
+		public OrderSide getOppositeSide() {
+			return BUY;
+		}
+	};
+	public abstract OrderSide getOppositeSide();
 }

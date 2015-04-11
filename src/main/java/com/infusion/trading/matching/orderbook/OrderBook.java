@@ -5,13 +5,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.infusion.trading.matching.domain.LimitOrder;
-import com.infusion.trading.matching.domain.Order;
 import com.infusion.trading.matching.domain.OrderSide;
 
 public class OrderBook {
 
 	private static List<LimitOrder>	buyOrders	= new LinkedList<LimitOrder>();
 	private static List<LimitOrder>	sellOrders	= new LinkedList<LimitOrder>();
+	private final int				TOP			= 0;
 
 	public void addLimitOrder(LimitOrder order) {
 		/*
@@ -37,6 +37,22 @@ public class OrderBook {
 		}
 	}
 
+	public LimitOrder retrieveOrder(OrderSide side) {
+		LimitOrder order;
+
+		if (side == OrderSide.BUY) {
+			order = buyOrders.get(TOP);
+		}
+		else {
+			order = sellOrders.get(TOP);
+		}
+//		if (order != null) {
+//			removeFilledOrderFromTopOfBook(side);
+//		}
+		return order;
+
+	}
+
 	public void fillOrder(int fillQuantity) {
 		// will only ever fill starting at top
 
@@ -50,7 +66,7 @@ public class OrderBook {
 		}
 	}
 
-	public void removeFilledOrderFromTopOfBook(OrderSide side) {
+	private void removeFilledOrderFromTopOfBook(OrderSide side) {
 		// will only ever remove starting at top
 
 		/*
@@ -76,12 +92,13 @@ public class OrderBook {
 	}
 
 	/*
-	 * Think these through. Maybe need to synchronize and return them as a Pair() 
+	 * Think these through. Maybe need to synchronize and return them as a
+	 * Pair()
 	 */
 	public List<LimitOrder> getBuyOrders() {
 		return Collections.unmodifiableList(buyOrders);
 	}
-	
+
 	public List<LimitOrder> getSellOrders() {
 		return Collections.unmodifiableList(sellOrders);
 	}
