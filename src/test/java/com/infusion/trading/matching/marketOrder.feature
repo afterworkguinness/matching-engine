@@ -4,3 +4,12 @@ Feature: Market order
       Given A limit sell order exists in the order book for 700 shares at 100
        When A market buy order is placed for 600 shares
        Then There should be 100 shares left in the order book
+
+  Scenario: A market buy order is placed and matched by multiple limit orders
+      Given these limit orders in the order book
+      		| side		| quantity	| limitPrice	|
+      		| sell		| 500		| 100			|
+      		| sell		| 400		| 100			|
+       When A market buy order is placed for 600 shares
+       Then There should be 300 shares left in the order book
+       

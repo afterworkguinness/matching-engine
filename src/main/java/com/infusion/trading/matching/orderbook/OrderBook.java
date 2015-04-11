@@ -11,9 +11,10 @@ public class OrderBook {
 
 	private static List<LimitOrder>	buyOrders	= new LinkedList<LimitOrder>();
 	private static List<LimitOrder>	sellOrders	= new LinkedList<LimitOrder>();
-	private final int				TOP			= 0;
+	private final int TOP			= 0;
 
 	public void addLimitOrder(LimitOrder order) {
+		
 		/*
 		 * Want to lock the entire order book at one time. Only one order,
 		 * regardless if it's buy or sell allowed in at one time
@@ -27,8 +28,7 @@ public class OrderBook {
 				case SELL:
 					sellOrders.add(order);
 					break;
-			}
-			;
+			};
 
 			/*
 			 * Backup to DB while still locking. If you do it after lock is
@@ -46,9 +46,6 @@ public class OrderBook {
 		else {
 			order = sellOrders.get(TOP);
 		}
-//		if (order != null) {
-//			removeFilledOrderFromTopOfBook(side);
-//		}
 		return order;
 
 	}
@@ -66,7 +63,7 @@ public class OrderBook {
 		}
 	}
 
-	private void removeFilledOrderFromTopOfBook(OrderSide side) {
+	public void removeCompletedOrder(OrderSide side) {
 		// will only ever remove starting at top
 
 		/*
@@ -101,5 +98,24 @@ public class OrderBook {
 
 	public List<LimitOrder> getSellOrders() {
 		return Collections.unmodifiableList(sellOrders);
+	}
+	
+	/*
+	 * ONLY FOR TESTING!
+	 * Find a way to get rid of this 
+	 */
+	public void clear() {
+		sellOrders.clear();
+		buyOrders.clear();
+	}
+	
+	public boolean isLiquidityLeft(OrderSide side) {
+		switch (side) {
+			case BUY:
+				return buyOrders.isEmpty()==false;
+			case SELL:
+				return sellOrders.isEmpty()==false;
+		};
+		return false;
 	}
 }

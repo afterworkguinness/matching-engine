@@ -1,6 +1,9 @@
 package com.infusion.trading.matching;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,14 +19,11 @@ import cucumber.api.java.en.When;
 
 public class MarketOrderSteps {
 
-	private int totalShares;
-	
 	@Autowired
 	private OrderBook orderbook;
 	
 	@Autowired
 	private MatchingEngine matchingEngine;
-	
 	
 	@Given("^.+ limit (.+) .+ for (\\d+) shares at (\\d+)$")
 	public void addLimitOrderToOrderBook(String orderType, int quantity, int limitPrice) {
@@ -31,20 +31,27 @@ public class MarketOrderSteps {
 		LimitOrder limitOrder = new LimitOrder(quantity, limitPrice, OrderSide.SELL);
 		
 		orderbook.addLimitOrder(limitOrder);
-		totalShares=quantity;
+	}
+	
+	@Given("^these limit orders in the order book$")
+	public void addLimitOrdersToOrderBook(List<LimitOrder> orders) {
+		orderbook.clear();
+		for(LimitOrder order : orders) {
+			orderbook.addLimitOrder(order);
+		}
+		
 	}
 	
 	@When(".+ market (.+) order .+ for (.+) shares")
 	public void incomingMarketOrder(String orderType, int quantity) 
 	{
 		matchingEngine.fillIncomingOrder(new MarketOrder(OrderSide.BUY, quantity));
-		totalShares-=quantity;
 	}
 	
 	@Then(".+ be (\\d+) shares left.+")
 	public void verifyOrderBookState(int qunatityRemaining) {
 		assertTrue(orderbook.getBuyOrders().isEmpty());
 		LimitOrder limitOrder = orderbook.getSellOrders().get(0);
-		assertEquals(limitOrder.getQuantity(), qunatityRemaining);
+		assertEquals(qunatityRemaining,limitOrder.getQuantity());
 	}
 }

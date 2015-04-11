@@ -9,7 +9,7 @@ import com.infusion.trading.matching.orderbook.OrderBook;
 public class MatchingEngine {
 
 	@Autowired
-	private OrderBook	orderBook;
+	private OrderBook orderBook;
 
 	public void fillIncomingOrder(MarketOrder order) {
 
@@ -20,18 +20,26 @@ public class MatchingEngine {
 
 		synchronized (this) {
 			if (order instanceof MarketOrder) {
-				MarketOrder marketOrder = (MarketOrder) order;
 
-				LimitOrder limitOrder = orderBook.retrieveOrder(marketOrder.getSide().getOppositeSide());
+				MarketOrder incomingOrder = (MarketOrder) order;
 
-				if (limitOrder != null) {
-					
-					int transactionQuantity = Math.min(marketOrder.getQuantity(), limitOrder.getQuantity());
-					marketOrder.fill(limitOrder);
-					marketOrder.reduceRemainingQuantity(transactionQuantity);
-					
-					limitOrder.fill(marketOrder);
-					limitOrder.reduceRemainingQuantity(transactionQuantity);
+				while (incomingOrder.isCompleted() == false && orderBook.isLiquidityLeft(incomingOrder.getSide().getOppositeSide())) {
+
+					LimitOrder restingLimitOrder = orderBook.retrieveOrder(incomingOrder.getSide().getOppositeSide());
+
+					if (restingLimitOrder != null) {
+
+						int transactionQuantity = Math.min(incomingOrder.getQuantity(), restingLimitOrder.getQuantity());
+
+						incomingOrder.fill(restingLimitOrder);
+
+						incomingOrder.reduceRemainingQuantity(transactionQuantity);
+						restingLimitOrder.reduceRemainingQuantity(transactionQuantity);
+
+						if (restingLimitOrder.isCompleted()) {
+							orderBook.removeCompletedOrder(restingLimitOrder.getSide());
+						}
+					}
 				}
 			}
 		}
