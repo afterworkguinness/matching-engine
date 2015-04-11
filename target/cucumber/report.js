@@ -47,7 +47,7 @@ formatter.match({
   "location": "MarketOrderSteps.addLimitOrderToOrderBook(String,int,int)"
 });
 formatter.result({
-  "duration": 154288368,
+  "duration": 57638162,
   "status": "passed"
 });
 formatter.match({
@@ -61,10 +61,10 @@ formatter.match({
       "offset": 33
     }
   ],
-  "location": "MarketOrderSteps.addMarketOrder(String,int)"
+  "location": "MarketOrderSteps.incomingMarketOrder(String,int)"
 });
 formatter.result({
-  "duration": 158896,
+  "duration": 108245,
   "status": "passed"
 });
 formatter.match({
@@ -74,10 +74,10 @@ formatter.match({
       "offset": 16
     }
   ],
-  "location": "MarketOrderSteps.doNothing(int)"
+  "location": "MarketOrderSteps.verifyOrderBookState(int)"
 });
 formatter.result({
-  "duration": 3863700,
+  "duration": 1337627,
   "status": "passed"
 });
 });

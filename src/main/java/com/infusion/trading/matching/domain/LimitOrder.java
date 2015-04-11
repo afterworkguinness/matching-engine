@@ -3,8 +3,15 @@ package com.infusion.trading.matching.domain;
 public class LimitOrder implements Order {
 	
 	private int quantity;
-	private int limitPrice;
+	private double limitPrice;
+	private OrderSide side;
 
+	public LimitOrder(int quanity, double limitPrice, OrderSide side) {
+		this.quantity=quanity;
+		this.limitPrice=limitPrice;
+		this.side = side;
+	}
+	
 	public void setQuantity(int quantity) {
 
 		this.quantity=quantity;
@@ -14,11 +21,15 @@ public class LimitOrder implements Order {
 		return quantity;
 	}
 
-	public int getLimitPrice() {
+	public double getLimitPrice() {
 		return limitPrice;
 	}
 
 	public void setLimitPrice(int limitPrice) {
 		this.limitPrice = limitPrice;
+	}
+	
+	public OrderSide getSide() {
+		return side;
 	}
 }
