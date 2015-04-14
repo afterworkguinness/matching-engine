@@ -21,7 +21,7 @@ public class MatchingEngine {
 		synchronized (this) {
 			if (order instanceof MarketOrder) {
 
-				MarketOrder incomingOrder = (MarketOrder) order;
+				MarketOrder incomingOrder = order;
 
 				while (incomingOrder.isCompleted() == false && orderBook.isLiquidityLeft(incomingOrder.getSide().getOppositeSide())) {
 
@@ -41,6 +41,12 @@ public class MatchingEngine {
 						}
 					}
 				}
+				
+				if(incomingOrder.isCompleted() == false) {
+					LimitOrder limitOrder = new LimitOrder(incomingOrder.getQuantity(), incomingOrder.getLastTradedPrice(), incomingOrder.getSide());
+					orderBook.addLimitOrder(limitOrder);
+				}
+				incomingOrder=null; //I think this helps with expedited GC... double check.
 			}
 		}
 	}

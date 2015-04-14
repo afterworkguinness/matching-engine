@@ -6,17 +6,19 @@ public class MarketOrder implements Order {
 	private OrderSide side;
 	private boolean completed = false;
 	private double totalPrice;
+	private double lastTradedPrice;
+	
 	
 	public MarketOrder(OrderSide side, int orderQuantity) {
 		this.quantity=orderQuantity;
 		this.side=side;
 	}
 	
-	
 	public void fill(LimitOrder limitOrder) {
 		
 		int transactionQuantity=Math.min(quantity, limitOrder.getQuantity());
 		totalPrice += (transactionQuantity*limitOrder.getLimitPrice());
+		lastTradedPrice = limitOrder.getLimitPrice();
 	}
 
 	public void reduceRemainingQuantity(int transactionQuantity) {
@@ -64,5 +66,15 @@ public class MarketOrder implements Order {
 
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+
+	public double getLastTradedPrice() {
+		return lastTradedPrice;
+	}
+
+
+	public void setLastTradedPrice(double lastTradedPrice) {
+		this.lastTradedPrice = lastTradedPrice;
 	}
 }

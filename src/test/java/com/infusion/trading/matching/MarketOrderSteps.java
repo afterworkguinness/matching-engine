@@ -39,7 +39,6 @@ public class MarketOrderSteps {
 		for(LimitOrder order : orders) {
 			orderbook.addLimitOrder(order);
 		}
-		
 	}
 	
 	@When(".+ market (.+) order .+ for (.+) shares")
@@ -54,4 +53,14 @@ public class MarketOrderSteps {
 		LimitOrder limitOrder = orderbook.getSellOrders().get(0);
 		assertEquals(qunatityRemaining,limitOrder.getQuantity());
 	}
-}
+	
+//	@Then("^The (.+) side of the order book should look like this at the end of the trade:$")
+//	public void verifyOrderBookState(OrderSide side, int quantity, double price) {
+//		if(side == OrderSide.BUY) {
+//			assertEquals(limitOrders, orderbook.getBuyOrders());
+//		}
+//		else {
+//			assertEquals(limitOrders, orderbook.getSellOrders());
+//		}
+//	}
+}	

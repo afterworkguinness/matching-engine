@@ -1,6 +1,6 @@
 Feature: Market order
 
-  Scenario: A market buy order is placed
+  : A market buy order is placed
       Given A limit sell order exists in the order book for 700 shares at 100
        When A market buy order is placed for 600 shares
        Then There should be 100 shares left in the order book
@@ -13,3 +13,14 @@ Feature: Market order
        When A market buy order is placed for 600 shares
        Then There should be 300 shares left in the order book
        
+       
+  #TODO: Need limit order factory
+  #Scenario: A market buy order is converted to a limit order when liquidity runs out
+  #    Given these limit orders in the order book
+  #    		| side		| quantity	| limitPrice	|
+  #    		| sell		| 500		| 100			|
+  #    		| sell		| 100		| 200			|
+  #     When A market buy order is placed for 700 shares
+  #     Then The buy side of the order book should look like this at the end of the trade:
+  #     		| side		| quantity	| limitPrice	|
+  #    		| buy		| 100		| 200			|
