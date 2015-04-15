@@ -21,7 +21,7 @@ public class LimitOrderSteps {
 	private OrderBook orderBook;
 
 	@Autowired
-	private OrderFillService matcher;
+	private OrderFillService orderFillService;
 
 	@Given("^The order book looks likes this before the trade is placed:$")
 	public void setupOrderbook(List<LimitOrder> limitOrders) {
@@ -34,7 +34,7 @@ public class LimitOrderSteps {
 
 	@When("^A limit (.+) order is placed for (\\d+) shares at (\\d+)$")
 	public void addLimitOrder(OrderSide side, int quantity, double limitPrice) {
-		orderBook.addLimitOrder(new LimitOrder(quantity, limitPrice, side));
+		orderFillService.processIncomingLimitOrder(new LimitOrder(quantity, limitPrice, side));
 	}
 
 	@Then("^The (.+) side of the order book should look like this at the end of the trade:$")
