@@ -4,31 +4,32 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.infusion.trading.matching.domain.LimitOrder;
 import com.infusion.trading.matching.domain.OrderSide;
+import com.infusion.trading.matching.lmit.LimitOrder;
 
 public class OrderBook {
 
-	private static List<LimitOrder>	buyOrders	= new LinkedList<LimitOrder>();
-	private static List<LimitOrder>	sellOrders	= new LinkedList<LimitOrder>();
-	private final int TOP			= 0;
+	private static List<LimitOrder> buyOrders = new LinkedList<LimitOrder>();
+	private static List<LimitOrder> sellOrders = new LinkedList<LimitOrder>();
+	private final int TOP = 0;
 
 	public void addLimitOrder(LimitOrder order) {
-		
+
 		/*
 		 * Want to lock the entire order book at one time. Only one order,
 		 * regardless if it's buy or sell allowed in at one time
 		 */
 		synchronized (this) {
 
-			switch (order.getSide()) {
+			switch (order.getOrderDetails().getSide()) {
 				case BUY:
 					buyOrders.add(order);
 					break;
 				case SELL:
 					sellOrders.add(order);
 					break;
-			};
+			}
+			;
 
 			/*
 			 * Backup to DB while still locking. If you do it after lock is
@@ -99,23 +100,23 @@ public class OrderBook {
 	public List<LimitOrder> getSellOrders() {
 		return Collections.unmodifiableList(sellOrders);
 	}
-	
+
 	/*
-	 * ONLY FOR TESTING!
-	 * Find a way to get rid of this 
+	 * ONLY FOR TESTING! Find a way to get rid of this
 	 */
 	public void clear() {
 		sellOrders.clear();
 		buyOrders.clear();
 	}
-	
+
 	public boolean isLiquidityLeft(OrderSide side) {
 		switch (side) {
 			case BUY:
-				return buyOrders.isEmpty()==false;
+				return buyOrders.isEmpty() == false;
 			case SELL:
-				return sellOrders.isEmpty()==false;
-		};
+				return sellOrders.isEmpty() == false;
+		}
+		;
 		return false;
 	}
 }

@@ -2,14 +2,19 @@ package com.infusion.trading.matching.matcher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.infusion.trading.matching.domain.LimitOrder;
 import com.infusion.trading.matching.domain.MarketOrder;
+import com.infusion.trading.matching.lmit.LimitOrder;
+import com.infusion.trading.matching.lmit.LimitOrderDetails;
+import com.infusion.trading.matching.lmit.LimitOrderFactory;
 import com.infusion.trading.matching.orderbook.OrderBook;
 
 public class MatchingEngine {
 
 	@Autowired
 	private OrderBook orderBook;
+
+	@Autowired
+	private LimitOrderFactory limitOrderFactory;
 
 	public void fillIncomingOrder(MarketOrder order) {
 
@@ -29,7 +34,7 @@ public class MatchingEngine {
 
 					if (restingLimitOrder != null) {
 
-						int transactionQuantity = Math.min(incomingOrder.getQuantity(), restingLimitOrder.getQuantity());
+						int transactionQuantity = Math.min(incomingOrder.getQuantity(), restingLimitOrder.getOrderDetails().getQuantity());
 
 						incomingOrder.fill(restingLimitOrder);
 
@@ -37,16 +42,17 @@ public class MatchingEngine {
 						restingLimitOrder.reduceRemainingQuantity(transactionQuantity);
 
 						if (restingLimitOrder.isCompleted()) {
-							orderBook.removeCompletedOrder(restingLimitOrder.getSide());
+							orderBook.removeCompletedOrder(restingLimitOrder.getOrderDetails().getSide());
 						}
 					}
 				}
-				
-				if(incomingOrder.isCompleted() == false) {
-					LimitOrder limitOrder = new LimitOrder(incomingOrder.getQuantity(), incomingOrder.getLastTradedPrice(), incomingOrder.getSide());
-					orderBook.addLimitOrder(limitOrder);
+
+				if (incomingOrder.isCompleted() == false) {
+					LimitOrderDetails limitOrderDetails = new LimitOrderDetails(incomingOrder.getQuantity(), incomingOrder.getLastTradedPrice(), incomingOrder.getSide());
+					orderBook.addLimitOrder(limitOrderFactory.createLimitOrder(limitOrderDetails));
 				}
-				incomingOrder=null; //I think this helps with expedited GC... double check.
+				incomingOrder = null; // I think this helps with expedited GC...
+										// double check.
 			}
 		}
 	}
