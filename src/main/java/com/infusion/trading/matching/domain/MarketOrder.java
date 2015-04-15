@@ -1,6 +1,5 @@
 package com.infusion.trading.matching.domain;
 
-
 public class MarketOrder implements Order {
 
 	private int quantity;
@@ -14,7 +13,6 @@ public class MarketOrder implements Order {
 		this.side = side;
 	}
 
-	@Override
 	public void reduceRemainingQuantity(int transactionQuantity) {
 		quantity -= transactionQuantity;
 
@@ -23,7 +21,6 @@ public class MarketOrder implements Order {
 		}
 	}
 
-	@Override
 	public int getQuantity() {
 		return quantity;
 	}
@@ -32,7 +29,6 @@ public class MarketOrder implements Order {
 		this.quantity = orderQuantity;
 	}
 
-	@Override
 	public OrderSide getSide() {
 		return side;
 	}

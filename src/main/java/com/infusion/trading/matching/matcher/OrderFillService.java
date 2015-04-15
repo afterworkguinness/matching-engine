@@ -27,11 +27,12 @@ public class OrderFillService {
 			if (match != null) {
 
 				fill(incomingLimitOrder, match);
-		
-				if(incomingLimitOrder.isCompleted() == false) {
+
+				if (incomingLimitOrder.isCompleted() == false) {
 					processIncomingLimitOrder(incomingLimitOrder);
 				}
-			} else {
+			}
+			else {
 				incomingLimitOrder.setArrivalTimeInOrderBook(arrivalTimeService.getArrivalTimeInOrderBook());
 				orderBook.addLimitOrder(incomingLimitOrder);
 			}
@@ -43,6 +44,10 @@ public class OrderFillService {
 		int transactionQuantity = Math.min(incomingOrder.getQuantity(), match.getQuantity());
 		incomingOrder.reduceRemainingQuantity(transactionQuantity);
 		match.reduceRemainingQuantity(transactionQuantity);
+
+		if (match.isCompleted()) {
+			orderBook.removeCompletedOrder(match.getSide());
+		}
 	}
 
 	public void fillIncomingMarketOrder(MarketOrder incomingOrder) {
@@ -60,17 +65,8 @@ public class OrderFillService {
 
 				if (restingLimitOrder != null) {
 
-					int transactionQuantity = Math.min(incomingOrder.getQuantity(), restingLimitOrder.getQuantity());
-
 					fill(incomingOrder, restingLimitOrder);
 					incomingOrder.setLastTradedPrice(restingLimitOrder.getLimitPrice());
-
-					incomingOrder.reduceRemainingQuantity(transactionQuantity);
-					restingLimitOrder.reduceRemainingQuantity(transactionQuantity);
-
-					if (restingLimitOrder.isCompleted()) {
-						orderBook.removeCompletedOrder(restingLimitOrder.getSide());
-					}
 				}
 			}
 
@@ -93,7 +89,8 @@ public class OrderFillService {
 			if (incomingOrder.getLimitPrice() <= restingLimitOrderAtTopOfBook.getLimitPrice()) {
 				return restingLimitOrderAtTopOfBook;
 			}
-		} else if (OrderSide.SELL == incomingOrder.getSide()) {
+		}
+		else if (OrderSide.SELL == incomingOrder.getSide()) {
 
 			if (incomingOrder.getLimitPrice() >= restingLimitOrderAtTopOfBook.getLimitPrice()) {
 				return restingLimitOrderAtTopOfBook;

@@ -1,20 +1,19 @@
 package com.infusion.trading.matching.domain;
 
 public class LimitOrder implements Order {
-	
+
 	private int quantity;
 	private double limitPrice;
 	private OrderSide side;
 	private boolean completed;
 	private long arrivalTimeInOrderBook;
-	
+
 	public LimitOrder(int quantity, double limitPrice, OrderSide side) {
-		this.quantity=quantity;
-		this.limitPrice=limitPrice;
-		this.side=side;
+		this.quantity = quantity;
+		this.limitPrice = limitPrice;
+		this.side = side;
 	}
-	
-	@Override
+
 	public void reduceRemainingQuantity(int transactionQuantity) {
 		quantity -= transactionQuantity;
 
@@ -23,7 +22,6 @@ public class LimitOrder implements Order {
 		}
 	}
 
-	@Override
 	public int getQuantity() {
 		return quantity;
 	}
@@ -40,7 +38,6 @@ public class LimitOrder implements Order {
 		this.limitPrice = limitPrice;
 	}
 
-	@Override
 	public OrderSide getSide() {
 		return side;
 	}
@@ -64,28 +61,23 @@ public class LimitOrder implements Order {
 	public void setArrivalTimeInOrderBook(long arrivalTimeInOrderBook) {
 		this.arrivalTimeInOrderBook = arrivalTimeInOrderBook;
 	}
-	
+
 	@Override
 	public boolean equals(Object objectToTest) {
-		
-		if(objectToTest instanceof LimitOrder) {
-			LimitOrder orderToTest = (LimitOrder)objectToTest;
-			if(orderToTest.getSide()==getSide() &&
-			   orderToTest.getLimitPrice() == getLimitPrice() &&
-			   orderToTest.getQuantity() == getQuantity() &&
-			   orderToTest.getArrivalTimeInOrderBook() == getArrivalTimeInOrderBook() &&
-			   orderToTest.isCompleted() == isCompleted()) {
+
+		if (objectToTest instanceof LimitOrder) {
+			LimitOrder orderToTest = (LimitOrder) objectToTest;
+			if (orderToTest.getSide() == getSide() && orderToTest.getLimitPrice() == getLimitPrice() && orderToTest.getQuantity() == getQuantity()
+					&& orderToTest.getArrivalTimeInOrderBook() == getArrivalTimeInOrderBook() && orderToTest.isCompleted() == isCompleted()) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public int hashCode() {
-		return Double.hashCode(getLimitPrice()) +
-			   getQuantity() +
-			   Long.hashCode(getArrivalTimeInOrderBook());
+		return Double.hashCode(getLimitPrice()) + getQuantity() + Long.hashCode(getArrivalTimeInOrderBook());
 	}
 
 	@Override
