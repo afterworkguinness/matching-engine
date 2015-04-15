@@ -59,7 +59,14 @@ public class LimitOrder implements Order {
 	}
 
 	public void setArrivalTimeInOrderBook(long arrivalTimeInOrderBook) {
-		this.arrivalTimeInOrderBook = arrivalTimeInOrderBook;
+
+		if (arrivalTimeInOrderBook == 0) {
+
+			this.arrivalTimeInOrderBook = arrivalTimeInOrderBook;
+		}
+		else {
+			throw new UnsupportedOperationException("Arrival time in orderbook can only be set once!");
+		}
 	}
 
 	@Override

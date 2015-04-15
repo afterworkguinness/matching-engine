@@ -31,6 +31,6 @@ public class LimitOrderSteps {
 
 	@When("^A limit (.+) order is palced for (\\d+) shares at (\\d+)$")
 	public void addLimitOrder(OrderSide side, int quantity, double limitPrice) {
-
+		orderBook.addLimitOrder(new LimitOrder(quantity, limitPrice, side));
 	}
 }

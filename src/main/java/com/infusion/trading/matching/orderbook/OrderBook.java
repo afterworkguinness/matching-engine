@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.infusion.trading.matching.domain.LimitOrder;
@@ -12,12 +13,16 @@ import com.infusion.trading.matching.domain.OrderSide;
 @Component
 public class OrderBook {
 
+	@Autowired
+	private IOrderArrivalTimeService arrivalTimeService;
+
 	private static List<LimitOrder> buyOrders = new LinkedList<LimitOrder>();
 	private static List<LimitOrder> sellOrders = new LinkedList<LimitOrder>();
 	private final int TOP = 0;
 
 	public void addLimitOrder(LimitOrder order) {
 
+		order.setArrivalTimeInOrderBook(arrivalTimeService.getArrivalTimeInOrderBook());
 		/*
 		 * Want to lock the entire order book at one time. Only one order,
 		 * regardless if it's buy or sell allowed in at one time
@@ -32,7 +37,6 @@ public class OrderBook {
 					sellOrders.add(order);
 					break;
 			}
-			;
 
 			/*
 			 * Backup to DB while still locking. If you do it after lock is

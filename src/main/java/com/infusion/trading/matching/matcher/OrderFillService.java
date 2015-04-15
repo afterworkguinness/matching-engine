@@ -7,7 +7,6 @@ import com.infusion.trading.matching.domain.LimitOrder;
 import com.infusion.trading.matching.domain.MarketOrder;
 import com.infusion.trading.matching.domain.Order;
 import com.infusion.trading.matching.domain.OrderSide;
-import com.infusion.trading.matching.orderbook.IOrderArrivalTimeService;
 import com.infusion.trading.matching.orderbook.OrderBook;
 
 @Component
@@ -15,9 +14,6 @@ public class OrderFillService {
 
 	@Autowired
 	private OrderBook orderBook;
-
-	@Autowired
-	private IOrderArrivalTimeService arrivalTimeService;
 
 	public void processIncomingLimitOrder(LimitOrder incomingLimitOrder) {
 		synchronized (this) {
@@ -33,7 +29,6 @@ public class OrderFillService {
 				}
 			}
 			else {
-				incomingLimitOrder.setArrivalTimeInOrderBook(arrivalTimeService.getArrivalTimeInOrderBook());
 				orderBook.addLimitOrder(incomingLimitOrder);
 			}
 		}
@@ -72,7 +67,6 @@ public class OrderFillService {
 
 			if (incomingOrder.isCompleted() == false) {
 				LimitOrder limitOrder = new LimitOrder(incomingOrder.getQuantity(), incomingOrder.getLastTradedPrice(), incomingOrder.getSide());
-				limitOrder.setArrivalTimeInOrderBook(arrivalTimeService.getArrivalTimeInOrderBook());
 				orderBook.addLimitOrder(limitOrder);
 			}
 			incomingOrder = null; // I think this helps with expedited GC...
