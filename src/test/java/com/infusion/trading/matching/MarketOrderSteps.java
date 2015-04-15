@@ -3,6 +3,7 @@ package com.infusion.trading.matching;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.infusion.trading.matching.domain.MarketOrder;
 import com.infusion.trading.matching.domain.OrderSide;
 import com.infusion.trading.matching.lmit.LimitOrder;
-import com.infusion.trading.matching.lmit.LimitOrderDetails;
+import com.infusion.trading.matching.lmit.LimitOrderDetail;
 import com.infusion.trading.matching.lmit.LimitOrderFactory;
 import com.infusion.trading.matching.matcher.MatchingEngine;
 import com.infusion.trading.matching.orderbook.OrderBook;
@@ -32,14 +33,14 @@ public class MarketOrderSteps {
 
 	@Given("^.+ limit (.+) .+ for (\\d+) shares at (\\d+)$")
 	public void addLimitOrderToOrderBook(String orderType, int quantity, int limitPrice) {
-		LimitOrderDetails orderDetails = new LimitOrderDetails(quantity, limitPrice, OrderSide.SELL);
+		LimitOrderDetail orderDetails = new LimitOrderDetail(quantity, limitPrice, OrderSide.SELL);
 		orderbook.addLimitOrder(limitOrderFactory.createLimitOrder(orderDetails));
 	}
 
 	@Given("^these limit orders in the order book$")
-	public void addLimitOrdersToOrderBook(List<LimitOrderDetails> orders) {
+	public void addLimitOrdersToOrderBook(List<LimitOrderDetail> orders) {
 		orderbook.clear();
-		for (LimitOrderDetails order : orders) {
+		for (LimitOrderDetail order : orders) {
 			orderbook.addLimitOrder(limitOrderFactory.createLimitOrder(order));
 		}
 	}
@@ -53,17 +54,23 @@ public class MarketOrderSteps {
 	public void verifyOrderBookState(int qunatityRemaining) {
 		assertTrue(orderbook.getBuyOrders().isEmpty());
 		LimitOrder limitOrder = orderbook.getSellOrders().get(0);
-		assertEquals(qunatityRemaining, limitOrder.getOrderDetails().getQuantity());
+		assertEquals(qunatityRemaining, limitOrder.getOrderDetail().getQuantity());
 	}
 
-	// @Then("^The (.+) side of the order book should look like this at the end of the trade:$")
-	// public void verifyOrderBookState(OrderSide side, int quantity, double
-	// price) {
-	// if(side == OrderSide.BUY) {
-	// assertEquals(limitOrders, orderbook.getBuyOrders());
-	// }
-	// else {
-	// assertEquals(limitOrders, orderbook.getSellOrders());
-	// }
-	// }
+	@Then("^The (.+) side of the order book should look like this at the end of the trade:$")
+	public void verifyOrderBookState(OrderSide side, List<LimitOrderDetail> limitOrderDetails) {
+
+		List<LimitOrder> limitOrders = new LinkedList<LimitOrder>();
+
+		for (LimitOrderDetail orderDetail : limitOrderDetails) {
+			limitOrders.add(limitOrderFactory.createLimitOrder(orderDetail));
+		}
+
+		if (side == OrderSide.BUY) {
+			assertEquals(limitOrders, orderbook.getBuyOrders());
+		}
+		else {
+			assertEquals(limitOrders, orderbook.getSellOrders());
+		}
+	}
 }

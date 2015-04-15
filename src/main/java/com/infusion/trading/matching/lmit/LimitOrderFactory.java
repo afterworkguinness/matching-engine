@@ -11,7 +11,7 @@ public class LimitOrderFactory {
 	@Autowired
 	private IOrderArrivalTimeService arrivalTimeService;
 
-	public LimitOrder createLimitOrder(LimitOrderDetails orderDetails) {
+	public LimitOrder createLimitOrder(LimitOrderDetail orderDetails) {
 
 		return new LimitOrder(orderDetails, arrivalTimeService.getArrivalTimeInOrderBook());
 	}

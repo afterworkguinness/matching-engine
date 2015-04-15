@@ -4,7 +4,7 @@ import com.infusion.trading.matching.domain.Order;
 
 public class LimitOrder implements Order {
 
-	private LimitOrderDetails orderDetails;
+	private LimitOrderDetail orderDetails;
 	private boolean completed;
 	private long creationTime;
 
@@ -13,12 +13,12 @@ public class LimitOrder implements Order {
 	}
 
 	// Should only be called from LimitOrerFactory
-	LimitOrder(LimitOrderDetails orderDetails, long creationTime) {
+	LimitOrder(LimitOrderDetail orderDetails, long creationTime) {
 		this.orderDetails = orderDetails;
 		this.creationTime = creationTime;
 	}
 
-	public LimitOrderDetails getOrderDetails() {
+	public LimitOrderDetail getOrderDetail() {
 		return orderDetails;
 	}
 
@@ -44,7 +44,7 @@ public class LimitOrder implements Order {
 			// /**** EXCEPT IN A TEST WHERE ALL ORDERS HAVE TIME 0
 			if (limitOrderToCompare.getCreationTime() == getCreationTime()) {
 
-				if (limitOrderToCompare.getOrderDetails().equals(getOrderDetails())) {
+				if (limitOrderToCompare.getOrderDetail().equals(getOrderDetail())) {
 					return true;
 				}
 			}

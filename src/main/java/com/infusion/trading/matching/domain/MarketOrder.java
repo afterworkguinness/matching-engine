@@ -17,9 +17,9 @@ public class MarketOrder implements Order {
 
 	public void fill(LimitOrder limitOrder) {
 
-		int transactionQuantity = Math.min(quantity, limitOrder.getOrderDetails().getQuantity());
-		totalPrice += (transactionQuantity * limitOrder.getOrderDetails().getLimitPrice());
-		lastTradedPrice = limitOrder.getOrderDetails().getLimitPrice();
+		int transactionQuantity = Math.min(quantity, limitOrder.getOrderDetail().getQuantity());
+		totalPrice += (transactionQuantity * limitOrder.getOrderDetail().getLimitPrice());
+		lastTradedPrice = limitOrder.getOrderDetail().getLimitPrice();
 	}
 
 	public void reduceRemainingQuantity(int transactionQuantity) {

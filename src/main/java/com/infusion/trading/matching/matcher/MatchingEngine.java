@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.infusion.trading.matching.domain.MarketOrder;
 import com.infusion.trading.matching.lmit.LimitOrder;
-import com.infusion.trading.matching.lmit.LimitOrderDetails;
+import com.infusion.trading.matching.lmit.LimitOrderDetail;
 import com.infusion.trading.matching.lmit.LimitOrderFactory;
 import com.infusion.trading.matching.orderbook.OrderBook;
 
@@ -34,7 +34,7 @@ public class MatchingEngine {
 
 					if (restingLimitOrder != null) {
 
-						int transactionQuantity = Math.min(incomingOrder.getQuantity(), restingLimitOrder.getOrderDetails().getQuantity());
+						int transactionQuantity = Math.min(incomingOrder.getQuantity(), restingLimitOrder.getOrderDetail().getQuantity());
 
 						incomingOrder.fill(restingLimitOrder);
 
@@ -42,13 +42,13 @@ public class MatchingEngine {
 						restingLimitOrder.reduceRemainingQuantity(transactionQuantity);
 
 						if (restingLimitOrder.isCompleted()) {
-							orderBook.removeCompletedOrder(restingLimitOrder.getOrderDetails().getSide());
+							orderBook.removeCompletedOrder(restingLimitOrder.getOrderDetail().getSide());
 						}
 					}
 				}
 
 				if (incomingOrder.isCompleted() == false) {
-					LimitOrderDetails limitOrderDetails = new LimitOrderDetails(incomingOrder.getQuantity(), incomingOrder.getLastTradedPrice(), incomingOrder.getSide());
+					LimitOrderDetail limitOrderDetails = new LimitOrderDetail(incomingOrder.getQuantity(), incomingOrder.getLastTradedPrice(), incomingOrder.getSide());
 					orderBook.addLimitOrder(limitOrderFactory.createLimitOrder(limitOrderDetails));
 				}
 				incomingOrder = null; // I think this helps with expedited GC...

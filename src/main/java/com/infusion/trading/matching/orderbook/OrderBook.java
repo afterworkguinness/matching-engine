@@ -21,7 +21,7 @@ public class OrderBook {
 		 */
 		synchronized (this) {
 
-			switch (order.getOrderDetails().getSide()) {
+			switch (order.getOrderDetail().getSide()) {
 				case BUY:
 					buyOrders.add(order);
 					break;

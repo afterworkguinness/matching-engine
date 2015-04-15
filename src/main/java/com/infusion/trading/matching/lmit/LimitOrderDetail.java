@@ -13,17 +13,17 @@ import com.infusion.trading.matching.domain.OrderSide;
  *         when the broker's system creates it
  *
  */
-public class LimitOrderDetails {
+public class LimitOrderDetail {
 
 	private OrderSide side;
 	private int quantity;
 	private double limitPrice;
 
-	public LimitOrderDetails() {
+	public LimitOrderDetail() {
 		// For Cucumber
 	}
 
-	public LimitOrderDetails(int quantity, double limitPrice, OrderSide side) {
+	public LimitOrderDetail(int quantity, double limitPrice, OrderSide side) {
 		this.quantity = quantity;
 		this.limitPrice = limitPrice;
 		this.side = side;
@@ -55,8 +55,8 @@ public class LimitOrderDetails {
 
 	@Override
 	public boolean equals(Object objectToTest) {
-		if (objectToTest instanceof LimitOrderDetails) {
-			LimitOrderDetails detailsToTest = (LimitOrderDetails) objectToTest;
+		if (objectToTest instanceof LimitOrderDetail) {
+			LimitOrderDetail detailsToTest = (LimitOrderDetail) objectToTest;
 
 			if (detailsToTest.getLimitPrice() == getLimitPrice() && detailsToTest.getQuantity() == getQuantity() && detailsToTest.getSide() == getSide()) {
 				return true;
