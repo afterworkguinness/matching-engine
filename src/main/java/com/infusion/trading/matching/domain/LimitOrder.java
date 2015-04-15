@@ -14,6 +14,7 @@ public class LimitOrder implements Order {
 		this.side=side;
 	}
 	
+	@Override
 	public void reduceRemainingQuantity(int transactionQuantity) {
 		quantity -= transactionQuantity;
 
@@ -22,6 +23,7 @@ public class LimitOrder implements Order {
 		}
 	}
 
+	@Override
 	public int getQuantity() {
 		return quantity;
 	}
@@ -38,6 +40,7 @@ public class LimitOrder implements Order {
 		this.limitPrice = limitPrice;
 	}
 
+	@Override
 	public OrderSide getSide() {
 		return side;
 	}

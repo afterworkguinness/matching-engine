@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.infusion.trading.matching.domain.LimitOrder;
 import com.infusion.trading.matching.domain.MarketOrder;
+import com.infusion.trading.matching.domain.Order;
 import com.infusion.trading.matching.domain.OrderSide;
 import com.infusion.trading.matching.orderbook.IOrderArrivalTimeService;
 import com.infusion.trading.matching.orderbook.OrderBook;
@@ -37,7 +38,7 @@ public class OrderFillService {
 		}
 	}
 
-	private void fill(LimitOrder incomingOrder, LimitOrder match) {
+	private void fill(Order incomingOrder, LimitOrder match) {
 
 		int transactionQuantity = Math.min(incomingOrder.getQuantity(), match.getQuantity());
 		incomingOrder.reduceRemainingQuantity(transactionQuantity);
@@ -61,7 +62,8 @@ public class OrderFillService {
 
 					int transactionQuantity = Math.min(incomingOrder.getQuantity(), restingLimitOrder.getQuantity());
 
-					incomingOrder.fill(restingLimitOrder);
+					fill(incomingOrder, restingLimitOrder);
+					incomingOrder.setLastTradedPrice(restingLimitOrder.getLimitPrice());
 
 					incomingOrder.reduceRemainingQuantity(transactionQuantity);
 					restingLimitOrder.reduceRemainingQuantity(transactionQuantity);
