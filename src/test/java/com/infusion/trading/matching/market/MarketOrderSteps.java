@@ -1,4 +1,4 @@
-package com.infusion.trading.matching;
+package com.infusion.trading.matching.market;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

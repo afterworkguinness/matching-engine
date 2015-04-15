@@ -1,4 +1,4 @@
-package com.infusion.trading.matching;
+package com.infusion.trading.matching.market;
 
 import org.junit.runner.RunWith;
 
