@@ -1,6 +1,7 @@
 package com.infusion.trading.matching.orderbook;
 
-import com.infusion.trading.matching.lmit.LimitOrder;
+import com.infusion.trading.matching.domain.LimitOrder;
+
 
 public class PriceTimePriorityOrderInserter implements OrderPlacementAlgorithm {
 

@@ -9,9 +9,5 @@
 
     <context:component-scan base-package="com.infusion.trading.matching" />
 	<context:annotation-config/>
-    
-	<bean id="matchingEngine" class="com.infusion.trading.matching.matcher.MatchingEngine" />
-	<bean id="mockArrivalTimeService" class="com.infusion.trading.matching.orderbook.MockOrderArrivalTimeService"/>
-	<bean id="orderBook" class="com.infusion.trading.matching.orderbook.OrderBook" />
 
 </beans>

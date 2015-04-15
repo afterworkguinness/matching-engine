@@ -1,7 +1,7 @@
 Feature: Limit Order
 
 	Scenario: A limit order is executed
-	   Given: The order book looks likes this:
+	   Given: The order book looks likes this before the trade is placed:
 		      | side	| quantity	| limitPrice	|
 		      | buy		| 100		| 200			|
 	    When: A limit sell order is placed for 100 shares at 200

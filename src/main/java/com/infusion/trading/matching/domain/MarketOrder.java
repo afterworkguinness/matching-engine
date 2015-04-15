@@ -1,6 +1,5 @@
 package com.infusion.trading.matching.domain;
 
-import com.infusion.trading.matching.lmit.LimitOrder;
 
 public class MarketOrder implements Order {
 
@@ -17,9 +16,9 @@ public class MarketOrder implements Order {
 
 	public void fill(LimitOrder limitOrder) {
 
-		int transactionQuantity = Math.min(quantity, limitOrder.getOrderDetail().getQuantity());
-		totalPrice += (transactionQuantity * limitOrder.getOrderDetail().getLimitPrice());
-		lastTradedPrice = limitOrder.getOrderDetail().getLimitPrice();
+		int transactionQuantity = Math.min(quantity, limitOrder.getQuantity());
+		totalPrice += (transactionQuantity * limitOrder.getLimitPrice());
+		lastTradedPrice = limitOrder.getLimitPrice();
 	}
 
 	public void reduceRemainingQuantity(int transactionQuantity) {

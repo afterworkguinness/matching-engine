@@ -4,9 +4,12 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.infusion.trading.matching.domain.OrderSide;
-import com.infusion.trading.matching.lmit.LimitOrder;
+import org.springframework.stereotype.Component;
 
+import com.infusion.trading.matching.domain.LimitOrder;
+import com.infusion.trading.matching.domain.OrderSide;
+
+@Component
 public class OrderBook {
 
 	private static List<LimitOrder> buyOrders = new LinkedList<LimitOrder>();
@@ -21,7 +24,7 @@ public class OrderBook {
 		 */
 		synchronized (this) {
 
-			switch (order.getOrderDetail().getSide()) {
+			switch (order.getSide()) {
 				case BUY:
 					buyOrders.add(order);
 					break;
@@ -49,19 +52,6 @@ public class OrderBook {
 		}
 		return order;
 
-	}
-
-	public void fillOrder(int fillQuantity) {
-		// will only ever fill starting at top
-
-		/*
-		 * Want to lock the entire order book at one time. Only one order,
-		 * regardless if it's buy or sell allowed in at one time
-		 */
-
-		synchronized (this) {
-
-		}
 	}
 
 	public void removeCompletedOrder(OrderSide side) {
