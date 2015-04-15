@@ -53,4 +53,15 @@ public class LimitOrderDetails {
 		this.limitPrice = limitPrice;
 	}
 
+	@Override
+	public boolean equals(Object objectToTest) {
+		if (objectToTest instanceof LimitOrderDetails) {
+			LimitOrderDetails detailsToTest = (LimitOrderDetails) objectToTest;
+
+			if (detailsToTest.getLimitPrice() == getLimitPrice() && detailsToTest.getQuantity() == getQuantity() && detailsToTest.getSide() == getSide()) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

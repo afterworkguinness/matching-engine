@@ -45,9 +45,8 @@ public class LimitOrder implements Order {
 			if (limitOrderToCompare.getCreationTime() == getCreationTime()) {
 
 				if (limitOrderToCompare.getOrderDetails().equals(getOrderDetails())) {
-
+					return true;
 				}
-				return true;
 			}
 		}
 		return false;
