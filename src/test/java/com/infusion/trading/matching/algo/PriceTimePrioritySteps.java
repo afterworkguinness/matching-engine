@@ -23,8 +23,8 @@ public class PriceTimePrioritySteps {
 	@Autowired
 	private OrderFillService orderFillService;
 
-	@Given("^The (.+) side of the order book looks like this:$")
-	public void setupOrderBook(OrderSide side, List<LimitOrder> limitOrders) {
+	@Given("^The order book looks like this before the trade is executed:$")
+	public void setupOrderBook(List<LimitOrder> limitOrders) {
 
 		orderBook.clear();
 
