@@ -1,7 +1,6 @@
 package com.infusion.trading.matching.market;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -44,14 +43,7 @@ public class MarketOrderSteps {
 		matchingEngine.fillIncomingMarketOrder(new MarketOrder(OrderSide.BUY, quantity));
 	}
 
-	@Then(".+ be (\\d+) shares left.+")
-	public void verifyOrderBookState(int qunatityRemaining) {
-		assertTrue(orderbook.getBuyOrders().isEmpty());
-		LimitOrder limitOrder = orderbook.getSellOrders().get(0);
-		assertEquals(qunatityRemaining, limitOrder.getQuantity());
-	}
-
-	@Then("^The (.+) side of the order book should look like this at the end of the trade:$")
+	@Then("^The (.+) side of the order book should look like this after the trade is executed:$")
 	public void verifyOrderBookState(OrderSide side, List<LimitOrder> limitOrders) {
 
 		if (side == OrderSide.BUY) {
