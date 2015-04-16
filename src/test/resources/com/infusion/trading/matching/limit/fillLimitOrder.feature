@@ -32,3 +32,4 @@ Feature: Limit Order
 	      And The buy side of the order book should look like this at the end of the trade:
  		      | side	| quantity	| limitPrice	|
  		      | buy		| 50		| 200			|
+ 		      
