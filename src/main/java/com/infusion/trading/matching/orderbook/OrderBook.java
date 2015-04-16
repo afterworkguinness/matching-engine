@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.infusion.trading.matching.algo.IOrderPlacementAlgorithm;
 import com.infusion.trading.matching.domain.LimitOrder;
 import com.infusion.trading.matching.domain.OrderSide;
 
@@ -16,6 +17,9 @@ public class OrderBook {
 	@Autowired
 	private IOrderArrivalTimeService arrivalTimeService;
 
+	@Autowired
+	private IOrderPlacementAlgorithm orderPlacementAlgorithm;
+
 	private static List<LimitOrder> buyOrders = new LinkedList<LimitOrder>();
 	private static List<LimitOrder> sellOrders = new LinkedList<LimitOrder>();
 	private final int TOP = 0;
@@ -23,19 +27,32 @@ public class OrderBook {
 	public void addLimitOrder(LimitOrder order) {
 
 		order.setArrivalTimeInOrderBook(arrivalTimeService.getArrivalTimeInOrderBook());
+
 		/*
 		 * Want to lock the entire order book at one time. Only one order,
 		 * regardless if it's buy or sell allowed in at one time
 		 */
 		synchronized (this) {
-
+			LinkedList<LimitOrder> orders = null;
 			switch (order.getSide()) {
 				case BUY:
-					buyOrders.add(order);
+					orders = (LinkedList<LimitOrder>) buyOrders;
 					break;
 				case SELL:
-					sellOrders.add(order);
+					orders = (LinkedList<LimitOrder>) sellOrders;
 					break;
+			}
+
+			int position = orderPlacementAlgorithm.findPositionToPlaceInBook(orders, order);
+
+			if (position == 0) {
+				orders.addFirst(order);
+			}
+			else if (position == -1) {
+				orders.addLast(order);
+			}
+			else {
+				orders.add(position, order);
 			}
 
 			/*
@@ -115,7 +132,6 @@ public class OrderBook {
 			case SELL:
 				return sellOrders.isEmpty() == false;
 		}
-		;
 		return false;
 	}
 }
