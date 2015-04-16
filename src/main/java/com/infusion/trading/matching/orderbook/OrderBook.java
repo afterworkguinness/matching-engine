@@ -46,13 +46,18 @@ public class OrderBook {
 	}
 
 	public LimitOrder retrieveOrder(OrderSide side) {
-		LimitOrder order;
+		LimitOrder order = null;
+		List<LimitOrder> orders;
 
 		if (side == OrderSide.BUY) {
-			order = buyOrders.get(TOP);
+			orders = buyOrders;
 		}
 		else {
-			order = sellOrders.get(TOP);
+			orders = sellOrders;
+		}
+
+		if (orders.isEmpty() == false) {
+			order = orders.get(TOP);
 		}
 		return order;
 

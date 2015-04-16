@@ -23,7 +23,7 @@ public class LimitOrderSteps {
 	@Autowired
 	private OrderFillService orderFillService;
 
-	@Given("^The order book looks likes this before the trade is placed:$")
+	@Given("^The order book looks like this before the trade is placed:$")
 	public void setupOrderbook(List<LimitOrder> limitOrders) {
 
 		orderBook.clear();

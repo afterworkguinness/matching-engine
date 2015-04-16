@@ -78,6 +78,10 @@ public class OrderFillService {
 
 		LimitOrder restingLimitOrderAtTopOfBook = orderBook.retrieveOrder(incomingOrder.getSide().getOppositeSide());
 
+		if (restingLimitOrderAtTopOfBook == null) {
+			return null; // no liquidity
+		}
+
 		if (OrderSide.BUY == incomingOrder.getSide()) {
 
 			if (incomingOrder.getLimitPrice() <= restingLimitOrderAtTopOfBook.getLimitPrice()) {
