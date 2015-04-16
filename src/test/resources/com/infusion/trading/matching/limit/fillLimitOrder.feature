@@ -1,5 +1,13 @@
 Feature: Limit Order
 
+  Scenario: A limit order is added to an empty order book
+    Given The order book looks like this before the trade is placed:
+      | side | quantity | limitPrice |
+    When A limit buy order is placed for 100 shares at 50
+    Then The buy side of the order book should look like this at the end of the trade:
+      | side | quantity | limitPrice |
+      | buy  | 100      | 50         |
+
   Scenario: A limit order is executed
     Given The order book looks like this before the trade is placed:
       | side | quantity | limitPrice |
@@ -8,7 +16,7 @@ Feature: Limit Order
     Then The buy side of the order book should look like this at the end of the trade:
       | side | quantity | limitPrice |
 
-  Scenario: A limit order is executed and runs out of liquidity
+  Scenario: A limit order is partially filled against one resting order and runs out of liquidity
     Given The order book looks like this before the trade is placed:
       | side | quantity | limitPrice |
       | sell | 100      | 200        |
@@ -19,7 +27,7 @@ Feature: Limit Order
       | side | quantity | limitPrice |
       | buy  | 50       | 200        |
 
-  Scenario: A limit order is executed against multiple resting orders and runs out of liquidity
+  Scenario: A limit order is partially filled against multiple resting orders and runs out of liquidity
     Given The order book looks like this before the trade is placed:
       | side | quantity | limitPrice |
       | sell | 100      | 200        |
@@ -31,10 +39,11 @@ Feature: Limit Order
       | side | quantity | limitPrice |
       | buy  | 50       | 200        |
 
-  Scenario: A limit order is added to an empty order book
+  Scenario: A limit sell order crosses the bid ask spread
     Given The order book looks like this before the trade is placed:
       | side | quantity | limitPrice |
-    When A limit buy order is placed for 100 shares at 50
-    Then The buy side of the order book should look like this at the end of the trade:
-      | side | quantity | limitPrice |
-      | buy  | 100      | 50         |
+      | sell | 100      | 200        |
+      | buy  | 100      | 150        |
+    When A sell limit order is placed for 100 shares at 99
+    Then it crosses the bid ask spread and is executed at 100
+    And The order book should look like this at the end of the trade:
