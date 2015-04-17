@@ -61,6 +61,6 @@ public class LimitOrderSteps {
 		 * Cucumber, we are splitting up the execution and verification into two
 		 * methods Must use a hand rolled stub
 		 */
-		assertEquals(tradeExecutionService.getTradePrice() == executionPrice, 0.00001);
+		assertEquals(tradeExecutionService.getTradePrice(),executionPrice, 0.00001);
 	}
 }
