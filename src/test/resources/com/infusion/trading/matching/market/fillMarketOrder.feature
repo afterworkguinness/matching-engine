@@ -1,7 +1,9 @@
 Feature: Market order
 
   Scenario: A market buy order is placed
-    Given A limit sell order exists in the order book for 700 shares at 100
+    Given these limit orders in the order book
+      | side | quantity | limitPrice |
+      | sell | 700      | 100        |
     When A market buy order is placed for 600 shares
     Then The sell side of the order book should look like this after the trade is executed:
       | side | quantity | limitPrice |
