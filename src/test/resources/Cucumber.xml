@@ -10,6 +10,8 @@
  
 	<context:component-scan base-package="com.infusion.trading.matching" />
 	<context:annotation-config/>
-	<import resource="matching-engine-spring-context.xml" />
+	<import resource="matching-engine-spring-context-TEST.xml" />
 
 </beans>
+
+
