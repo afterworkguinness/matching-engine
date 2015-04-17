@@ -48,4 +48,5 @@ public class PriceTimePrioritySteps {
 			assertEquals(orders, orderBook.getSellOrders());
 		}
 	}
+
 }

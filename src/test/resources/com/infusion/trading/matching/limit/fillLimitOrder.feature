@@ -44,6 +44,10 @@ Feature: Limit Order
       | side | quantity | limitPrice |
       | sell | 100      | 200        |
       | buy  | 100      | 150        |
-    When A sell limit order is placed for 100 shares at 99
-    Then it crosses the bid ask spread and is executed at 100
-    And The order book should look like this at the end of the trade:
+    When A limit sell order is placed for 100 shares at 145
+    Then It crosses the bid ask spread and is executed at 150
+    And The sell side of the order book should look like this at the end of the trade:
+      | side | quantity | limitPrice |
+      | sell | 100      | 200        |
+    And The buy side of the order book should look like this at the end of the trade:
+      | side | quantity | limitPrice |

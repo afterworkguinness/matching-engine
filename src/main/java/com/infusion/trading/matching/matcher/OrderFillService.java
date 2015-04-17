@@ -7,6 +7,7 @@ import com.infusion.trading.matching.domain.LimitOrder;
 import com.infusion.trading.matching.domain.MarketOrder;
 import com.infusion.trading.matching.domain.Order;
 import com.infusion.trading.matching.domain.OrderSide;
+import com.infusion.trading.matching.execution.ITradeExecutionService;
 import com.infusion.trading.matching.orderbook.OrderBook;
 
 @Component
@@ -15,7 +16,11 @@ public class OrderFillService {
 	@Autowired
 	private OrderBook orderBook;
 
+	@Autowired
+	private ITradeExecutionService tradeExecutionService;
+
 	public void processIncomingLimitOrder(LimitOrder incomingLimitOrder) {
+
 		synchronized (this) {
 
 			LimitOrder match = retrieveMatchingOrder(incomingLimitOrder);
@@ -23,6 +28,16 @@ public class OrderFillService {
 			if (match != null) {
 
 				fill(incomingLimitOrder, match);
+				/*
+				 * Transaction price: If the incoming order is a market order,
+				 * it has no price limits and the price of the matched limit
+				 * order is used If the incoming order is a limit order, the
+				 * price of the older order is used ...that is always the
+				 * resting order
+				 * 
+				 * So in any case, the price of the resting order is used
+				 */
+				tradeExecutionService.executeTrade(incomingLimitOrder, match, match.getLimitPrice());
 
 				if (incomingLimitOrder.isCompleted() == false) {
 					processIncomingLimitOrder(incomingLimitOrder);
@@ -62,6 +77,17 @@ public class OrderFillService {
 
 					fill(incomingOrder, restingLimitOrder);
 					incomingOrder.setLastTradedPrice(restingLimitOrder.getLimitPrice());
+
+					/*
+					 * Transaction price: If the incoming order is a market
+					 * order, it has no price limits and the price of the
+					 * matched limit order is used If the incoming order is a
+					 * limit order, the price of the older order is used ...that
+					 * is always the resting order
+					 * 
+					 * So in any case, the price of the resting order is used
+					 */
+					tradeExecutionService.executeTrade(incomingOrder, restingLimitOrder, restingLimitOrder.getLimitPrice());
 				}
 			}
 
@@ -84,13 +110,13 @@ public class OrderFillService {
 
 		if (OrderSide.BUY == incomingOrder.getSide()) {
 
-			if (incomingOrder.getLimitPrice() <= restingLimitOrderAtTopOfBook.getLimitPrice()) {
+			if (incomingOrder.getLimitPrice() >= restingLimitOrderAtTopOfBook.getLimitPrice()) {
 				return restingLimitOrderAtTopOfBook;
 			}
 		}
 		else if (OrderSide.SELL == incomingOrder.getSide()) {
 
-			if (incomingOrder.getLimitPrice() >= restingLimitOrderAtTopOfBook.getLimitPrice()) {
+			if (incomingOrder.getLimitPrice() <= restingLimitOrderAtTopOfBook.getLimitPrice()) {
 				return restingLimitOrderAtTopOfBook;
 			}
 		}
