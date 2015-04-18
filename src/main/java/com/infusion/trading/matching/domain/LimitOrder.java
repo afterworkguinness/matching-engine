@@ -1,5 +1,8 @@
 package com.infusion.trading.matching.domain;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class LimitOrder implements Order {
 
 	private int quantity;
@@ -7,6 +10,8 @@ public class LimitOrder implements Order {
 	private OrderSide side;
 	private boolean completed;
 	private long arrivalTimeInOrderBook;
+
+	private Logger LOGGER = LoggerFactory.getLogger(com.infusion.trading.matching.domain.LimitOrder.class);
 
 	public LimitOrder(int quantity, double limitPrice, OrderSide side) {
 		this.quantity = quantity;
@@ -17,7 +22,6 @@ public class LimitOrder implements Order {
 	@Override
 	public void reduceRemainingQuantity(int transactionQuantity) {
 		quantity -= transactionQuantity;
-
 		if (quantity == 0) {
 			completed = true;
 		}
@@ -52,10 +56,6 @@ public class LimitOrder implements Order {
 	@Override
 	public boolean isCompleted() {
 		return completed;
-	}
-
-	public void setCompleted(boolean completed) {
-		this.completed = completed;
 	}
 
 	public long getArrivalTimeInOrderBook() {
@@ -93,13 +93,13 @@ public class LimitOrder implements Order {
 
 	@Override
 	public String toString() {
-		return "LimitOrder [quantity=" + quantity + ", limitPrice=" + limitPrice + ", side=" + side + ", completed=" + completed + ", arrivalTimeInOrderBook="
-				+ arrivalTimeInOrderBook + "]";
+
+		return "[Limit Order]: Side: " + side.name() + " | Quantity: " + quantity + " | Limit Price: " + limitPrice;
 	}
 
 	@Override
 	public void setLastTradedPrice(double price) {
-		//do nothing for limit orders
+		// do nothing for limit orders
 	}
 
 	@Override
