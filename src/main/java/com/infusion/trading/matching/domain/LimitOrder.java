@@ -14,6 +14,7 @@ public class LimitOrder implements Order {
 		this.side = side;
 	}
 
+	@Override
 	public void reduceRemainingQuantity(int transactionQuantity) {
 		quantity -= transactionQuantity;
 
@@ -22,6 +23,7 @@ public class LimitOrder implements Order {
 		}
 	}
 
+	@Override
 	public int getQuantity() {
 		return quantity;
 	}
@@ -38,6 +40,7 @@ public class LimitOrder implements Order {
 		this.limitPrice = limitPrice;
 	}
 
+	@Override
 	public OrderSide getSide() {
 		return side;
 	}
@@ -46,6 +49,7 @@ public class LimitOrder implements Order {
 		this.side = side;
 	}
 
+	@Override
 	public boolean isCompleted() {
 		return completed;
 	}
@@ -91,5 +95,15 @@ public class LimitOrder implements Order {
 	public String toString() {
 		return "LimitOrder [quantity=" + quantity + ", limitPrice=" + limitPrice + ", side=" + side + ", completed=" + completed + ", arrivalTimeInOrderBook="
 				+ arrivalTimeInOrderBook + "]";
+	}
+
+	@Override
+	public void setLastTradedPrice(double price) {
+		//do nothing for limit orders
+	}
+
+	@Override
+	public double getLastTradedPrice() {
+		throw new UnsupportedOperationException("Not supported by limit orders");
 	}
 }

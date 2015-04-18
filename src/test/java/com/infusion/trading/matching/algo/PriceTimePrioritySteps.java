@@ -35,7 +35,7 @@ public class PriceTimePrioritySteps {
 
 	@When("^A (.+) limit order is placed for (\\d+) shares at (\\d+)$")
 	public void fillLimitOrder(OrderSide side, int quantity, double limitPrice) {
-		orderFillService.processIncomingLimitOrder(new LimitOrder(quantity, limitPrice, side));
+		orderFillService.attemptToFillOrder(new LimitOrder(quantity, limitPrice, side));
 	}
 
 	@Then("^The (.+) side of the order book should look like this:$")

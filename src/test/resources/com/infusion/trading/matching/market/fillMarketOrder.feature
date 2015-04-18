@@ -1,5 +1,7 @@
 Feature: Market order
 
+#test last traded price
+
   Scenario: A market buy order is placed
     Given these limit orders in the order book
       | side | quantity | limitPrice |

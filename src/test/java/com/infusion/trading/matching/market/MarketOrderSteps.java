@@ -40,7 +40,7 @@ public class MarketOrderSteps {
 
 	@When(".+ market (.+) order .+ for (.+) shares")
 	public void incomingMarketOrder(String orderType, int quantity) {
-		matchingEngine.fillIncomingMarketOrder(new MarketOrder(OrderSide.BUY, quantity));
+		matchingEngine.attemptToFillOrder(new MarketOrder(OrderSide.BUY, quantity));
 	}
 
 	@Then("^The (.+) side of the order book should look like this after the trade is executed:$")
