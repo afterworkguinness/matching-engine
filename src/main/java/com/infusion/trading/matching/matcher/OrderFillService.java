@@ -46,11 +46,19 @@ public class OrderFillService {
 				LOGGER.debug("Order is completed");
 			}
 			if (order.isCompleted() == false) {
-				LOGGER.debug("Order is incomplete and no more matches exist in book. Adding to order book");
-				addOrderToBook(order);
+				LOGGER.debug("Order is incomplete and no more matches exist in book.");
+				if(order.isPartialFillsAllowed()) {
+					LOGGER.debug("Adding to order book");
+					addOrderToBook(order);
+				} else {
+					LOGGER.debug("Partial fills not allowed for this order. Killing and reverting any limit orders used to fill it");
+					orderBook.revertStagedOrders(order.getSide().getOppositeSide());
+				}
+					
 			}
 		}
 	}
+	
 
 	private void fillOrderUntilNoMatchesOrNoLiquidiy(Order order) {
 

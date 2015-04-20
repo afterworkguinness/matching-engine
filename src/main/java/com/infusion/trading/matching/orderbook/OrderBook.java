@@ -35,23 +35,21 @@ public class OrderBook {
 		synchronized (this) {
 			LinkedList<LimitOrder> orders = null;
 			switch (order.getSide()) {
-				case BUY:
-					orders = (LinkedList<LimitOrder>) buyOrders;
-					break;
-				case SELL:
-					orders = (LinkedList<LimitOrder>) sellOrders;
-					break;
+			case BUY:
+				orders = (LinkedList<LimitOrder>) buyOrders;
+				break;
+			case SELL:
+				orders = (LinkedList<LimitOrder>) sellOrders;
+				break;
 			}
 
 			int position = orderPlacementAlgorithm.findPositionToPlaceInBook(orders, order);
 
 			if (position == 0) {
 				orders.addFirst(order);
-			}
-			else if (position == -1) {
+			} else if (position == -1) {
 				orders.addLast(order);
-			}
-			else {
+			} else {
 				orders.add(position, order);
 			}
 
@@ -68,14 +66,16 @@ public class OrderBook {
 
 		if (side == OrderSide.BUY) {
 			orders = buyOrders;
-		}
-		else {
+		} else {
 			orders = sellOrders;
 		}
 
 		int start = TOP;
+
 		while (orders.isEmpty() == false && start < orders.size()) {
+
 			order = orders.get(start);
+
 			if (order.isHoldInStaging() == false) {
 				return order;
 			}
@@ -94,22 +94,20 @@ public class OrderBook {
 
 		synchronized (this) {
 			switch (side) {
-				case BUY:
-					if (incomingOrderAllowsPartialFills == false) {
-						buyOrders.get(0).setHoldInStaging(true);
-					}
-					else {
-						buyOrders.remove(0);
-					}
-					break;
-				case SELL:
-					if (incomingOrderAllowsPartialFills == false) {
-						sellOrders.get(0).setHoldInStaging(true);
-					}
-					else {
-						sellOrders.remove(0);
-					}
-					break;
+			case BUY:
+				if (incomingOrderAllowsPartialFills == false) {
+					buyOrders.get(0).holdInStaging();
+				} else {
+					buyOrders.remove(0);
+				}
+				break;
+			case SELL:
+				if (incomingOrderAllowsPartialFills == false) {
+					sellOrders.get(0).holdInStaging();
+				} else {
+					sellOrders.remove(0);
+				}
+				break;
 
 			/*
 			 * Backup to DB while still locking. If you do it after lock is
@@ -141,11 +139,29 @@ public class OrderBook {
 
 	public boolean isLiquidityLeft(OrderSide side) {
 		switch (side) {
-			case BUY:
-				return buyOrders.isEmpty() == false;
-			case SELL:
-				return sellOrders.isEmpty() == false;
+		case BUY:
+			return buyOrders.isEmpty() == false;
+		case SELL:
+			return sellOrders.isEmpty() == false;
 		}
 		return false;
+	}
+
+	public void revertStagedOrders(OrderSide side) {
+		List<LimitOrder> orders = null;
+
+		switch (side) {
+		case BUY:
+			orders = buyOrders;
+		case SELL:
+			orders = sellOrders;
+		}
+
+		for (LimitOrder order : orders) {
+
+			if (order.isHoldInStaging()) {
+				order.reset();
+			}
+		}
 	}
 }

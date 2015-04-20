@@ -120,8 +120,13 @@ public class LimitOrder implements Order {
 		return holdInStaging;
 	}
 
-	public void setHoldInStaging(boolean holdInStaging) {
-		this.holdInStaging = holdInStaging;
+	public void holdInStaging() {
+		this.holdInStaging = true;
+	}
+	
+	public void reset() {
+		holdInStaging = false;
+		quantity += quantityOfLastTransaction;
 	}
 
 	public boolean isPartialFillsAllowed() {

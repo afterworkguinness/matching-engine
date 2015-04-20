@@ -38,7 +38,7 @@ public class OrderDesignationSteps {
 	@When("^a (.+) market order is placed to (.+) (\\d+) shares$")
 	public void processIncomingOrder(OrderDesignation designation, OrderSide side, int quantity) {
 
-		orderFillService.attemptToFillOrder(new MarketOrder(side, quantity));
+		orderFillService.attemptToFillOrder(new MarketOrder(side, quantity, designation));
 	}
 
 	@Then("^.+ the (.+) side of the order book should look like this:$")
