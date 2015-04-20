@@ -73,14 +73,18 @@ public class OrderBook {
 			orders = sellOrders;
 		}
 
-		if (orders.isEmpty() == false) {
-			order = orders.get(TOP);
+		int start = TOP;
+		while (orders.isEmpty() == false && start < orders.size()) {
+			order = orders.get(start);
+			if (order.isHoldInStaging() == false) {
+				return order;
+			}
+			start++;
 		}
-		return order;
-
+		return null;
 	}
 
-	public void removeCompletedOrder(OrderSide side) {
+	public void removeCompletedOrder(OrderSide side, boolean incomingOrderAllowsPartialFills) {
 		// will only ever remove starting at top
 
 		/*
@@ -91,10 +95,20 @@ public class OrderBook {
 		synchronized (this) {
 			switch (side) {
 				case BUY:
-					buyOrders.remove(0);
+					if (incomingOrderAllowsPartialFills == false) {
+						buyOrders.get(0).setHoldInStaging(true);
+					}
+					else {
+						buyOrders.remove(0);
+					}
 					break;
 				case SELL:
-					sellOrders.remove(0);
+					if (incomingOrderAllowsPartialFills == false) {
+						sellOrders.get(0).setHoldInStaging(true);
+					}
+					else {
+						sellOrders.remove(0);
+					}
 					break;
 
 			/*

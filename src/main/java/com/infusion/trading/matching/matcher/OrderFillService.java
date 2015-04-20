@@ -94,13 +94,14 @@ public class OrderFillService {
 
 		match.reduceRemainingQuantity(transactionQuantity);
 		LOGGER.debug("Matched order remaining quantity is " + match.getQuantity());
+
 		// Last traded price is not needed for a limit order, but for simplicity
 		// we will set it regardless
 		incomingOrder.setLastTradedPrice(match.getLimitPrice());
 
 		if (match.isCompleted()) {
 			LOGGER.debug("Matched order completely filled");
-			orderBook.removeCompletedOrder(match.getSide());
+			orderBook.removeCompletedOrder(match.getSide(), incomingOrder.isPartialFillsAllowed());
 		}
 	}
 

@@ -10,6 +10,9 @@ public class LimitOrder implements Order {
 	private OrderSide side;
 	private boolean completed;
 	private long arrivalTimeInOrderBook;
+	private int quantityOfLastTransaction;
+	private boolean holdInStaging;
+	private boolean partialFillsAllowed = true;
 
 	private Logger LOGGER = LoggerFactory.getLogger(com.infusion.trading.matching.domain.LimitOrder.class);
 
@@ -19,15 +22,21 @@ public class LimitOrder implements Order {
 		this.side = side;
 	}
 
-	@Override
+	public LimitOrder(int quantity, double limitPrice, OrderSide side, OrderDesignation designation) {
+		this.quantity = quantity;
+		this.limitPrice = limitPrice;
+		this.side = side;
+		this.partialFillsAllowed = (designation == null);
+	}
+
 	public void reduceRemainingQuantity(int transactionQuantity) {
 		quantity -= transactionQuantity;
+		quantityOfLastTransaction = transactionQuantity;
 		if (quantity == 0) {
 			completed = true;
 		}
 	}
 
-	@Override
 	public int getQuantity() {
 		return quantity;
 	}
@@ -44,7 +53,6 @@ public class LimitOrder implements Order {
 		this.limitPrice = limitPrice;
 	}
 
-	@Override
 	public OrderSide getSide() {
 		return side;
 	}
@@ -53,7 +61,6 @@ public class LimitOrder implements Order {
 		this.side = side;
 	}
 
-	@Override
 	public boolean isCompleted() {
 		return completed;
 	}
@@ -97,13 +104,27 @@ public class LimitOrder implements Order {
 		return "[Limit Order]: Side: " + side.name() + " | Quantity: " + quantity + " | Limit Price: " + limitPrice;
 	}
 
-	@Override
 	public void setLastTradedPrice(double price) {
 		// do nothing for limit orders
 	}
 
-	@Override
 	public double getLastTradedPrice() {
 		throw new UnsupportedOperationException("Not supported by limit orders");
+	}
+
+	public int getQuantityOfLastTransaction() {
+		return this.quantityOfLastTransaction;
+	}
+
+	public boolean isHoldInStaging() {
+		return holdInStaging;
+	}
+
+	public void setHoldInStaging(boolean holdInStaging) {
+		this.holdInStaging = holdInStaging;
+	}
+
+	public boolean isPartialFillsAllowed() {
+		return partialFillsAllowed;
 	}
 }
