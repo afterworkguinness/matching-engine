@@ -47,18 +47,16 @@ public class OrderFillService {
 			}
 			if (order.isCompleted() == false) {
 				LOGGER.debug("Order is incomplete and no more matches exist in book.");
-				if(order.isPartialFillsAllowed()) {
+				if (order.isPartialFillsAllowed()) {
 					LOGGER.debug("Adding to order book");
 					addOrderToBook(order);
 				} else {
 					LOGGER.debug("Partial fills not allowed for this order. Killing and reverting any limit orders used to fill it");
 					orderBook.revertStagedOrders(order.getSide().getOppositeSide());
 				}
-					
 			}
 		}
 	}
-	
 
 	private void fillOrderUntilNoMatchesOrNoLiquidiy(Order order) {
 
@@ -70,8 +68,7 @@ public class OrderFillService {
 				LOGGER.debug("Matching order found - " + match);
 				fill(order, match);
 				tradeExecutionService.executeTrade(order, match, match.getLimitPrice());
-			}
-			else {
+			} else {
 				LOGGER.debug("No matching order found");
 				break;
 			}
@@ -84,8 +81,7 @@ public class OrderFillService {
 		if (order instanceof MarketOrder) {
 			LOGGER.debug("Converting market order to limit order at last traded price $" + order.getLastTradedPrice());
 			limitOrder = new LimitOrder(order.getQuantity(), order.getLastTradedPrice(), order.getSide());
-		}
-		else {
+		} else {
 			limitOrder = (LimitOrder) order;
 		}
 		orderBook.addLimitOrder(limitOrder);
@@ -129,8 +125,7 @@ public class OrderFillService {
 			if (limitOrder.getLimitPrice() >= orderAtTopOfBook.getLimitPrice()) {
 				return orderAtTopOfBook;
 			}
-		}
-		else if (OrderSide.SELL == order.getSide()) {
+		} else if (OrderSide.SELL == order.getSide()) {
 
 			if (limitOrder.getLimitPrice() <= orderAtTopOfBook.getLimitPrice()) {
 				return orderAtTopOfBook;

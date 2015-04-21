@@ -8,7 +8,7 @@ public class LimitOrder implements Order {
 	private int quantity;
 	private double limitPrice;
 	private OrderSide side;
-	private boolean completed;
+	private boolean completed=false;
 	private long arrivalTimeInOrderBook;
 	private int quantityOfLastTransaction;
 	private boolean holdInStaging;
@@ -85,8 +85,11 @@ public class LimitOrder implements Order {
 
 		if (objectToTest instanceof LimitOrder) {
 			LimitOrder orderToTest = (LimitOrder) objectToTest;
-			if (orderToTest.getSide() == getSide() && orderToTest.getLimitPrice() == getLimitPrice() && orderToTest.getQuantity() == getQuantity()
-					&& orderToTest.getArrivalTimeInOrderBook() == getArrivalTimeInOrderBook() && orderToTest.isCompleted() == isCompleted()) {
+			if (orderToTest.getSide() == getSide() &&
+					orderToTest.getLimitPrice() == getLimitPrice() && 
+					orderToTest.getQuantity() == getQuantity()
+					&& orderToTest.getArrivalTimeInOrderBook() == getArrivalTimeInOrderBook()
+					&& orderToTest.isCompleted() == isCompleted()) {
 				return true;
 			}
 		}
@@ -126,6 +129,7 @@ public class LimitOrder implements Order {
 	
 	public void reset() {
 		holdInStaging = false;
+		completed=false;
 		quantity += quantityOfLastTransaction;
 	}
 

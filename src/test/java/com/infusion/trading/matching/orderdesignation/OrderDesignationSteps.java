@@ -41,7 +41,7 @@ public class OrderDesignationSteps {
 		orderFillService.attemptToFillOrder(new MarketOrder(side, quantity, designation));
 	}
 
-	@Then("^.+ the (.+) side of the order book should look like this:$")
+	@Then("^.*the (.+) side of the order book should look like this:$")
 	public void verifyOrderBookState(OrderSide side, List<LimitOrder> orders) {
 
 		if (OrderSide.BUY == side) {
