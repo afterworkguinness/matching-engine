@@ -164,4 +164,30 @@ public class OrderBook {
 			}
 		}
 	}
+
+	public void completeStagedOrders(OrderSide side) {
+		List<LimitOrder> orders = null;
+
+		switch (side) {
+		case BUY:
+			orders = buyOrders;
+		case SELL:
+			orders = sellOrders;
+		}
+		
+		int lastIndexToRemove=-1;
+		
+		// This mess is necessary to avoid concurrent modification exception
+		
+		for (int i=0; i< orders.size(); i++) {
+
+			if (orders.get(i).isHoldInStaging()) {
+				lastIndexToRemove=i;
+			}
+		}
+		
+		for(int i =0; i <= lastIndexToRemove; i++) {
+			orders.remove(i);
+		}
+	}
 }

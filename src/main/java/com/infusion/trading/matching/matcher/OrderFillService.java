@@ -44,6 +44,7 @@ public class OrderFillService {
 
 			if (order.isCompleted()) {
 				LOGGER.debug("Order is completed");
+				orderBook.completeStagedOrders(order.getSide().getOppositeSide());
 			}
 			if (order.isCompleted() == false) {
 				LOGGER.debug("Order is incomplete and no more matches exist in book.");
