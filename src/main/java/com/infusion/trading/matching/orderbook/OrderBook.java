@@ -33,23 +33,18 @@ public class OrderBook {
 		 * regardless if it's buy or sell allowed in at one time
 		 */
 		synchronized (this) {
-			LinkedList<LimitOrder> orders = null;
-			switch (order.getSide()) {
-			case BUY:
-				orders = (LinkedList<LimitOrder>) buyOrders;
-				break;
-			case SELL:
-				orders = (LinkedList<LimitOrder>) sellOrders;
-				break;
-			}
+
+			LinkedList<LimitOrder> orders = (LinkedList<LimitOrder>) getOrders(order.getSide());
 
 			int position = orderPlacementAlgorithm.findPositionToPlaceInBook(orders, order);
 
 			if (position == 0) {
 				orders.addFirst(order);
-			} else if (position == -1) {
+			}
+			else if (position == -1) {
 				orders.addLast(order);
-			} else {
+			}
+			else {
 				orders.add(position, order);
 			}
 
@@ -61,14 +56,9 @@ public class OrderBook {
 	}
 
 	public LimitOrder retrieveOrder(OrderSide side) {
-		LimitOrder order = null;
-		List<LimitOrder> orders;
 
-		if (side == OrderSide.BUY) {
-			orders = buyOrders;
-		} else {
-			orders = sellOrders;
-		}
+		LimitOrder order = null;
+		List<LimitOrder> orders = getOrders(side);
 
 		int start = TOP;
 
@@ -93,27 +83,21 @@ public class OrderBook {
 		 */
 
 		synchronized (this) {
-			switch (side) {
-			case BUY:
-				if (incomingOrderAllowsPartialFills == false) {
-					buyOrders.get(0).holdInStaging();
-				} else {
-					buyOrders.remove(0);
-				}
-				break;
-			case SELL:
-				if (incomingOrderAllowsPartialFills == false) {
-					sellOrders.get(0).holdInStaging();
-				} else {
-					sellOrders.remove(0);
-				}
-				break;
+
+			List<LimitOrder> orders = getOrders(side);
+
+			if (incomingOrderAllowsPartialFills == false) {
+				orders.get(TOP).holdInStaging();
+			}
+			else {
+				orders.remove(TOP);
+
+			}
 
 			/*
 			 * Backup to DB while still locking. If you do it after lock is
 			 * released, it could be stale
 			 */
-			}
 		}
 	}
 
@@ -138,24 +122,14 @@ public class OrderBook {
 	}
 
 	public boolean isLiquidityLeft(OrderSide side) {
-		switch (side) {
-		case BUY:
-			return buyOrders.isEmpty() == false;
-		case SELL:
-			return sellOrders.isEmpty() == false;
-		}
-		return false;
+
+		OrderSide sideToCheck = side.getOppositeSide();
+		return getOrders(sideToCheck).isEmpty() == false;
 	}
 
 	public void revertStagedOrders(OrderSide side) {
-		List<LimitOrder> orders = null;
 
-		switch (side) {
-		case BUY:
-			orders = buyOrders;
-		case SELL:
-			orders = sellOrders;
-		}
+		List<LimitOrder> orders = getOrders(side);
 
 		for (LimitOrder order : orders) {
 
@@ -166,28 +140,34 @@ public class OrderBook {
 	}
 
 	public void completeStagedOrders(OrderSide side) {
-		List<LimitOrder> orders = null;
 
-		switch (side) {
-		case BUY:
-			orders = buyOrders;
-		case SELL:
-			orders = sellOrders;
-		}
-		
-		int lastIndexToRemove=-1;
-		
+		List<LimitOrder> orders = getOrders(side);
+
+		int lastIndexToRemove = -1;
+
 		// This mess is necessary to avoid concurrent modification exception
-		
-		for (int i=0; i< orders.size(); i++) {
+
+		for (int i = 0; i < orders.size(); i++) {
 
 			if (orders.get(i).isHoldInStaging()) {
-				lastIndexToRemove=i;
+				lastIndexToRemove = i;
 			}
 		}
-		
-		for(int i =0; i <= lastIndexToRemove; i++) {
+
+		for (int i = 0; i <= lastIndexToRemove; i++) {
 			orders.remove(i);
+		}
+	}
+
+	private List<LimitOrder> getOrders(OrderSide side) {
+
+		switch (side) {
+			case BUY:
+				return buyOrders;
+			case SELL:
+				return sellOrders;
+			default:
+				return null;
 		}
 	}
 }

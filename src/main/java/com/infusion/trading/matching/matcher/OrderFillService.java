@@ -62,7 +62,7 @@ public class OrderFillService {
 
 	private void fillOrderUntilNoMatchesOrNoLiquidiy(Order order) {
 
-		while (order.isCompleted() == false && orderBook.isLiquidityLeft(order.getSide().getOppositeSide())) {
+		while (order.isCompleted() == false && orderBook.isLiquidityLeft(order.getSide())) {
 
 			LimitOrder match = findMatchingOrder(order);
 
