@@ -51,7 +51,8 @@ public class OrderFillService {
 				if (order.isPartialFillsAllowed()) {
 					LOGGER.debug("Adding to order book");
 					addOrderToBook(order);
-				} else {
+				}
+				else {
 					LOGGER.debug("Partial fills not allowed for this order. Killing and reverting any limit orders used to fill it");
 					orderBook.revertStagedOrders(order.getSide().getOppositeSide());
 				}
@@ -67,9 +68,29 @@ public class OrderFillService {
 
 			if (match != null) {
 				LOGGER.debug("Matching order found - " + match);
-				fill(order, match);
+
+				int transactionQuantity = Math.min(order.getQuantity(), match.getQuantity());
+
+				LOGGER.debug("Transaction quantity is " + transactionQuantity);
+
+				order.reduceRemainingQuantity(transactionQuantity);
+				LOGGER.debug("Incoming order remaining quantity is " + order.getQuantity());
+
+				match.reduceRemainingQuantity(transactionQuantity);
+				LOGGER.debug("Matched order remaining quantity is " + match.getQuantity());
+
+				// Last traded price is not needed for a limit order, but for
+				// simplicity
+				// we will set it regardless
+				order.setLastTradedPrice(match.getLimitPrice());
+
+				if (match.isCompleted()) {
+					LOGGER.debug("Matched order completely filled");
+					orderBook.removeCompletedOrder(match.getSide(), order.isPartialFillsAllowed());
+				}
 				tradeExecutionService.executeTrade(order, match, match.getLimitPrice());
-			} else {
+			}
+			else {
 				LOGGER.debug("No matching order found");
 				break;
 			}
@@ -82,32 +103,11 @@ public class OrderFillService {
 		if (order instanceof MarketOrder) {
 			LOGGER.debug("Converting market order to limit order at last traded price $" + order.getLastTradedPrice());
 			limitOrder = new LimitOrder(order.getQuantity(), order.getLastTradedPrice(), order.getSide());
-		} else {
+		}
+		else {
 			limitOrder = (LimitOrder) order;
 		}
 		orderBook.addLimitOrder(limitOrder);
-	}
-
-	private void fill(Order incomingOrder, LimitOrder match) {
-
-		int transactionQuantity = Math.min(incomingOrder.getQuantity(), match.getQuantity());
-
-		LOGGER.debug("Transaction quantity is " + transactionQuantity);
-
-		incomingOrder.reduceRemainingQuantity(transactionQuantity);
-		LOGGER.debug("Incoming order remaining quantity is " + incomingOrder.getQuantity());
-
-		match.reduceRemainingQuantity(transactionQuantity);
-		LOGGER.debug("Matched order remaining quantity is " + match.getQuantity());
-
-		// Last traded price is not needed for a limit order, but for simplicity
-		// we will set it regardless
-		incomingOrder.setLastTradedPrice(match.getLimitPrice());
-
-		if (match.isCompleted()) {
-			LOGGER.debug("Matched order completely filled");
-			orderBook.removeCompletedOrder(match.getSide(), incomingOrder.isPartialFillsAllowed());
-		}
 	}
 
 	private LimitOrder findMatchingOrder(Order order) {
@@ -126,7 +126,8 @@ public class OrderFillService {
 			if (limitOrder.getLimitPrice() >= orderAtTopOfBook.getLimitPrice()) {
 				return orderAtTopOfBook;
 			}
-		} else if (OrderSide.SELL == order.getSide()) {
+		}
+		else if (OrderSide.SELL == order.getSide()) {
 
 			if (limitOrder.getLimitPrice() <= orderAtTopOfBook.getLimitPrice()) {
 				return orderAtTopOfBook;
