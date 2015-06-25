@@ -14,4 +14,19 @@ public class MockTradeExecutionService implements ITradeExecutionService {
 	public double getTradePrice() {
 		return tradePrice;
 	}
+
+	public void executeTrade(Order order, LimitOrder match, double tradePrice, boolean holdInStaging) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void executeStagedTransactions() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void flushStagedTransactions() {
+		// TODO Auto-generated method stub
+
+	}
 }

@@ -1,5 +1,6 @@
 package com.infusion.trading.matching.orderbook;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,6 +24,17 @@ public class OrderBook {
 	private static List<LimitOrder> buyOrders = new LinkedList<LimitOrder>();
 	private static List<LimitOrder> sellOrders = new LinkedList<LimitOrder>();
 	private final int TOP = 0;
+
+	public List<LimitOrder> getStagedOrders(OrderSide side) {
+		List<LimitOrder> orders = getOrders(side);
+		List<LimitOrder> stagedOrders = new ArrayList<LimitOrder>();
+		for (LimitOrder order : orders) {
+			if (order.isHoldInStaging()) {
+				stagedOrders.add(order);
+			}
+		}
+		return Collections.<LimitOrder> unmodifiableList(stagedOrders);
+	}
 
 	public void addLimitOrder(LimitOrder order) {
 
@@ -91,7 +103,6 @@ public class OrderBook {
 			}
 			else {
 				orders.remove(TOP);
-
 			}
 
 			/*

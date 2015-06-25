@@ -16,10 +16,18 @@ public class TradeExecutionService implements ITradeExecutionService {
 
 	private Logger LOGGER = LoggerFactory.getLogger(com.infusion.trading.matching.execution.TradeExecutionService.class);
 
-	public void executeTrade(Order order, LimitOrder match, double tradePrice) {
+	public void executeTrade(Order order, LimitOrder match, double tradePrice, boolean holdInStaging) {
 
 		// new Thread(() -> sendToClearingEngine(order, match,
 		// tradePrice)).run();
+	}
+
+	public void executeStagedTransactions() {
+
+	}
+
+	public void flushStagedTransactions() {
+
 	}
 
 	private void sendToClearingEngine(Order order, LimitOrder match, double tradePrice) {

@@ -45,20 +45,31 @@ public class OrderFillService {
 			fillOrderUntilNoMatchesOrNoLiquidiy(order);
 
 			if (order.isCompleted()) {
-				LOGGER.debug("Order is completed");
-				orderBook.completeStagedOrders(order.getSide().getOppositeSide());
+				processCompleteOrder(order);
 			}
-			if (order.isCompleted() == false) {
-				LOGGER.debug("Order is incomplete and no more matches exist in book.");
-				if (order.isPartialFillsAllowed()) {
-					LOGGER.debug("Adding to order book");
-					addOrderToBook(order);
-				}
-				else {
-					LOGGER.debug("Partial fills not allowed for this order. Killing and reverting any limit orders used to fill it");
-					orderBook.revertStagedOrders(order.getSide().getOppositeSide());
-				}
+			else {
+				processIncompleteOrder(order);
 			}
+		}
+	}
+
+	private void processCompleteOrder(Order order) {
+		LOGGER.debug("Order is completed");
+		tradeExecutionService.executeStagedTransactions();
+		orderBook.completeStagedOrders(order.getSide().getOppositeSide());
+	}
+
+	private void processIncompleteOrder(Order order) {
+		LOGGER.debug("Order is incomplete and no more matches exist in book.");
+
+		if (order.isPartialFillsAllowed()) {
+			LOGGER.debug("Adding to order book");
+			addOrderToBook(order);
+		}
+		else {
+			LOGGER.debug("Partial fills not allowed for this order. Killing and reverting any limit orders used to fill it");
+			orderBook.revertStagedOrders(order.getSide().getOppositeSide());
+			tradeExecutionService.flushStagedTransactions();
 		}
 	}
 
@@ -90,7 +101,7 @@ public class OrderFillService {
 					LOGGER.debug("Matched order completely filled");
 					orderBook.removeCompletedOrder(match.getSide(), order.isPartialFillsAllowed());
 				}
-				tradeExecutionService.executeTrade(order, match, match.getLimitPrice());
+				tradeExecutionService.executeTrade(order, match, match.getLimitPrice(), !order.isPartialFillsAllowed());
 			}
 			else {
 				LOGGER.debug("No matching order found");
