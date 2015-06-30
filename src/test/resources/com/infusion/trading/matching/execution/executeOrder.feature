@@ -1,5 +1,3 @@
-#TODO: Need to test quantity, it is not being tested.
-
 Feature: Execute order
 
 Scenario: A partial fill occurs and the trade is executed

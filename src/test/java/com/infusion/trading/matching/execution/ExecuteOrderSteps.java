@@ -52,10 +52,6 @@ public class ExecuteOrderSteps {
 		List<Transaction> transactionsSentToClearingHouse = tradeExecutionService.getTransactions();
 		
 		assertFalse("transactions should not be empty", transactionsSentToClearingHouse.isEmpty());
-		//It would be nice to be able to set completed flag
-		//Setting quantity to 0 as it will be 0 after filling order
-		LimitOrder expectedMatch = new LimitOrder(0, 150, OrderSide.BUY);
-		Transaction expectedTransaction = new Transaction(order, expectedMatch, 150);
 		
 		/* complete flag on limit order is not publicly mutable and is 
 		 * used in testing equality on match and order fields of transaction.
@@ -67,9 +63,8 @@ public class ExecuteOrderSteps {
 		Transaction actualTransaction = transactionsSentToClearingHouse.get(0);
 		LimitOrder actualMatch = actualTransaction.getMatch();
 				
-		assertEquals(expectedTransaction.getOrder(), actualTransaction.getOrder());
-		assertEquals(expectedMatch.getQuantity(), actualMatch.getQuantity());
-		assertEquals(expectedMatch.getSide(), actualMatch.getSide());
+		assertEquals(order, actualTransaction.getOrder());
+		assertEquals(quantity, actualMatch.getQuantityOfLastTransaction());
 		assertEquals(price, actualTransaction.getTradePrice(), 0.0001);
 	}
 }
