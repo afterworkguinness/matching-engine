@@ -1,32 +1,25 @@
 package com.infusion.trading.matching.execution;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.infusion.trading.matching.domain.LimitOrder;
 import com.infusion.trading.matching.domain.Order;
 
-public class MockTradeExecutionService implements ITradeExecutionService {
+public class MockTradeExecutionService extends TradeExecutionService {
+	private List<Transaction> transactions = new ArrayList<Transaction>();
 
-	private double tradePrice;
-
-	public void executeTrade(Order order, LimitOrder match, double tradePrice) {
-		this.tradePrice = tradePrice;
-	}
-
-	public double getTradePrice() {
-		return tradePrice;
-	}
-
+	@Override
 	public void executeTrade(Order order, LimitOrder match, double tradePrice, boolean holdInStaging) {
-		// TODO Auto-generated method stub
-
+		transactions.add(new Transaction(order, match, tradePrice));
+		super.executeTrade(order, match, tradePrice, holdInStaging);
 	}
 
-	public void executeStagedTransactions() {
-		// TODO Auto-generated method stub
-
+	public List<Transaction> getTransactions() {
+		return transactions;
 	}
 
-	public void flushStagedTransactions() {
-		// TODO Auto-generated method stub
-
+	public void reset() {
+		transactions.clear();
 	}
 }

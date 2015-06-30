@@ -31,6 +31,7 @@ public class LimitOrderSteps {
 	public void setupOrderbook(List<LimitOrder> limitOrders) {
 
 		orderBook.clear();
+		tradeExecutionService.reset();
 
 		for (LimitOrder order : limitOrders)
 			orderBook.addLimitOrder(order);
@@ -61,6 +62,8 @@ public class LimitOrderSteps {
 		 * Cucumber, we are splitting up the execution and verification into two
 		 * methods Must use a hand rolled stub
 		 */
-		assertEquals(tradeExecutionService.getTradePrice(),executionPrice, 0.00001);
+		double actualTradePrice = tradeExecutionService.getTransactions().get(0).getTradePrice();
+
+		assertEquals(actualTradePrice, executionPrice, 0.00001);
 	}
 }
