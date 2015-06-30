@@ -33,8 +33,9 @@ public class LimitOrderSteps {
 		orderBook.clear();
 		tradeExecutionService.reset();
 
-		for (LimitOrder order : limitOrders)
+		for (LimitOrder order : limitOrders) {
 			orderBook.addLimitOrder(order);
+		}
 	}
 
 	@When("^A limit (.+) order is placed for (\\d+) shares at (\\d+)$")

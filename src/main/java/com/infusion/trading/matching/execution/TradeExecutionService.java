@@ -51,36 +51,12 @@ public class TradeExecutionService implements ITradeExecutionService {
 		stagedTransactions.clear();
 	}
 
-	private void sendToClearingEngine(Order order, LimitOrder match, double tradePrice) {
+	void sendToClearingEngine(Order order, LimitOrder match, double tradePrice) {
 		LOGGER.debug("Trade executed. Sending to clearing engine. Trade price $" + tradePrice);
 		// TODO: Implement clearing engine
 	}
 
 	protected List<Transaction> getStagedTransactions() {
 		return Collections.unmodifiableList(stagedTransactions);
-	}
-
-	public static class Transaction {
-		private Order order;
-		private LimitOrder match;
-		private double tradePrice;
-
-		Transaction(Order order, LimitOrder match, double tradePrice) {
-			this.order = order;
-			this.match = match;
-			this.tradePrice = tradePrice;
-		}
-
-		public Order getOrder() {
-			return order;
-		}
-
-		public LimitOrder getMatch() {
-			return match;
-		}
-
-		public double getTradePrice() {
-			return tradePrice;
-		}
 	}
 }

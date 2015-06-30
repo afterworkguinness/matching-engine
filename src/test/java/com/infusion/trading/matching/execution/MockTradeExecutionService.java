@@ -10,9 +10,8 @@ public class MockTradeExecutionService extends TradeExecutionService {
 	private List<Transaction> transactions = new ArrayList<Transaction>();
 
 	@Override
-	public void executeTrade(Order order, LimitOrder match, double tradePrice, boolean holdInStaging) {
+	void sendToClearingEngine(Order order, LimitOrder match, double tradePrice) {
 		transactions.add(new Transaction(order, match, tradePrice));
-		super.executeTrade(order, match, tradePrice, holdInStaging);
 	}
 
 	public List<Transaction> getTransactions() {
