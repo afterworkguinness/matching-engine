@@ -20,6 +20,7 @@ public class LimitOrder implements Order {
 		this.quantity = quantity;
 		this.limitPrice = limitPrice;
 		this.side = side;
+		this.partialFillsAllowed=true;
 	}
 
 	public LimitOrder(int quantity, double limitPrice, OrderSide side, OrderDesignation designation) {
@@ -29,6 +30,7 @@ public class LimitOrder implements Order {
 		this.partialFillsAllowed = (designation == null);
 	}
 
+	@Override
 	public void reduceRemainingQuantity(int transactionQuantity) {
 		quantity -= transactionQuantity;
 		quantityOfLastTransaction = transactionQuantity;
@@ -37,6 +39,7 @@ public class LimitOrder implements Order {
 		}
 	}
 
+	@Override
 	public int getQuantity() {
 		return quantity;
 	}
@@ -53,6 +56,7 @@ public class LimitOrder implements Order {
 		this.limitPrice = limitPrice;
 	}
 
+	@Override
 	public OrderSide getSide() {
 		return side;
 	}
@@ -61,6 +65,7 @@ public class LimitOrder implements Order {
 		this.side = side;
 	}
 
+	@Override
 	public boolean isCompleted() {
 		return completed;
 	}
@@ -90,6 +95,8 @@ public class LimitOrder implements Order {
 					orderToTest.getQuantity() == getQuantity()
 					&& orderToTest.getArrivalTimeInOrderBook() == getArrivalTimeInOrderBook()
 					&& orderToTest.isCompleted() == isCompleted()) {
+					//FIXME: Why does adding this break everything ??? 
+//					&& orderToTest.isPartialFillsAllowed() == partialFillsAllowed) {
 				return true;
 			}
 		}
@@ -104,17 +111,20 @@ public class LimitOrder implements Order {
 	@Override
 	public String toString() {
 
-		return "[Limit Order]: Side: " + side.name() + " | Quantity: " + quantity + " | Limit Price: " + limitPrice;
+		return "[Limit Order]: Side: " + side.name() + " | Quantity: " + quantity + " | Limit Price: " + limitPrice + " | Partial Fills Allowed: " + partialFillsAllowed ;
 	}
 
+	@Override
 	public void setLastTradedPrice(double price) {
 		// do nothing for limit orders
 	}
 
+	@Override
 	public double getLastTradedPrice() {
 		throw new UnsupportedOperationException("Not supported by limit orders");
 	}
 
+	@Override
 	public int getQuantityOfLastTransaction() {
 		return this.quantityOfLastTransaction;
 	}
@@ -133,6 +143,7 @@ public class LimitOrder implements Order {
 		quantity += quantityOfLastTransaction;
 	}
 
+	@Override
 	public boolean isPartialFillsAllowed() {
 		return partialFillsAllowed;
 	}
