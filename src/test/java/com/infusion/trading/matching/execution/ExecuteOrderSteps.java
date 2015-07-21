@@ -51,8 +51,7 @@ public class ExecuteOrderSteps {
 	
 	@When("^A (.+) limit (.+) order is placed for (\\d+) shares at (\\d+)$")
 	public void addLimitOrder(OrderDesignation designation, OrderSide side, int quantity, double price) {
-		this.order=new LimitOrder(quantity, price, side, designation);
-		orderFillService.attemptToFillOrder(order);
+		baseSteps.addLimitOrder(designation, side, quantity, price);
 	}
 
 	@Then("^No trades should be executed")
