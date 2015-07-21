@@ -14,6 +14,7 @@ import com.infusion.trading.matching.domain.OrderDesignation;
 import com.infusion.trading.matching.domain.OrderSide;
 import com.infusion.trading.matching.matcher.OrderFillService;
 import com.infusion.trading.matching.orderbook.OrderBook;
+import com.infusion.trading.matching.test.common.BaseSteps;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -30,17 +31,16 @@ public class ExecuteOrderSteps {
 	@Autowired
 	private OrderFillService orderFillService;
 	
+	@Autowired
+	private BaseSteps baseSteps;
+	
 	private Order order;
 	
 	@Given("^The order book looks like this before the trade is placed:$")
 	public void setupOrderBook(List<LimitOrder> limitOrders) {
 		
-		orderBook.clear();
 		tradeExecutionService.reset();
-		
-		for(LimitOrder order : limitOrders) {
-			orderBook.addLimitOrder(order);
-		}
+		baseSteps.setupOrderBook(limitOrders);
 	}
 	
 	@When("^A limit (.+) order is placed for (\\d+) shares at (\\d+)$")
