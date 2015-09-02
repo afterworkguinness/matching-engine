@@ -10,9 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.infusion.trading.matching.domain.LimitOrder;
-import com.infusion.trading.matching.domain.Order;
-
 /*
  * Need logic to send details of completed trade (matched buy and sell orders and price) 
  * to some endpoint outside the matching engine so it will clear the trade
@@ -26,13 +23,15 @@ public class TradeExecutionService implements ITradeExecutionService {
 	private ExecutorService asyncService = Executors.newFixedThreadPool(THREADS);
 
 	@Override
-	public void executeTrade(Order order, LimitOrder match, double tradePrice, boolean holdInStaging) {
-
+	public void executeTrade(double price, int quantity, boolean holdInStaging, long buyTradeId, long sellTradeId) {
+		
+		Transaction transaction = new Transaction(price, quantity, buyTradeId, sellTradeId);
+		
 		if (holdInStaging) {
-			stagedTransactions.add(new Transaction(order, match, tradePrice));
+			stagedTransactions.add(transaction);
 		}
 		else {
-			new Thread(() -> sendToClearingEngine(order, match, tradePrice)).run();
+			new Thread(() -> sendToClearingEngine(transaction)).run();
 		}
 	}
 
@@ -40,7 +39,7 @@ public class TradeExecutionService implements ITradeExecutionService {
 	public void executeStagedTransactions() {
 		for (Transaction transaction : stagedTransactions) {
 			asyncService.submit(() -> {
-				sendToClearingEngine(transaction.getOrder(), transaction.getMatch(), transaction.getTradePrice());
+				sendToClearingEngine(transaction);
 			});
 		}
 		flushStagedTransactions();
@@ -51,8 +50,8 @@ public class TradeExecutionService implements ITradeExecutionService {
 		stagedTransactions.clear();
 	}
 
-	void sendToClearingEngine(Order order, LimitOrder match, double tradePrice) {
-		LOGGER.debug("Trade executed. Sending to clearing engine. Trade price $" + tradePrice);
+	void sendToClearingEngine(Transaction transaction) {
+		LOGGER.debug("Trade executed. Sending to clearing engine. Trade price $" + transaction.getTradePrice());
 		// TODO: Implement clearing engine
 	}
 

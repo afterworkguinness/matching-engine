@@ -38,7 +38,7 @@ Feature: Limit Order
     And The buy side of the order book should look like this at the end of the trade:
       | side | quantity | limitPrice |
       | buy  | 50       | 200        |
-
+      
   Scenario: A limit sell order crosses the bid ask spread
     Given The order book looks like this before the trade is placed:
       | side | quantity | limitPrice |

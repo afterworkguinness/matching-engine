@@ -96,13 +96,14 @@ public class OrderFillService {
 				// Last traded price is not needed for a limit order, but for
 				// simplicity
 				// we will set it regardless
+				LOGGER.info("Last traded price: " + match.getLimitPrice());
 				order.setLastTradedPrice(match.getLimitPrice());
 
 				if (match.isCompleted()) {
 					LOGGER.debug("Matched order completely filled");
 					orderBook.removeCompletedOrder(match.getSide(), order.isPartialFillsAllowed());
 				}
-				tradeExecutionService.executeTrade(order, match, match.getLimitPrice(), !order.isPartialFillsAllowed());
+				tradeExecutionService.executeTrade(match.getLimitPrice(), transactionQuantity, !order.isPartialFillsAllowed(), 0,0);
 			}
 			else {
 				LOGGER.debug("No matching order found");

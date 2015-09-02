@@ -34,10 +34,15 @@ public class ExecuteOrderSteps {
 	@Autowired
 	private BaseSteps baseSteps;
 	
-	private Order order;
+	private Order restingOrder_buy;
+	private Order expectedMatch_sell;
+	
 	
 	@Given("^The order book looks like this before the trade is placed:$")
 	public void setupOrderBook(List<LimitOrder> limitOrders) {
+		
+		//In this test, we're only expecting a single order to be waiting in the book
+		restingOrder_buy = limitOrders.get(0);
 		
 		tradeExecutionService.reset();
 		baseSteps.setupOrderBook(limitOrders);
@@ -45,8 +50,7 @@ public class ExecuteOrderSteps {
 	
 	@When("^A limit (.+) order is placed for (\\d+) shares at (\\d+)$")
 	public void addLimitOrder(OrderSide side, int quantity, double price) {
-		this.order=new LimitOrder(quantity, price, side);
-		orderFillService.attemptToFillOrder(order);
+		baseSteps.addLimitOrder(null, side, quantity, price);
 	}
 	
 	@When("^A (.+) limit (.+) order is placed for (\\d+) shares at (\\d+)$")
@@ -73,10 +77,7 @@ public class ExecuteOrderSteps {
 		 */
 		
 		Transaction actualTransaction = transactionsSentToClearingHouse.get(0);
-		LimitOrder actualMatch = actualTransaction.getMatch();
-				
-		assertEquals(order, actualTransaction.getOrder());
-		assertEquals(quantity, actualMatch.getQuantityOfLastTransaction());
 		assertEquals(price, actualTransaction.getTradePrice(), 0.0001);
+		assertEquals(quantity, actualTransaction.getQuantity(), 0.0001);
 	}
 }

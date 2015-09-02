@@ -1,4 +1,3 @@
-
 package com.infusion.trading.matching.test.common;
 
 import java.util.List;
@@ -18,22 +17,29 @@ public class BaseSteps {
 
 	@Autowired
 	private OrderBook orderBook;
-	
+
 	@Autowired
 	private OrderFillService orderFillService;
-	
+
 	private Order order;
-	
+
 	public void setupOrderBook(List<LimitOrder> orders) {
 		orderBook.clear();
-		
-		for(LimitOrder order : orders) {
+
+		for (LimitOrder order : orders) {
 			orderBook.addLimitOrder(order);
 		}
 	}
-	
+
 	public void addLimitOrder(OrderDesignation designation, OrderSide side, int quantity, double price) {
-		this.order=new LimitOrder(quantity, price, side, designation);
+
+		if (designation != null) {
+			this.order = new LimitOrder(quantity, price, side, designation);
+		} else {
+			//FIXME: Doesn't work when you pass null for designation.
+			this.order = new LimitOrder(quantity, price, side);
+		}
+
 		orderFillService.attemptToFillOrder(order);
 	}
 }
