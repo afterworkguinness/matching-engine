@@ -9,7 +9,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.infusion.trading.matching.domain.LimitOrder;
-import com.infusion.trading.matching.domain.Order;
 import com.infusion.trading.matching.domain.OrderDesignation;
 import com.infusion.trading.matching.domain.OrderSide;
 import com.infusion.trading.matching.matcher.OrderFillService;
@@ -34,15 +33,8 @@ public class ExecuteOrderSteps {
 	@Autowired
 	private BaseSteps baseSteps;
 	
-	private Order restingOrder_buy;
-	private Order expectedMatch_sell;
-	
-	
 	@Given("^The order book looks like this before the trade is placed:$")
 	public void setupOrderBook(List<LimitOrder> limitOrders) {
-		
-		//In this test, we're only expecting a single order to be waiting in the book
-		restingOrder_buy = limitOrders.get(0);
 		
 		tradeExecutionService.reset();
 		baseSteps.setupOrderBook(limitOrders);
