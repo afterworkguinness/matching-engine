@@ -1,12 +1,17 @@
 package com.infusion.trading.matching.execution;
 
-
+/*
+ * Will need to expand this to include:
+ * Buy & sell trade IDs
+ * Stock
+ * timestamp
+ */
 public class Transaction {
 	
 	private double tradePrice;
 	private int quantity;
-
-	Transaction(double tradePrice, int quantity, long buyTradeId, long sellTradeId) {
+	
+	Transaction(double tradePrice, int quantity) {
 		this.tradePrice = tradePrice;
 		this.quantity = quantity;
 	}
@@ -19,5 +24,24 @@ public class Transaction {
 
 	public double getTradePrice() {
 		return tradePrice;
+	}
+	
+	@Override
+	public boolean equals(Object objectToTest) {
+		if(objectToTest instanceof Transaction) {
+			Transaction transactionToTest = (Transaction)objectToTest;
+			
+			if(transactionToTest.getTradePrice() == getTradePrice() &&
+					transactionToTest.getQuantity() == getQuantity()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Transaction [tradePrice=" + tradePrice + ", quantity=" + quantity + "]";
 	}
 }

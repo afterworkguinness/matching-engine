@@ -56,7 +56,7 @@ public class ExecuteOrderSteps {
 	}
 	
 	@Then("^A trade for (\\d+) shares should be executed at (\\d+)")
-	public void verifyTransactionExecuted(int quantity, double price) {
+	public void verifyTransactionsExecuted(int quantity, double price) {
 		List<Transaction> transactionsSentToClearingHouse = tradeExecutionService.getTransactions();
 		
 		assertFalse("transactions should not be empty", transactionsSentToClearingHouse.isEmpty());
@@ -71,5 +71,12 @@ public class ExecuteOrderSteps {
 		Transaction actualTransaction = transactionsSentToClearingHouse.get(0);
 		assertEquals(price, actualTransaction.getTradePrice(), 0.0001);
 		assertEquals(quantity, actualTransaction.getQuantity(), 0.0001);
+	}
+	
+	@Then("^the following trades are executed:$")
+	public void verifyTransactionsExecuted(List<Transaction> expectedTransactions) {
+		
+		List<Transaction> actualTransactions = tradeExecutionService.getTransactions();
+		assertEquals(expectedTransactions, actualTransactions);
 	}
 }
