@@ -1,7 +1,7 @@
 package com.infusion.trading.matching.orderbook;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderBookService {
 	
-	private Map<String, OrderBook> orderBooks = new HashMap<String, OrderBook>();
+	private Map<String, OrderBook> orderBooks = new ConcurrentHashMap<String, OrderBook>();
+	
 	private Logger LOGGER = LoggerFactory.getLogger(OrderBookService.class);
 	
 	public OrderBook getOrderBook(String symbol) {
