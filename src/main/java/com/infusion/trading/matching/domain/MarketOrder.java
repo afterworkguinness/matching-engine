@@ -11,9 +11,16 @@ public class MarketOrder implements Order {
 	private double totalPrice;
 	private double lastTradedPrice;
 	private boolean partialFillsAllowed = true;
+	private String symbol; 
 
 	private Logger LOGGER = LoggerFactory.getLogger(com.infusion.trading.matching.domain.MarketOrder.class);
 
+	public MarketOrder(String symbol, OrderSide side, int orderQuantity) {
+		this.quantity = orderQuantity;
+		this.side = side;
+		this.symbol=symbol;
+	}
+	@Deprecated
 	public MarketOrder(OrderSide side, int orderQuantity) {
 		this.quantity = orderQuantity;
 		this.side = side;
@@ -25,6 +32,7 @@ public class MarketOrder implements Order {
 		partialFillsAllowed = (designation == null);
 	}
 
+	@Override
 	public void reduceRemainingQuantity(int transactionQuantity) {
 		quantity -= transactionQuantity;
 		if (quantity == 0) {
@@ -32,6 +40,7 @@ public class MarketOrder implements Order {
 		}
 	}
 
+	@Override
 	public int getQuantity() {
 		return quantity;
 	}
@@ -40,6 +49,7 @@ public class MarketOrder implements Order {
 		this.quantity = orderQuantity;
 	}
 
+	@Override
 	public OrderSide getSide() {
 		return side;
 	}
@@ -48,6 +58,7 @@ public class MarketOrder implements Order {
 		this.side = side;
 	}
 
+	@Override
 	public boolean isCompleted() {
 		return completed;
 	}
@@ -64,10 +75,12 @@ public class MarketOrder implements Order {
 		this.totalPrice = totalPrice;
 	}
 
+	@Override
 	public double getLastTradedPrice() {
 		return lastTradedPrice;
 	}
 
+	@Override
 	public void setLastTradedPrice(double lastTradedPrice) {
 		this.lastTradedPrice = lastTradedPrice;
 	}
@@ -78,11 +91,18 @@ public class MarketOrder implements Order {
 		return "[Market Order]: Side: " + side.name() + " | Quantity: " + quantity + " | Last Traded Price: " + lastTradedPrice;
 	}
 
+	@Override
 	public int getQuantityOfLastTransaction() {
 		throw new UnsupportedOperationException("Not supported for market orders");
 	}
 
+	@Override
 	public boolean isPartialFillsAllowed() {
 		return partialFillsAllowed;
+	}
+
+	@Override
+	public String getSymbol() {
+		return this.symbol;
 	}
 }

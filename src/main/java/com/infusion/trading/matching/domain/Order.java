@@ -17,4 +17,6 @@ public interface Order {
 	public int getQuantityOfLastTransaction();
 
 	public boolean isPartialFillsAllowed();
+	
+	public String getSymbol();
 }

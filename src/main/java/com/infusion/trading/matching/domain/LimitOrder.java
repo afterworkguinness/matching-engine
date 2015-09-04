@@ -13,6 +13,7 @@ public class LimitOrder implements Order {
 	private int quantityOfLastTransaction;
 	private boolean holdInStaging;
 	private boolean partialFillsAllowed = true;
+	private String symbol;
 
 	private Logger LOGGER = LoggerFactory.getLogger(com.infusion.trading.matching.domain.LimitOrder.class);
 
@@ -21,6 +22,13 @@ public class LimitOrder implements Order {
 		this.limitPrice = limitPrice;
 		this.side = side;
 		this.partialFillsAllowed=true;
+	}
+	public LimitOrder(String symbol, int quantity, double limitPrice, OrderSide side) {
+		this.quantity = quantity;
+		this.limitPrice = limitPrice;
+		this.side = side;
+		this.partialFillsAllowed=true;
+		this.symbol=symbol;
 	}
 
 	public LimitOrder(int quantity, double limitPrice, OrderSide side, OrderDesignation designation) {
@@ -146,5 +154,14 @@ public class LimitOrder implements Order {
 	@Override
 	public boolean isPartialFillsAllowed() {
 		return partialFillsAllowed;
+	}
+
+	@Override
+	public String getSymbol() {
+		return symbol;
+	}
+
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
 }
