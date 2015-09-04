@@ -10,12 +10,13 @@ import com.infusion.trading.matching.domain.MarketOrder;
 import com.infusion.trading.matching.domain.Order;
 import com.infusion.trading.matching.execution.ITradeExecutionService;
 import com.infusion.trading.matching.orderbook.OrderBook;
+import com.infusion.trading.matching.orderbook.OrderBookService;
 
 @Component
 public class OrderFillService {
 
 	@Autowired
-	private OrderBook orderBook;
+	private OrderBookService orderBookService;
 
 	@Autowired
 	private ITradeExecutionService tradeExecutionService;
@@ -39,33 +40,44 @@ public class OrderFillService {
 		 * 
 		 * So in any case, the price of the resting order is used
 		 */
-		synchronized (this) {
+		OrderBook orderBook = orderBookService.getOrderBook(order.getSymbol());
+
+		orderBook.lockForWrite();
+
+		try {
 
 			LOGGER.debug("New order - " + order);
 
-			fillOrderUntilNoMatchesOrNoLiquidiy(order);
+			// FIXME: This is UGLY, don't pass orderbook around
+			fillOrderUntilNoMatchesOrNoLiquidiy(order, orderBook);
 
 			if (order.isCompleted()) {
-				processCompleteOrder(order);
+				// FIXME: This is UGLY, don't pass orderbook around
+				processCompleteOrder(order, orderBook);
 			}
 			else {
-				processIncompleteOrder(order);
+				// FIXME: This is UGLY, don't pass orderbook around
+				processIncompleteOrder(order, orderBook);
 			}
+		}
+		finally {
+			orderBook.unlockWriteLock();
 		}
 	}
 
-	private void processCompleteOrder(Order order) {
+	private void processCompleteOrder(Order order, OrderBook orderBook) {
 		LOGGER.debug("Order is completed");
 		tradeExecutionService.executeStagedTransactions();
 		orderBook.completeStagedOrders(order.getSide().getOppositeSide());
 	}
 
-	private void processIncompleteOrder(Order order) {
+	private void processIncompleteOrder(Order order, OrderBook orderBook) {
 		LOGGER.debug("Order is incomplete and no more matches exist in book.");
 
 		if (order.isPartialFillsAllowed()) {
 			LOGGER.debug("Adding to order book");
-			addOrderToBook(order);
+			// FIXME: This is UGLY, don't pass orderbook around
+			addOrderToBook(order, orderBook);
 		}
 		else {
 			LOGGER.debug("Partial fills not allowed for this order. Killing and reverting any limit orders used to fill it");
@@ -74,7 +86,7 @@ public class OrderFillService {
 		}
 	}
 
-	private void fillOrderUntilNoMatchesOrNoLiquidiy(Order order) {
+	private void fillOrderUntilNoMatchesOrNoLiquidiy(Order order, OrderBook orderBook) {
 
 		while (order.isCompleted() == false && orderBook.isLiquidityLeft(order.getSide())) {
 
@@ -103,7 +115,7 @@ public class OrderFillService {
 					LOGGER.debug("Matched order completely filled");
 					orderBook.removeCompletedOrder(match.getSide(), order.isPartialFillsAllowed());
 				}
-				tradeExecutionService.executeTrade(match.getLimitPrice(), transactionQuantity, !order.isPartialFillsAllowed(), 0,0);
+				tradeExecutionService.executeTrade(match.getLimitPrice(), transactionQuantity, !order.isPartialFillsAllowed(), 0, 0);
 			}
 			else {
 				LOGGER.debug("No matching order found");
@@ -112,7 +124,7 @@ public class OrderFillService {
 		}
 	}
 
-	private void addOrderToBook(Order order) {
+	private void addOrderToBook(Order order, OrderBook orderBook) {
 		LimitOrder limitOrder;
 
 		if (order instanceof MarketOrder) {

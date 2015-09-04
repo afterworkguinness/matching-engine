@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,6 +26,7 @@ public class OrderBook {
 	private static List<LimitOrder> buyOrders = new LinkedList<LimitOrder>();
 	private static List<LimitOrder> sellOrders = new LinkedList<LimitOrder>();
 	private final int TOP = 0;
+	private final ReadWriteLock LOCK = new ReentrantReadWriteLock();
 
 	public List<LimitOrder> getStagedOrders(OrderSide side) {
 		List<LimitOrder> orders = getOrders(side);
@@ -180,5 +183,21 @@ public class OrderBook {
 			default:
 				return null;
 		}
+	}
+
+	public void lockForWrite() {
+		LOCK.writeLock().lock();
+	}
+
+	public void unlockWriteLock() {
+		LOCK.writeLock().unlock();
+	}
+
+	public void registerReader() {
+		LOCK.readLock().lock();
+	}
+
+	public void unregisterReader() {
+		LOCK.readLock().unlock();
 	}
 }
