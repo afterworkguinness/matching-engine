@@ -11,6 +11,8 @@ import com.infusion.trading.matching.domain.OrderSide;
 import com.infusion.trading.matching.execution.MockTradeExecutionService;
 import com.infusion.trading.matching.matcher.OrderFillService;
 import com.infusion.trading.matching.orderbook.OrderBook;
+import com.infusion.trading.matching.orderbook.OrderBookService;
+import com.infusion.trading.matching.test.common.TesUtil;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -19,7 +21,7 @@ import cucumber.api.java.en.When;
 public class LimitOrderSteps {
 
 	@Autowired
-	private OrderBook orderBook;
+	private OrderBookService orderBookService;
 
 	@Autowired
 	private OrderFillService orderFillService;
@@ -27,8 +29,12 @@ public class LimitOrderSteps {
 	@Autowired
 	private MockTradeExecutionService tradeExecutionService;
 
+	@Autowired
+	private TesUtil testUtil;
+
 	@Given("^The order book looks like this before the trade is placed:$")
 	public void setupOrderbook(List<LimitOrder> limitOrders) {
+		OrderBook orderBook = testUtil.getOrderBook(limitOrders.get(0));
 
 		orderBook.clear();
 		tradeExecutionService.reset();
@@ -43,8 +49,15 @@ public class LimitOrderSteps {
 		orderFillService.attemptToFillOrder(new LimitOrder(quantity, limitPrice, side));
 	}
 
+	@When("^A limit (.+) order is placed for (\\d+) shares of (.+) at (\\d+)$")
+	public void addLimitOrder(OrderSide side, int quantity, String symbol, double limitPrice) {
+		orderFillService.attemptToFillOrder(new LimitOrder(symbol, quantity, limitPrice, side));
+	}
+
 	@Then("^The (.+) side of the order book should look like this at the end of the trade:$")
 	public void verifyOrderBookState(OrderSide side, List<LimitOrder> limitOrders) {
+
+		OrderBook orderBook = testUtil.getOrderBook(limitOrders.get(0));
 
 		if (OrderSide.BUY == side) {
 			assertEquals(limitOrders, orderBook.getBuyOrders());

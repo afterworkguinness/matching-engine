@@ -2,11 +2,11 @@ Feature: Limit Order
 
   Scenario: A limit order is added to an empty order book
     Given The order book looks like this before the trade is placed:
-      | side | quantity | limitPrice |
-    When A limit buy order is placed for 100 shares at 50
+      | symbol | side | quantity | limitPrice |
+    When A limit buy order is placed for 100 shares of FOO at 50
     Then The buy side of the order book should look like this at the end of the trade:
-      | side | quantity | limitPrice |
-      | buy  | 100      | 50         |
+      | symbol  | side | quantity | limitPrice |
+      | FOO		| buy  | 100      | 50         |
 
   Scenario: A limit order is executed
     Given The order book looks like this before the trade is placed:

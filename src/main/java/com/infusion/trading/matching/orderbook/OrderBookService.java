@@ -20,7 +20,7 @@ public class OrderBookService {
 
 	public OrderBook getOrderBook(String symbol) {
 
-		if (true)
+		if (symbol == null)
 			return tempOrderBook;
 
 		/*
@@ -31,7 +31,8 @@ public class OrderBookService {
 
 		if (orderBooks.containsKey(symbol)) {
 			book = orderBooks.get(symbol);
-		} else {
+		}
+		else {
 			book = new OrderBook();
 			orderBooks.put(symbol, book);
 			LOGGER.debug("Order book for [" + symbol + "] doesn't exist. Creating.");
