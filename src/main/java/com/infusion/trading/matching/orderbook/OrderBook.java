@@ -2,6 +2,7 @@ package com.infusion.trading.matching.orderbook;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -169,19 +170,14 @@ public class OrderBook {
 
 		List<LimitOrder> orders = getOrders(side);
 
-		int lastIndexToRemove = -1;
-
 		// This mess is necessary to avoid concurrent modification exception
+		Iterator<LimitOrder> ordersIterator = orders.iterator();
 
-		for (int i = 0; i < orders.size(); i++) {
-
-			if (orders.get(i).isHoldInStaging()) {
-				lastIndexToRemove = i;
+		while (ordersIterator.hasNext()) {
+			LimitOrder order = ordersIterator.next();
+			if (order.isHoldInStaging()) {
+				ordersIterator.remove();
 			}
-		}
-
-		for (int i = 0; i <= lastIndexToRemove; i++) {
-			orders.remove(i);
 		}
 	}
 
