@@ -28,6 +28,18 @@ public class OrderBook {
 	private final int TOP = 0;
 	private final ReadWriteLock LOCK = new ReentrantReadWriteLock();
 
+	@Deprecated
+	// "For backwards compatibility"
+	public OrderBook() {
+
+	}
+
+	// This won't be a spring managed bean anymore
+	public OrderBook(IOrderArrivalTimeService arrivalTimeService, IOrderPlacementAlgorithm orderPlacementAlgorithm) {
+		this.arrivalTimeService = arrivalTimeService;
+		this.orderPlacementAlgorithm = orderPlacementAlgorithm;
+	}
+
 	public List<LimitOrder> getStagedOrders(OrderSide side) {
 		List<LimitOrder> orders = getOrders(side);
 		List<LimitOrder> stagedOrders = new ArrayList<LimitOrder>();
@@ -199,5 +211,33 @@ public class OrderBook {
 
 	public void unregisterReader() {
 		LOCK.readLock().unlock();
+	}
+
+	@Override
+	public boolean equals(Object obectToTest) {
+		if (obectToTest instanceof OrderBook) {
+			OrderBook orderBookToTest = (OrderBook) obectToTest;
+
+			if (orderBookToTest.getBuyOrders().equals(getBuyOrders()) && orderBookToTest.getSellOrders().equals(getSellOrders())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+
+		int hashCode = 32;
+
+		if (buyOrders.isEmpty() == false) {
+			hashCode += buyOrders.get(0).hashCode();
+		}
+
+		if (sellOrders.isEmpty() == false) {
+			hashCode += sellOrders.get(0).hashCode();
+		}
+
+		return hashCode;
 	}
 }

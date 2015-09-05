@@ -8,11 +8,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.infusion.trading.matching.algo.IOrderPlacementAlgorithm;
+
 @Component
 public class OrderBookService {
 
 	@Autowired
 	private OrderBook tempOrderBook;
+
+	@Autowired
+	private IOrderArrivalTimeService arrivalTimeService;
+
+	@Autowired
+	private IOrderPlacementAlgorithm orderPlacementAlgorithm;
 
 	private Map<String, OrderBook> orderBooks = new ConcurrentHashMap<String, OrderBook>();
 
@@ -33,10 +41,11 @@ public class OrderBookService {
 			book = orderBooks.get(symbol);
 		}
 		else {
-			book = new OrderBook();
+			book = new OrderBook(arrivalTimeService, orderPlacementAlgorithm);
 			orderBooks.put(symbol, book);
 			LOGGER.debug("Order book for [" + symbol + "] doesn't exist. Creating.");
 		}
 		return book;
 	}
+
 }

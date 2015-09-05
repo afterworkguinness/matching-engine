@@ -8,5 +8,6 @@
 	http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 
 	<bean id="tradeExecutionService" class="com.infusion.trading.matching.execution.MockTradeExecutionService"/>
-
+	<bean id="orderBookService" class="com.infusion.trading.matching.orderbook.TestOrderBookService"/>
+	
 </beans>
