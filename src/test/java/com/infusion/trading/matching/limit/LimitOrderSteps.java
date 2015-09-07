@@ -37,17 +37,19 @@ public class LimitOrderSteps {
 	private TesUtil testUtil;
 
 	private Map<String, OrderBook> expectedOrderBooks = new HashMap<String, OrderBook>();
+	private Map<String, OrderBook> snapshotOfOrderBooksBeforeTestRuns = new HashMap<String, OrderBook>();
 
 	private Logger LOGGER = LoggerFactory.getLogger(LimitOrderSteps.class);
 
 	@Given("^The order book looks like this before the trade is placed:$")
 	public void setupOrderbook(List<LimitOrder> limitOrders) {
 		for (LimitOrder order : limitOrders) {
-			OrderBook orderBook = testUtil.getOrderBook(order);
+			OrderBook orderBook = orderBookService.getOrderBook(order.getSymbol());
 			orderBook.clear();
 			tradeExecutionService.reset();
 			orderBook.addLimitOrder(order);
 		}
+		snapshotOfOrderBooksBeforeTestRuns = orderBookService.getAllOrderBooks();
 	}
 
 	@When("^A limit (.+) order is placed for (\\d+) shares at (\\d+)$")
@@ -63,13 +65,6 @@ public class LimitOrderSteps {
 	@Then("^The order book should look like this at the end of the trade:$")
 	public void verifyOrderBookState(List<LimitOrder> expectedLmitOrders) {
 
-		/*
-		 * Create map of Symbol and OrderBook (just like in orderbook svc) For
-		 * each order in expected: Add it to buy/sell side of orderbook for its
-		 * symbol When done creating orderbooks for expected data, compare the
-		 * expected orderbooks with the real ones
-		 */
-
 		for (LimitOrder expectedOrder : expectedLmitOrders) {
 
 			String symbol = expectedOrder.getSymbol();
@@ -77,15 +72,8 @@ public class LimitOrderSteps {
 			expectedOrderBook.addLimitOrder(expectedOrder);
 		}
 
-		OrderBook expectedOrderBook;
-		OrderBook actualOrderBook;
+		assertEquals(expectedOrderBooks, orderBookService.getAllOrderBooks());
 
-		for (Map.Entry<String, OrderBook> entry : expectedOrderBooks.entrySet()) {
-			String symbol = entry.getKey();
-			expectedOrderBook = entry.getValue();
-			actualOrderBook = orderBookService.getOrderBook(symbol);
-			assertEquals("Testing order book for [" + symbol + "]", expectedOrderBook, actualOrderBook);
-		}
 	}
 
 	private OrderBook retrievetOrCreateExpectedOrderBook(String symbol) {
@@ -95,7 +83,7 @@ public class LimitOrderSteps {
 			book = expectedOrderBooks.get(symbol);
 		}
 		else {
-			book = orderBookService.forceCreateNewOrderBook();
+			book = orderBookService.forceCreateNewOrderBook(symbol);
 			expectedOrderBooks.put(symbol, book);
 		}
 		return book;

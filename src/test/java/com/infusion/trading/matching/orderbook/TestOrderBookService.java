@@ -14,8 +14,8 @@ public class TestOrderBookService extends OrderBookService {
 	@Autowired
 	private IOrderPlacementAlgorithm orderPlacementAlgorithm;
 
-	public OrderBook forceCreateNewOrderBook() {
+	public OrderBook forceCreateNewOrderBook(String symbol) {
 
-		return new OrderBook(arrivalTimeService, orderPlacementAlgorithm);
+		return new OrderBook(arrivalTimeService, orderPlacementAlgorithm, symbol);
 	}
 }

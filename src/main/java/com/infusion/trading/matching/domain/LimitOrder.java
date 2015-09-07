@@ -8,7 +8,7 @@ public class LimitOrder implements Order {
 	private int quantity;
 	private double limitPrice;
 	private OrderSide side;
-	private boolean completed=false;
+	private boolean completed = false;
 	private long arrivalTimeInOrderBook;
 	private int quantityOfLastTransaction;
 	private boolean holdInStaging;
@@ -21,14 +21,15 @@ public class LimitOrder implements Order {
 		this.quantity = quantity;
 		this.limitPrice = limitPrice;
 		this.side = side;
-		this.partialFillsAllowed=true;
+		this.partialFillsAllowed = true;
 	}
+
 	public LimitOrder(String symbol, int quantity, double limitPrice, OrderSide side) {
 		this.quantity = quantity;
 		this.limitPrice = limitPrice;
 		this.side = side;
-		this.partialFillsAllowed=true;
-		this.symbol=symbol;
+		this.partialFillsAllowed = true;
+		this.symbol = symbol;
 	}
 
 	public LimitOrder(int quantity, double limitPrice, OrderSide side, OrderDesignation designation) {
@@ -98,13 +99,12 @@ public class LimitOrder implements Order {
 
 		if (objectToTest instanceof LimitOrder) {
 			LimitOrder orderToTest = (LimitOrder) objectToTest;
-			if (orderToTest.getSide() == getSide() &&
-					orderToTest.getLimitPrice() == getLimitPrice() && 
-					orderToTest.getQuantity() == getQuantity()
-					&& orderToTest.getArrivalTimeInOrderBook() == getArrivalTimeInOrderBook()
+			if (orderToTest.getSymbol().equals(getSymbol()) && orderToTest.getSide() == getSide() && orderToTest.getLimitPrice() == getLimitPrice()
+					&& orderToTest.getQuantity() == getQuantity() && orderToTest.getArrivalTimeInOrderBook() == getArrivalTimeInOrderBook()
 					&& orderToTest.isCompleted() == isCompleted()) {
-					//FIXME: Why does adding this break everything ??? 
-//					&& orderToTest.isPartialFillsAllowed() == partialFillsAllowed) {
+				// FIXME: Why does adding this break everything ???
+				// && orderToTest.isPartialFillsAllowed() ==
+				// partialFillsAllowed) {
 				return true;
 			}
 		}
@@ -113,13 +113,14 @@ public class LimitOrder implements Order {
 
 	@Override
 	public int hashCode() {
-		return Double.hashCode(getLimitPrice()) + getQuantity() + Long.hashCode(getArrivalTimeInOrderBook());
+		return getSymbol().hashCode() + Double.hashCode(getLimitPrice()) + getQuantity() + Long.hashCode(getArrivalTimeInOrderBook());
 	}
 
 	@Override
 	public String toString() {
 
-		return "[Limit Order]: Side: " + side.name() + " | Quantity: " + quantity + " | Limit Price: " + limitPrice + " | Partial Fills Allowed: " + partialFillsAllowed ;
+		return "[Limit Order]: Symbol: " + symbol + "| Side: " + side.name() + " | Quantity: " + quantity + " | Limit Price: " + limitPrice + " | Partial Fills Allowed: "
+				+ partialFillsAllowed;
 	}
 
 	@Override
@@ -144,10 +145,10 @@ public class LimitOrder implements Order {
 	public void holdInStaging() {
 		this.holdInStaging = true;
 	}
-	
+
 	public void reset() {
 		holdInStaging = false;
-		completed=false;
+		completed = false;
 		quantity += quantityOfLastTransaction;
 	}
 

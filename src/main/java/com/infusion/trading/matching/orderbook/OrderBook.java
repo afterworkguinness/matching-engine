@@ -27,6 +27,7 @@ public class OrderBook {
 	private static List<LimitOrder> buyOrders = new LinkedList<LimitOrder>();
 	private static List<LimitOrder> sellOrders = new LinkedList<LimitOrder>();
 	private final int TOP = 0;
+	private String symbol;
 	private final ReadWriteLock LOCK = new ReentrantReadWriteLock();
 
 	@Deprecated
@@ -36,7 +37,8 @@ public class OrderBook {
 	}
 
 	// This won't be a spring managed bean anymore
-	public OrderBook(IOrderArrivalTimeService arrivalTimeService, IOrderPlacementAlgorithm orderPlacementAlgorithm) {
+	public OrderBook(IOrderArrivalTimeService arrivalTimeService, IOrderPlacementAlgorithm orderPlacementAlgorithm, String symbol) {
+		this.symbol = symbol;
 		this.arrivalTimeService = arrivalTimeService;
 		this.orderPlacementAlgorithm = orderPlacementAlgorithm;
 	}
@@ -103,29 +105,20 @@ public class OrderBook {
 	}
 
 	public void removeCompletedOrder(OrderSide side, boolean incomingOrderAllowsPartialFills) {
-		// will only ever remove starting at top
+
+		List<LimitOrder> orders = getOrders(side);
+
+		if (incomingOrderAllowsPartialFills == false) {
+			orders.get(TOP).holdInStaging();
+		}
+		else {
+			orders.remove(TOP);
+		}
 
 		/*
-		 * Want to lock the entire order book at one time. Only one order,
-		 * regardless if it's buy or sell allowed in at one time
+		 * Backup to DB while still locking. If you do it after lock is
+		 * released, it could be stale
 		 */
-
-		synchronized (this) {
-
-			List<LimitOrder> orders = getOrders(side);
-
-			if (incomingOrderAllowsPartialFills == false) {
-				orders.get(TOP).holdInStaging();
-			}
-			else {
-				orders.remove(TOP);
-			}
-
-			/*
-			 * Backup to DB while still locking. If you do it after lock is
-			 * released, it could be stale
-			 */
-		}
 	}
 
 	/*
@@ -209,12 +202,16 @@ public class OrderBook {
 		LOCK.readLock().unlock();
 	}
 
+	public String getSymbol() {
+		return symbol;
+	}
+
 	@Override
 	public boolean equals(Object obectToTest) {
 		if (obectToTest instanceof OrderBook) {
 			OrderBook orderBookToTest = (OrderBook) obectToTest;
 
-			if (orderBookToTest.getBuyOrders().equals(getBuyOrders()) && orderBookToTest.getSellOrders().equals(getSellOrders())) {
+			if (orderBookToTest.getSymbol().equals(getSymbol()) && getBuyOrders().equals(getBuyOrders()) && orderBookToTest.getSellOrders().equals(getSellOrders())) {
 				return true;
 			}
 		}
@@ -225,6 +222,7 @@ public class OrderBook {
 	public int hashCode() {
 
 		int hashCode = 32;
+		hashCode += symbol.hashCode();
 
 		if (buyOrders.isEmpty() == false) {
 			hashCode += buyOrders.get(0).hashCode();
@@ -235,5 +233,12 @@ public class OrderBook {
 		}
 
 		return hashCode;
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("Buy Orders: ").append(buyOrders).append("Sell Orders: ").append(sellOrders);
+		return buffer.toString();
 	}
 }

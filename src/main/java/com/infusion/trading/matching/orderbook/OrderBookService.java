@@ -1,5 +1,6 @@
 package com.infusion.trading.matching.orderbook;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -23,7 +24,6 @@ public class OrderBookService {
 	private IOrderPlacementAlgorithm orderPlacementAlgorithm;
 
 	private Map<String, OrderBook> orderBooks = new ConcurrentHashMap<String, OrderBook>();
-
 	private Logger LOGGER = LoggerFactory.getLogger(OrderBookService.class);
 
 	public OrderBook getOrderBook(String symbol) {
@@ -31,21 +31,25 @@ public class OrderBookService {
 		if (symbol == null)
 			return tempOrderBook;
 
-		/*
-		 * FOR NOW, THIS CODE IS UNREACHABLE SO IT DOESN'T BREAK TESTS MORE
-		 * REFACTORING NEEDS TO BE DONE BEFORE THIS CAN BE USED
-		 */
 		OrderBook book;
 
 		if (orderBooks.containsKey(symbol)) {
 			book = orderBooks.get(symbol);
 		}
 		else {
-			book = new OrderBook(arrivalTimeService, orderPlacementAlgorithm);
+			book = new OrderBook(arrivalTimeService, orderPlacementAlgorithm, symbol);
 			orderBooks.put(symbol, book);
 			LOGGER.debug("Order book for [" + symbol + "] doesn't exist. Creating.");
 		}
 		return book;
+	}
+
+	/*
+	 * Somehow, some way, instead of returning orderbooks just return immutable
+	 * lists of buy/sell orders
+	 */
+	public Map<String, OrderBook> getAllOrderBooks() {
+		return Collections.unmodifiableMap(orderBooks);
 	}
 
 }
