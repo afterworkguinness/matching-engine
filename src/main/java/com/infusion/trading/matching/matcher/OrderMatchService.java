@@ -8,15 +8,16 @@ import com.infusion.trading.matching.domain.MarketOrder;
 import com.infusion.trading.matching.domain.Order;
 import com.infusion.trading.matching.domain.OrderSide;
 import com.infusion.trading.matching.orderbook.OrderBook;
+import com.infusion.trading.matching.orderbook.OrderBookService;
 
 @Component
 public class OrderMatchService {
 
 	@Autowired
-	private OrderBook orderBook;
+	private OrderBookService orderBookService;
 
 	public LimitOrder findMatchingOrder(Order order) {
-
+		OrderBook orderBook = orderBookService.getOrderBook(order.getSymbol());
 		LimitOrder orderAtTopOfBook = orderBook.retrieveOrder(order.getSide().getOppositeSide());
 		// Liquidity is checked before calling this method, so if it returns
 		// null that's b/c a it doesn't match the limit orders price limit

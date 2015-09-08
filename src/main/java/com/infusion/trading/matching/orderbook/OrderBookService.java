@@ -37,6 +37,10 @@ public class OrderBookService {
 			book = orderBooks.get(symbol);
 		}
 		else {
+			/* TODO: Very odd behaviour (and replicatable).
+			 * I create FOO order book and add an order to it in the setup steps
+			 * I then create a Bar orderbook. When its constructor returns, it has a foo order in it... HOW ???
+			 */
 			book = new OrderBook(arrivalTimeService, orderPlacementAlgorithm, symbol);
 			orderBooks.put(symbol, book);
 			LOGGER.debug("Order book for [" + symbol + "] doesn't exist. Creating.");

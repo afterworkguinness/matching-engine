@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 
 public class LimitOrder implements Order {
 
-	private int quantity;
-	private double limitPrice;
+	private Integer quantity;
+	private Double limitPrice;
 	private OrderSide side;
 	private boolean completed = false;
 	private long arrivalTimeInOrderBook;
@@ -24,7 +24,7 @@ public class LimitOrder implements Order {
 		this.partialFillsAllowed = true;
 	}
 
-	public LimitOrder(String symbol, int quantity, double limitPrice, OrderSide side) {
+	public LimitOrder(String symbol, Integer quantity, Double limitPrice, OrderSide side) {
 		this.quantity = quantity;
 		this.limitPrice = limitPrice;
 		this.side = side;
@@ -32,7 +32,7 @@ public class LimitOrder implements Order {
 		this.symbol = symbol;
 	}
 
-	public LimitOrder(int quantity, double limitPrice, OrderSide side, OrderDesignation designation) {
+	public LimitOrder(Integer quantity, Double limitPrice, OrderSide side, OrderDesignation designation) {
 		this.quantity = quantity;
 		this.limitPrice = limitPrice;
 		this.side = side;
@@ -40,7 +40,7 @@ public class LimitOrder implements Order {
 	}
 
 	@Override
-	public void reduceRemainingQuantity(int transactionQuantity) {
+	public void reduceRemainingQuantity(Integer transactionQuantity) {
 		quantity -= transactionQuantity;
 		quantityOfLastTransaction = transactionQuantity;
 		if (quantity == 0) {
@@ -49,19 +49,19 @@ public class LimitOrder implements Order {
 	}
 
 	@Override
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
-	public double getLimitPrice() {
+	public Double getLimitPrice() {
 		return limitPrice;
 	}
 
-	public void setLimitPrice(double limitPrice) {
+	public void setLimitPrice(Double limitPrice) {
 		this.limitPrice = limitPrice;
 	}
 
@@ -124,17 +124,17 @@ public class LimitOrder implements Order {
 	}
 
 	@Override
-	public void setLastTradedPrice(double price) {
+	public void setLastTradedPrice(Double price) {
 		// do nothing for limit orders
 	}
 
 	@Override
-	public double getLastTradedPrice() {
+	public Double getLastTradedPrice() {
 		throw new UnsupportedOperationException("Not supported by limit orders");
 	}
 
 	@Override
-	public int getQuantityOfLastTransaction() {
+	public Integer getQuantityOfLastTransaction() {
 		return this.quantityOfLastTransaction;
 	}
 

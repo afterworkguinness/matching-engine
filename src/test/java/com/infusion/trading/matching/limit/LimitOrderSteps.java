@@ -69,7 +69,13 @@ public class LimitOrderSteps {
 
 			String symbol = expectedOrder.getSymbol();
 			OrderBook expectedOrderBook = retrievetOrCreateExpectedOrderBook(symbol);
-			expectedOrderBook.addLimitOrder(expectedOrder);
+
+			/* The test expected data shows and empty order book, but really each line is a limit order.
+			 * If the book is expected to be empty, we need to make sure we don't try and add a null limit order to it 
+			 */
+			if (expectedOrder.getLimitPrice() != null) {
+				expectedOrderBook.addLimitOrder(expectedOrder);
+			}
 		}
 
 		assertEquals(expectedOrderBooks, orderBookService.getAllOrderBooks());
@@ -81,8 +87,7 @@ public class LimitOrderSteps {
 
 		if (expectedOrderBooks.containsKey(symbol)) {
 			book = expectedOrderBooks.get(symbol);
-		}
-		else {
+		} else {
 			book = orderBookService.forceCreateNewOrderBook(symbol);
 			expectedOrderBooks.put(symbol, book);
 		}

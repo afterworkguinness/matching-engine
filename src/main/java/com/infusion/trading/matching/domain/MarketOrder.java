@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 
 public class MarketOrder implements Order {
 
-	private int quantity;
+	private Integer quantity;
 	private OrderSide side;
 	private boolean completed = false;
-	private double totalPrice;
-	private double lastTradedPrice;
+	private Double totalPrice;
+	private Double lastTradedPrice;
 	private boolean partialFillsAllowed = true;
 	private String symbol; 
 
@@ -33,7 +33,7 @@ public class MarketOrder implements Order {
 	}
 
 	@Override
-	public void reduceRemainingQuantity(int transactionQuantity) {
+	public void reduceRemainingQuantity(Integer transactionQuantity) {
 		quantity -= transactionQuantity;
 		if (quantity == 0) {
 			completed = true;
@@ -41,7 +41,7 @@ public class MarketOrder implements Order {
 	}
 
 	@Override
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
@@ -71,17 +71,17 @@ public class MarketOrder implements Order {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(double totalPrice) {
+	public void setTotalPrice(Double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
 	@Override
-	public double getLastTradedPrice() {
+	public Double getLastTradedPrice() {
 		return lastTradedPrice;
 	}
 
 	@Override
-	public void setLastTradedPrice(double lastTradedPrice) {
+	public void setLastTradedPrice(Double lastTradedPrice) {
 		this.lastTradedPrice = lastTradedPrice;
 	}
 
@@ -92,7 +92,7 @@ public class MarketOrder implements Order {
 	}
 
 	@Override
-	public int getQuantityOfLastTransaction() {
+	public Integer getQuantityOfLastTransaction() {
 		throw new UnsupportedOperationException("Not supported for market orders");
 	}
 

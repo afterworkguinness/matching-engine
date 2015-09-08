@@ -26,6 +26,7 @@ Feature: Limit Order
     Then The order book should look like this at the end of the trade:
       | symbol | side | quantity | limitPrice |
 	  | BAR	   | buy  | 100		 | 500		  |	
+	  | FOO	   |  	  | 		 | 			  |	
 
   Scenario: A limit order is partially filled against one resting order and runs out of liquidity
     Given The order book looks like this before the trade is placed:

@@ -2,19 +2,19 @@ package com.infusion.trading.matching.domain;
 
 public interface Order {
 
-	public int getQuantity();
+	public Integer getQuantity();
 
 	public OrderSide getSide();
 
-	public void reduceRemainingQuantity(int transactionQuantity);
+	public void reduceRemainingQuantity(Integer transactionQuantity);
 
 	public boolean isCompleted();
 
-	public void setLastTradedPrice(double price);
+	public void setLastTradedPrice(Double price);
 
-	public double getLastTradedPrice();
+	public Double getLastTradedPrice();
 
-	public int getQuantityOfLastTransaction();
+	public Integer getQuantityOfLastTransaction();
 
 	public boolean isPartialFillsAllowed();
 

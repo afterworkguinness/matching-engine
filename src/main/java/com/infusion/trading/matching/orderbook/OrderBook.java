@@ -24,8 +24,8 @@ public class OrderBook {
 	@Autowired
 	private IOrderPlacementAlgorithm orderPlacementAlgorithm;
 
-	private static List<LimitOrder> buyOrders = new LinkedList<LimitOrder>();
-	private static List<LimitOrder> sellOrders = new LinkedList<LimitOrder>();
+	private List<LimitOrder> buyOrders = new LinkedList<LimitOrder>();
+	private List<LimitOrder> sellOrders = new LinkedList<LimitOrder>();
 	private final int TOP = 0;
 	private String symbol;
 	private final ReadWriteLock LOCK = new ReentrantReadWriteLock();
@@ -62,27 +62,23 @@ public class OrderBook {
 		 * Want to lock the entire order book at one time. Only one order,
 		 * regardless if it's buy or sell allowed in at one time
 		 */
-		synchronized (this) {
 
-			LinkedList<LimitOrder> orders = (LinkedList<LimitOrder>) getOrders(order.getSide());
+		LinkedList<LimitOrder> orders = (LinkedList<LimitOrder>) getOrders(order.getSide());
 
-			int position = orderPlacementAlgorithm.findPositionToPlaceInBook(orders, order);
+		int position = orderPlacementAlgorithm.findPositionToPlaceInBook(orders, order);
 
-			if (position == 0) {
-				orders.addFirst(order);
-			}
-			else if (position == -1) {
-				orders.addLast(order);
-			}
-			else {
-				orders.add(position, order);
-			}
-
-			/*
-			 * Backup to DB while still locking. If you do it after lock is
-			 * released, it could be stale
-			 */
+		if (position == 0) {
+			orders.addFirst(order);
+		} else if (position == -1) {
+			orders.addLast(order);
+		} else {
+			orders.add(position, order);
 		}
+
+		/*
+		 * Backup to DB while still locking. If you do it after lock is
+		 * released, it could be stale
+		 */
 	}
 
 	public LimitOrder retrieveOrder(OrderSide side) {
@@ -110,8 +106,7 @@ public class OrderBook {
 
 		if (incomingOrderAllowsPartialFills == false) {
 			orders.get(TOP).holdInStaging();
-		}
-		else {
+		} else {
 			orders.remove(TOP);
 		}
 
@@ -177,12 +172,12 @@ public class OrderBook {
 	private List<LimitOrder> getOrders(OrderSide side) {
 
 		switch (side) {
-			case BUY:
-				return buyOrders;
-			case SELL:
-				return sellOrders;
-			default:
-				return null;
+		case BUY:
+			return buyOrders;
+		case SELL:
+			return sellOrders;
+		default:
+			return null;
 		}
 	}
 
@@ -211,7 +206,8 @@ public class OrderBook {
 		if (obectToTest instanceof OrderBook) {
 			OrderBook orderBookToTest = (OrderBook) obectToTest;
 
-			if (orderBookToTest.getSymbol().equals(getSymbol()) && getBuyOrders().equals(getBuyOrders()) && orderBookToTest.getSellOrders().equals(getSellOrders())) {
+			if (orderBookToTest.getSymbol().equals(getSymbol()) && getBuyOrders().equals(getBuyOrders())
+					&& orderBookToTest.getSellOrders().equals(getSellOrders())) {
 				return true;
 			}
 		}
@@ -238,7 +234,7 @@ public class OrderBook {
 	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("Buy Orders: ").append(buyOrders).append("Sell Orders: ").append(sellOrders);
+		buffer.append("Symbol: ").append(symbol).append("Buy Orders: ").append(buyOrders).append("Sell Orders: ").append(sellOrders);
 		return buffer.toString();
 	}
 }
