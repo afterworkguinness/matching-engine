@@ -99,8 +99,11 @@ public class LimitOrder implements Order {
 
 		if (objectToTest instanceof LimitOrder) {
 			LimitOrder orderToTest = (LimitOrder) objectToTest;
-			if (orderToTest.getSymbol().equals(getSymbol()) && orderToTest.getSide() == getSide() && orderToTest.getLimitPrice() == getLimitPrice()
-					&& orderToTest.getQuantity() == getQuantity() && orderToTest.getArrivalTimeInOrderBook() == getArrivalTimeInOrderBook()
+			if (orderToTest.getSymbol().equals(getSymbol()) && 
+					orderToTest.getSide() == getSide() && 
+					orderToTest.getLimitPrice().equals(getLimitPrice())
+					&& orderToTest.getQuantity().equals(getQuantity()) && 
+					orderToTest.getArrivalTimeInOrderBook() == getArrivalTimeInOrderBook()
 					&& orderToTest.isCompleted() == isCompleted()) {
 				// FIXME: Why does adding this break everything ???
 				// && orderToTest.isPartialFillsAllowed() ==

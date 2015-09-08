@@ -48,7 +48,6 @@ public class OrderBookService {
 		}
 		return book;
 	}
-
 	/*
 	 * Somehow, some way, instead of returning orderbooks just return immutable
 	 * lists of buy/sell orders

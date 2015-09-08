@@ -47,15 +47,9 @@ public class LimitOrderSteps {
 		
 		for (LimitOrder order : limitOrders) {
 			OrderBook orderBook = orderBookService.getOrderBook(order.getSymbol());
-			orderBook.clear();
 			tradeExecutionService.reset();
 			orderBook.addLimitOrder(order);
 		}
-	}
-
-	@When("^A limit (.+) order is placed for (\\d+) shares at (\\d+)$")
-	public void addLimitOrder(OrderSide side, int quantity, double limitPrice) {
-		orderFillService.attemptToFillOrder(new LimitOrder(quantity, limitPrice, side));
 	}
 
 	@When("^A limit (.+) order is placed for (\\d+) shares of (.+) at (\\d+)$")
@@ -96,7 +90,7 @@ public class LimitOrderSteps {
 	}
 
 	@Then("^It crosses the bid ask spread and is executed at (\\d+)$")
-	public void verifyCrossesTheSpread(double executionPrice) {
+	public void verifyCrossesTheSpread(double expectedExecutionPrice) {
 
 		/*
 		 * Can't use Mockito to verify TradeExecutionService. To use Mockito
@@ -106,6 +100,6 @@ public class LimitOrderSteps {
 		 */
 		double actualTradePrice = tradeExecutionService.getTransactions().get(0).getTradePrice();
 
-		assertEquals(actualTradePrice, executionPrice, 0.00001);
+		assertEquals(expectedExecutionPrice, actualTradePrice, 0.00001);
 	}
 }

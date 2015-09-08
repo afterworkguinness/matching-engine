@@ -206,7 +206,8 @@ public class OrderBook {
 		if (obectToTest instanceof OrderBook) {
 			OrderBook orderBookToTest = (OrderBook) obectToTest;
 
-			if (orderBookToTest.getSymbol().equals(getSymbol()) && getBuyOrders().equals(getBuyOrders())
+			if (orderBookToTest.getSymbol().equals(getSymbol()) 
+					&& getBuyOrders().equals(getBuyOrders())
 					&& orderBookToTest.getSellOrders().equals(getSellOrders())) {
 				return true;
 			}
@@ -234,7 +235,7 @@ public class OrderBook {
 	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("Symbol: ").append(symbol).append("Buy Orders: ").append(buyOrders).append("Sell Orders: ").append(sellOrders);
+		buffer.append("Symbol: ").append(symbol).append(" Buy Orders: ").append(buyOrders).append(" Sell Orders: ").append(sellOrders);
 		return buffer.toString();
 	}
 }
