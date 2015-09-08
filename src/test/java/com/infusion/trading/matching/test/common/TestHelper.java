@@ -45,7 +45,7 @@ public class TestHelper {
 		}
 	}
 
-	public void addLimitOrder(OrderSide side, int quantity, String symbol, double price, OrderDesignation  designation) {
+	public void fillNewLimitOrder(OrderSide side, int quantity, String symbol, double price, OrderDesignation  designation) {
 		orderFillService.attemptToFillOrder(new LimitOrder(symbol, quantity, price, side, designation));
 	}
 	

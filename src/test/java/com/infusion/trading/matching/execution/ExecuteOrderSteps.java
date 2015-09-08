@@ -33,12 +33,12 @@ public class ExecuteOrderSteps {
 	
 	@When("^A (.+) limit (.+) order is placed for (\\d+) shares of (.+) at (\\d+)$")
 	public void addLimitOrder(OrderDesignation designation, OrderSide side, int quantity, String symbol, double price) {
-		testHelper.addLimitOrder(side, quantity, symbol, price, designation);
+		testHelper.fillNewLimitOrder(side, quantity, symbol, price, designation);
 	}
 
 	@When("^A limit (.+) order is placed for (\\d+) shares of (.+) at (\\d+)$")
 	public void addLimitOrder(OrderSide side, int quantity, String symbol, double price) {
-		testHelper.addLimitOrder(side, quantity, symbol, price, null);
+		testHelper.fillNewLimitOrder(side, quantity, symbol, price, null);
 	}
 
 	@Then("^No trades should be executed")

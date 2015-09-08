@@ -35,7 +35,7 @@ public class LimitOrderSteps {
 
 	@When("^A limit (.+) order is placed for (\\d+) shares of (.+) at (\\d+)$")
 	public void addLimitOrder(OrderSide side, int quantity, String symbol, double limitPrice) {
-		testHelper.addLimitOrder(side, quantity, symbol, limitPrice, null);
+		testHelper.fillNewLimitOrder(side, quantity, symbol, limitPrice, null);
 	}
 
 	@Then("^The order book should look like this at the end of the trade:$")
