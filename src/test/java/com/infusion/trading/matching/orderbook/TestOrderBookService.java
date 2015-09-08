@@ -18,4 +18,8 @@ public class TestOrderBookService extends OrderBookService {
 
 		return new OrderBook(arrivalTimeService, orderPlacementAlgorithm, symbol);
 	}
+	
+	public void deleteAllOrderBooks() {
+		orderBooks.clear();
+	}
 }

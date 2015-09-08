@@ -37,19 +37,20 @@ public class LimitOrderSteps {
 	private TesUtil testUtil;
 
 	private Map<String, OrderBook> expectedOrderBooks = new HashMap<String, OrderBook>();
-	private Map<String, OrderBook> snapshotOfOrderBooksBeforeTestRuns = new HashMap<String, OrderBook>();
 
 	private Logger LOGGER = LoggerFactory.getLogger(LimitOrderSteps.class);
 
 	@Given("^The order book looks like this before the trade is placed:$")
 	public void setupOrderbook(List<LimitOrder> limitOrders) {
+		
+		orderBookService.deleteAllOrderBooks();
+		
 		for (LimitOrder order : limitOrders) {
 			OrderBook orderBook = orderBookService.getOrderBook(order.getSymbol());
 			orderBook.clear();
 			tradeExecutionService.reset();
 			orderBook.addLimitOrder(order);
 		}
-		snapshotOfOrderBooksBeforeTestRuns = orderBookService.getAllOrderBooks();
 	}
 
 	@When("^A limit (.+) order is placed for (\\d+) shares at (\\d+)$")

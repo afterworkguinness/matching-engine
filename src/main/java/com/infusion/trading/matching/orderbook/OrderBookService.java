@@ -23,7 +23,8 @@ public class OrderBookService {
 	@Autowired
 	private IOrderPlacementAlgorithm orderPlacementAlgorithm;
 
-	private Map<String, OrderBook> orderBooks = new ConcurrentHashMap<String, OrderBook>();
+	// We want to directly modify the map from a test so make it accessible to classes in its package
+	Map<String, OrderBook> orderBooks = new ConcurrentHashMap<String, OrderBook>();
 	private Logger LOGGER = LoggerFactory.getLogger(OrderBookService.class);
 
 	public OrderBook getOrderBook(String symbol) {
