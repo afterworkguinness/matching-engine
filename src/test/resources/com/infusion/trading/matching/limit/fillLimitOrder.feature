@@ -17,7 +17,7 @@ Feature: Limit Order
       | symbol | side | quantity | limitPrice |
       | FOO    |      |          |            |
 
-  Scenario: A limit order is executed and doesn't touch the resting limit order for another stock
+  Scenario: A limit order is executed and does not touch the resting limit order for another stock
     Given The order book looks like this before the trade is placed:
       | symbol | side | quantity | limitPrice |
       | FOO    | buy  | 100      | 200        |

@@ -1,16 +1,12 @@
 package com.infusion.trading.matching.market;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.infusion.trading.matching.domain.LimitOrder;
-import com.infusion.trading.matching.domain.MarketOrder;
 import com.infusion.trading.matching.domain.OrderSide;
-import com.infusion.trading.matching.matcher.OrderFillService;
-import com.infusion.trading.matching.orderbook.OrderBookService;
+import com.infusion.trading.matching.test.common.TestHelper;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -19,38 +15,20 @@ import cucumber.api.java.en.When;
 public class MarketOrderSteps {
 
 	@Autowired
-	private OrderBookService orderbookService;
-
-	@Autowired
-	private OrderFillService matchingEngine;
-
-	@Given("^.+ limit (.+) .+ for (\\d+) shares at (\\d+)$")
-	public void addLimitOrderToOrderBook(String orderType, int quantity, int limitPrice) {
-		LimitOrder limitOrder = new LimitOrder(quantity, limitPrice, OrderSide.SELL);
-		orderbook.addLimitOrder(limitOrder);
+	private TestHelper testHelper;
+	
+	@Given("^The order book looks like this before the trade is placed:$")
+	public void setupOrderBook(List<LimitOrder> orders) {
+		testHelper.setupOrderBook(orders);
 	}
 
-	@Given("^these limit orders in the order book$")
-	public void addLimitOrdersToOrderBook(List<LimitOrder> orders) {
-		orderbook.clear();
-		for (LimitOrder order : orders) {
-			orderbook.addLimitOrder(order);
-		}
+	@When(".+ market (.+) order .+ for (.+) shares of (.+)")
+	public void fillNewMarketOrder(OrderSide side, int quantity, String symbol) {
+		testHelper.fillNewMarketOrder(side, quantity, symbol);
 	}
 
-	@When(".+ market (.+) order .+ for (.+) shares")
-	public void incomingMarketOrder(String orderType, int quantity) {
-		matchingEngine.attemptToFillOrder(new MarketOrder(OrderSide.BUY, quantity));
-	}
-
-	@Then("^The (.+) side of the order book should look like this after the trade is executed:$")
-	public void verifyOrderBookState(OrderSide side, List<LimitOrder> limitOrders) {
-
-		if (side == OrderSide.BUY) {
-			assertEquals(limitOrders, orderbook.getBuyOrders());
-		}
-		else {
-			assertEquals(limitOrders, orderbook.getSellOrders());
-		}
+	@Then("^The order book should look like this at the end of the trade:$")
+	public void verifyOrderBookState(List<LimitOrder> expectedLmitOrders) {
+		testHelper.verifyOrderBookState(expectedLmitOrders);
 	}
 }

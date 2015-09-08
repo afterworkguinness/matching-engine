@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.infusion.trading.matching.domain.LimitOrder;
+import com.infusion.trading.matching.domain.MarketOrder;
 import com.infusion.trading.matching.domain.OrderDesignation;
 import com.infusion.trading.matching.domain.OrderSide;
 import com.infusion.trading.matching.execution.MockTradeExecutionService;
@@ -33,7 +34,8 @@ public class TestHelper {
 
 	
 	public void setupOrderBook(List<LimitOrder> limitOrders) {
-	
+		
+		expectedOrderBooks.clear();
 		orderBookService.deleteAllOrderBooks();
 
 		for (LimitOrder order : limitOrders) {
@@ -45,6 +47,10 @@ public class TestHelper {
 
 	public void addLimitOrder(OrderSide side, int quantity, String symbol, double price, OrderDesignation  designation) {
 		orderFillService.attemptToFillOrder(new LimitOrder(symbol, quantity, price, side, designation));
+	}
+	
+	public void fillNewMarketOrder(OrderSide side, int quantity, String symbol) {
+		orderFillService.attemptToFillOrder(new MarketOrder(symbol, side, quantity));
 	}
 	
 	public void verifyOrderBookState(List<LimitOrder> expectedLmitOrders) {

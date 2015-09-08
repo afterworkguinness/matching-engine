@@ -1,30 +1,41 @@
 Feature: Market order
 
   Scenario: A market buy order is placed
-    Given these limit orders in the order book
-      | symbol	| side | quantity | limitPrice |
-      | FOO		| sell | 700      | 100        |
+   Given The order book looks like this before the trade is placed:
+      | symbol | side | quantity | limitPrice |
+      | FOO    | sell | 700      | 100        |
     When A market buy order is placed for 600 shares of FOO
-    Then The order book should look like this after the trade is executed:
-      | symbol	| side | quantity | limitPrice |
-      | FOO		| sell | 100      | 100        |
+    Then The order book should look like this at the end of the trade:
+      | symbol | side | quantity | limitPrice |
+      | FOO    | sell | 100      | 100        |
+      
+  Scenario: A market buy order is placed and does not touch the resting limit order for another stock 
+    Given The order book looks like this before the trade is placed:
+      | symbol | side | quantity | limitPrice |
+      | BAR    | sell | 500      | 500        |
+      | FOO    | sell | 700      | 100        |
+    When A market buy order is placed for 600 shares of FOO
+    Then The order book should look like this at the end of the trade:
+      | symbol | side | quantity | limitPrice |
+      | BAR    | sell | 500      | 500        |
+      | FOO    | sell | 100      | 100        |
 
   Scenario: A market buy order is placed and matched by multiple limit orders
-    Given these limit orders in the order book
-      | side | quantity | limitPrice |
-      | sell | 500      | 100        |
-      | sell | 400      | 100        |
-    When A market buy order is placed for 600 shares
+    Given The order book looks like this before the trade is placed:
+      | symbol	| side | quantity | limitPrice |
+      | FOO		| sell | 500      | 100        |
+      | FOO		| sell | 400      | 100        |
+    When A market buy order is placed for 600 shares of FOO
     Then The sell side of the order book should look like this after the trade is executed:
-      | side | quantity | limitPrice |
-      | sell | 300      | 100        |
+      | symbol	| side | quantity | limitPrice |
+      | FOO		| sell | 300      | 100        |
 
   Scenario: A market buy order is converted to a limit order when liquidity runs out
-    Given these limit orders in the order book
-      | side | quantity | limitPrice |
-      | sell | 500      | 100        |
-      | sell | 100      | 200        |
-    When A market buy order is placed for 700 shares
-    Then The buy side of the order book should look like this after the trade is executed:
-      | side | quantity | limitPrice |
-      | buy  | 100      | 200        |
+    Given The order book looks like this before the trade is placed:
+      | symbol	| side | quantity | limitPrice |
+      | FOO		| sell | 500      | 100        |
+      | FOO		| sell | 100      | 200        |
+    When A market buy order is placed for 700 shares of FOO
+    Then The order book looks like this before the trade is placed:
+      | symbol	| side | quantity | limitPrice |
+      | FOO		| buy  | 100      | 200        |

@@ -8,18 +8,18 @@ public class MarketOrder implements Order {
 	private Integer quantity;
 	private OrderSide side;
 	private boolean completed = false;
-	private Double totalPrice;
 	private Double lastTradedPrice;
 	private boolean partialFillsAllowed = true;
-	private String symbol; 
+	private String symbol;
 
 	private Logger LOGGER = LoggerFactory.getLogger(com.infusion.trading.matching.domain.MarketOrder.class);
 
 	public MarketOrder(String symbol, OrderSide side, int orderQuantity) {
 		this.quantity = orderQuantity;
 		this.side = side;
-		this.symbol=symbol;
+		this.symbol = symbol;
 	}
+
 	@Deprecated
 	public MarketOrder(OrderSide side, int orderQuantity) {
 		this.quantity = orderQuantity;
@@ -67,14 +67,6 @@ public class MarketOrder implements Order {
 		this.completed = completed;
 	}
 
-	public double getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(Double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-
 	@Override
 	public Double getLastTradedPrice() {
 		return lastTradedPrice;
@@ -88,7 +80,7 @@ public class MarketOrder implements Order {
 	@Override
 	public String toString() {
 
-		return "[Market Order]: Side: " + side.name() + " | Quantity: " + quantity + " | Last Traded Price: " + lastTradedPrice;
+		return "[Market Order]: Symbol: " + symbol + " Side: " + side.name() + " | Quantity: " + quantity + " | Last Traded Price: " + lastTradedPrice;
 	}
 
 	@Override
@@ -104,5 +96,27 @@ public class MarketOrder implements Order {
 	@Override
 	public String getSymbol() {
 		return this.symbol;
+	}
+
+	@Override
+	public boolean equals(Object objectToTest) {
+
+		if (objectToTest instanceof MarketOrder) {
+			MarketOrder marketOrderToTest = (MarketOrder) objectToTest;
+
+			if (marketOrderToTest.getSymbol().equals(symbol) && 
+					marketOrderToTest.getSide() == side &&
+					marketOrderToTest.getQuantity().equals(quantity)
+					&& marketOrderToTest.getLastTradedPrice().equals(lastTradedPrice)) {
+
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return symbol.hashCode() + side.hashCode() + quantity + lastTradedPrice.hashCode();
 	}
 }
