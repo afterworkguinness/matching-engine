@@ -24,7 +24,7 @@ public class MarketOrderSteps {
 
 	@When(".+ market (.+) order .+ for (.+) shares of (.+)")
 	public void fillNewMarketOrder(OrderSide side, int quantity, String symbol) {
-		testHelper.fillNewMarketOrder(side, quantity, symbol);
+		testHelper.fillNewMarketOrder(side, quantity, symbol, null);
 	}
 
 	@Then("^The order book should look like this at the end of the trade:$")

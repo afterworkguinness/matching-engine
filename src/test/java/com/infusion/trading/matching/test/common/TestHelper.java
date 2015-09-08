@@ -49,8 +49,8 @@ public class TestHelper {
 		orderFillService.attemptToFillOrder(new LimitOrder(symbol, quantity, price, side, designation));
 	}
 	
-	public void fillNewMarketOrder(OrderSide side, int quantity, String symbol) {
-		orderFillService.attemptToFillOrder(new MarketOrder(symbol, side, quantity));
+	public void fillNewMarketOrder(OrderSide side, int quantity, String symbol, OrderDesignation designation) {
+		orderFillService.attemptToFillOrder(new MarketOrder(symbol, side, quantity, designation));
 	}
 	
 	public void verifyOrderBookState(List<LimitOrder> expectedLmitOrders) {
@@ -82,5 +82,4 @@ public class TestHelper {
 		}
 		return book;
 	}
-
 }

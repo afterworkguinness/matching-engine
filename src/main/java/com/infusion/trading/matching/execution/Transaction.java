@@ -10,12 +10,21 @@ public class Transaction {
 	
 	private double tradePrice;
 	private int quantity;
+	private String symbol;
 	
-	Transaction(double tradePrice, int quantity) {
-		this.tradePrice = tradePrice;
-		this.quantity = quantity;
+	public String getSymbol() {
+		return symbol;
 	}
 
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
+	}
+
+	Transaction(String symbol, double tradePrice, int quantity) {
+		this.tradePrice = tradePrice;
+		this.quantity = quantity;
+		this.symbol = symbol;
+	}
 
 	public int getQuantity() {
 		return quantity;
@@ -38,7 +47,6 @@ public class Transaction {
 		}
 		return false;
 	}
-
 
 	@Override
 	public String toString() {

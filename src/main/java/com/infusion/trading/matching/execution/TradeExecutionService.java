@@ -23,9 +23,9 @@ public class TradeExecutionService implements ITradeExecutionService {
 	private ExecutorService asyncService = Executors.newFixedThreadPool(THREADS);
 
 	@Override
-	public void executeTrade(double price, int quantity, boolean holdInStaging, long buyTradeId, long sellTradeId) {
+	public void executeTrade(String symbol, double price, int quantity, boolean holdInStaging, long buyTradeId, long sellTradeId) {
 		
-		Transaction transaction = new Transaction(price, quantity);
+		Transaction transaction = new Transaction(symbol, price, quantity);
 		
 		if (holdInStaging) {
 			stagedTransactions.add(transaction);

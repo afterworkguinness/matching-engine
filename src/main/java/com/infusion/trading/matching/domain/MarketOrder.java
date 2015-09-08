@@ -20,13 +20,7 @@ public class MarketOrder implements Order {
 		this.symbol = symbol;
 	}
 
-	@Deprecated
-	public MarketOrder(OrderSide side, int orderQuantity) {
-		this.quantity = orderQuantity;
-		this.side = side;
-	}
-
-	public MarketOrder(OrderSide side, int orderQuantity, OrderDesignation designation) {
+	public MarketOrder(String symbol, OrderSide side, int orderQuantity, OrderDesignation designation) {
 		this.quantity = orderQuantity;
 		this.side = side;
 		partialFillsAllowed = (designation == null);

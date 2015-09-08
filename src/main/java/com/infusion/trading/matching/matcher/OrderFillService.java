@@ -115,7 +115,7 @@ public class OrderFillService {
 					LOGGER.debug("Matched order completely filled");
 					orderBook.removeCompletedOrder(match.getSide(), order.isPartialFillsAllowed());
 				}
-				tradeExecutionService.executeTrade(match.getLimitPrice(), transactionQuantity, !order.isPartialFillsAllowed(), 0, 0);
+				tradeExecutionService.executeTrade(match.getSymbol(), match.getLimitPrice(), transactionQuantity, !order.isPartialFillsAllowed(), 0, 0);
 			}
 			else {
 				LOGGER.debug("No matching order found");
