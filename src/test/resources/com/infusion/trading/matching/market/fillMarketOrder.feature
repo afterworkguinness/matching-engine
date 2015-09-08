@@ -26,7 +26,7 @@ Feature: Market order
       | FOO		| sell | 500      | 100        |
       | FOO		| sell | 400      | 100        |
     When A market buy order is placed for 600 shares of FOO
-    Then The sell side of the order book should look like this after the trade is executed:
+    Then The order book should look like this at the end of the trade:
       | symbol	| side | quantity | limitPrice |
       | FOO		| sell | 300      | 100        |
 
@@ -36,6 +36,6 @@ Feature: Market order
       | FOO		| sell | 500      | 100        |
       | FOO		| sell | 100      | 200        |
     When A market buy order is placed for 700 shares of FOO
-    Then The order book looks like this before the trade is placed:
+    Then The order book should look like this at the end of the trade:
       | symbol	| side | quantity | limitPrice |
       | FOO		| buy  | 100      | 200        |
