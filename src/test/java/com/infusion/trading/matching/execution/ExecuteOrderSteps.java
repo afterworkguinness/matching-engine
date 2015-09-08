@@ -13,7 +13,7 @@ import com.infusion.trading.matching.domain.OrderDesignation;
 import com.infusion.trading.matching.domain.OrderSide;
 import com.infusion.trading.matching.matcher.OrderFillService;
 import com.infusion.trading.matching.orderbook.OrderBook;
-import com.infusion.trading.matching.test.common.BaseSteps;
+import com.infusion.trading.matching.test.common.TestHelper;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -31,7 +31,7 @@ public class ExecuteOrderSteps {
 	private OrderFillService orderFillService;
 	
 	@Autowired
-	private BaseSteps baseSteps;
+	private TestHelper baseSteps;
 	
 	@Given("^The order book looks like this before the trade is placed:$")
 	public void setupOrderBook(List<LimitOrder> limitOrders) {

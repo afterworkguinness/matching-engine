@@ -32,7 +32,8 @@ public class LimitOrder implements Order {
 		this.symbol = symbol;
 	}
 
-	public LimitOrder(Integer quantity, Double limitPrice, OrderSide side, OrderDesignation designation) {
+	public LimitOrder(String symbol, Integer quantity, Double limitPrice, OrderSide side, OrderDesignation designation) {
+		this.symbol = symbol;
 		this.quantity = quantity;
 		this.limitPrice = limitPrice;
 		this.side = side;

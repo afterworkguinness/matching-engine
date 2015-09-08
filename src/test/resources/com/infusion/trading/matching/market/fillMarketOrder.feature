@@ -1,15 +1,13 @@
 Feature: Market order
 
-#test last traded price
-
   Scenario: A market buy order is placed
     Given these limit orders in the order book
-      | side | quantity | limitPrice |
-      | sell | 700      | 100        |
-    When A market buy order is placed for 600 shares
-    Then The sell side of the order book should look like this after the trade is executed:
-      | side | quantity | limitPrice |
-      | sell | 100      | 100        |
+      | symbol	| side | quantity | limitPrice |
+      | FOO		| sell | 700      | 100        |
+    When A market buy order is placed for 600 shares of FOO
+    Then The order book should look like this after the trade is executed:
+      | symbol	| side | quantity | limitPrice |
+      | FOO		| sell | 100      | 100        |
 
   Scenario: A market buy order is placed and matched by multiple limit orders
     Given these limit orders in the order book

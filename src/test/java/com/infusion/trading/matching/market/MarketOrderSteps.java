@@ -10,7 +10,7 @@ import com.infusion.trading.matching.domain.LimitOrder;
 import com.infusion.trading.matching.domain.MarketOrder;
 import com.infusion.trading.matching.domain.OrderSide;
 import com.infusion.trading.matching.matcher.OrderFillService;
-import com.infusion.trading.matching.orderbook.OrderBook;
+import com.infusion.trading.matching.orderbook.OrderBookService;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -19,7 +19,7 @@ import cucumber.api.java.en.When;
 public class MarketOrderSteps {
 
 	@Autowired
-	private OrderBook orderbook;
+	private OrderBookService orderbookService;
 
 	@Autowired
 	private OrderFillService matchingEngine;
