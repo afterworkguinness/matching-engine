@@ -21,6 +21,7 @@ public class MarketOrder implements Order {
 	}
 
 	public MarketOrder(String symbol, OrderSide side, int orderQuantity, OrderDesignation designation) {
+		this.symbol = symbol;
 		this.quantity = orderQuantity;
 		this.side = side;
 		partialFillsAllowed = (designation == null);
