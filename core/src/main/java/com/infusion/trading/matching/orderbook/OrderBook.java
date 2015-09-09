@@ -8,35 +8,20 @@ import java.util.List;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.infusion.trading.matching.algo.IOrderPlacementAlgorithm;
 import com.infusion.trading.matching.domain.LimitOrder;
 import com.infusion.trading.matching.domain.OrderSide;
 
-@Component
 public class OrderBook {
 
-	@Autowired
 	private IOrderArrivalTimeService arrivalTimeService;
-
-	@Autowired
 	private IOrderPlacementAlgorithm orderPlacementAlgorithm;
-
 	private List<LimitOrder> buyOrders = new LinkedList<LimitOrder>();
 	private List<LimitOrder> sellOrders = new LinkedList<LimitOrder>();
 	private final int TOP = 0;
 	private String symbol;
 	private final ReadWriteLock LOCK = new ReentrantReadWriteLock();
 
-	@Deprecated
-	// "For backwards compatibility"
-	public OrderBook() {
-
-	}
-
-	// This won't be a spring managed bean anymore
 	public OrderBook(IOrderArrivalTimeService arrivalTimeService, IOrderPlacementAlgorithm orderPlacementAlgorithm, String symbol) {
 		this.symbol = symbol;
 		this.arrivalTimeService = arrivalTimeService;
@@ -69,9 +54,11 @@ public class OrderBook {
 
 		if (position == 0) {
 			orders.addFirst(order);
-		} else if (position == -1) {
+		}
+		else if (position == -1) {
 			orders.addLast(order);
-		} else {
+		}
+		else {
 			orders.add(position, order);
 		}
 
@@ -106,7 +93,8 @@ public class OrderBook {
 
 		if (incomingOrderAllowsPartialFills == false) {
 			orders.get(TOP).holdInStaging();
-		} else {
+		}
+		else {
 			orders.remove(TOP);
 		}
 
@@ -172,12 +160,12 @@ public class OrderBook {
 	private List<LimitOrder> getOrders(OrderSide side) {
 
 		switch (side) {
-		case BUY:
-			return buyOrders;
-		case SELL:
-			return sellOrders;
-		default:
-			return null;
+			case BUY:
+				return buyOrders;
+			case SELL:
+				return sellOrders;
+			default:
+				return null;
 		}
 	}
 
@@ -206,9 +194,7 @@ public class OrderBook {
 		if (obectToTest instanceof OrderBook) {
 			OrderBook orderBookToTest = (OrderBook) obectToTest;
 
-			if (orderBookToTest.getSymbol().equals(getSymbol()) 
-					&& getBuyOrders().equals(getBuyOrders())
-					&& orderBookToTest.getSellOrders().equals(getSellOrders())) {
+			if (orderBookToTest.getSymbol().equals(getSymbol()) && getBuyOrders().equals(getBuyOrders()) && orderBookToTest.getSellOrders().equals(getSellOrders())) {
 				return true;
 			}
 		}

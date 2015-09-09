@@ -15,22 +15,17 @@ import com.infusion.trading.matching.algo.IOrderPlacementAlgorithm;
 public class OrderBookService {
 
 	@Autowired
-	private OrderBook tempOrderBook;
-
-	@Autowired
 	private IOrderArrivalTimeService arrivalTimeService;
 
 	@Autowired
 	private IOrderPlacementAlgorithm orderPlacementAlgorithm;
 
-	// We want to directly modify the map from a test so make it accessible to classes in its package
+	// We want to directly modify the map from a test so make it accessible to
+	// classes in its package
 	Map<String, OrderBook> orderBooks = new ConcurrentHashMap<String, OrderBook>();
 	private Logger LOGGER = LoggerFactory.getLogger(OrderBookService.class);
 
 	public OrderBook getOrderBook(String symbol) {
-
-		if (symbol == null)
-			return tempOrderBook;
 
 		OrderBook book;
 
@@ -38,9 +33,11 @@ public class OrderBookService {
 			book = orderBooks.get(symbol);
 		}
 		else {
-			/* TODO: Very odd behaviour (and replicatable).
-			 * I create FOO order book and add an order to it in the setup steps
-			 * I then create a Bar orderbook. When its constructor returns, it has a foo order in it... HOW ???
+			/*
+			 * TODO: Very odd behaviour (and replicatable). I create FOO order
+			 * book and add an order to it in the setup steps I then create a
+			 * Bar orderbook. When its constructor returns, it has a foo order
+			 * in it... HOW ???
 			 */
 			book = new OrderBook(arrivalTimeService, orderPlacementAlgorithm, symbol);
 			orderBooks.put(symbol, book);
@@ -48,6 +45,7 @@ public class OrderBookService {
 		}
 		return book;
 	}
+
 	/*
 	 * Somehow, some way, instead of returning orderbooks just return immutable
 	 * lists of buy/sell orders

@@ -442,3 +442,447 @@
 2015-09-08 20:23:31.981 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
 2015-09-08 20:23:31.981 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
 2015-09-08 20:23:31.981 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:42:50.440 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.458 DEBUG c.i.t.m.matcher.OrderFillService New order - [Market Order]: Symbol: FOO Side: BUY | Quantity: 600 | Last Traded Price: null
+2015-09-08 20:42:50.459 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 700 | Limit Price: 100.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.459 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 600
+2015-09-08 20:42:50.459 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:42:50.459 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 100
+2015-09-08 20:42:50.459 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 100.0
+2015-09-08 20:42:50.522 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:42:50.529 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [BAR] doesn't exist. Creating.
+2015-09-08 20:42:50.531 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.532 DEBUG c.i.t.m.matcher.OrderFillService New order - [Market Order]: Symbol: FOO Side: BUY | Quantity: 600 | Last Traded Price: null
+2015-09-08 20:42:50.532 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 700 | Limit Price: 100.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.532 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 600
+2015-09-08 20:42:50.532 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:42:50.533 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 100
+2015-09-08 20:42:50.533 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 100.0
+2015-09-08 20:42:50.533 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:42:50.539 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.540 DEBUG c.i.t.m.matcher.OrderFillService New order - [Market Order]: Symbol: FOO Side: BUY | Quantity: 600 | Last Traded Price: null
+2015-09-08 20:42:50.540 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 500 | Limit Price: 100.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.540 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 500
+2015-09-08 20:42:50.541 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 100
+2015-09-08 20:42:50.541 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:50.541 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 100.0
+2015-09-08 20:42:50.541 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:50.541 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 400 | Limit Price: 100.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.541 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:42:50.541 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:42:50.541 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 300
+2015-09-08 20:42:50.541 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 100.0
+2015-09-08 20:42:50.541 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:42:50.545 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.546 DEBUG c.i.t.m.matcher.OrderFillService New order - [Market Order]: Symbol: FOO Side: BUY | Quantity: 700 | Last Traded Price: null
+2015-09-08 20:42:50.546 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 500 | Limit Price: 100.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.546 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 500
+2015-09-08 20:42:50.546 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 200
+2015-09-08 20:42:50.546 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:50.546 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 100.0
+2015-09-08 20:42:50.546 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:50.547 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.547 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:42:50.547 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 100
+2015-09-08 20:42:50.547 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:50.547 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
+2015-09-08 20:42:50.547 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:50.547 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:42:50.547 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:42:50.547 DEBUG c.i.t.m.matcher.OrderFillService Converting market order to limit order at last traded price $200.0
+2015-09-08 20:42:50.630 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.631 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 200 | Limit Price: 150.0 | Partial Fills Allowed: true
+2015-09-08 20:42:50.631 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.631 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:42:50.631 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 100
+2015-09-08 20:42:50.631 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:50.631 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:42:50.631 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:50.632 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:42:50.632 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:42:50.636 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.639 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 200 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.640 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.640 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:42:50.640 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 100
+2015-09-08 20:42:50.640 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:50.640 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:42:50.640 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:50.640 DEBUG c.i.t.m.matcher.OrderFillService No matching order found
+2015-09-08 20:42:50.641 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:42:50.641 DEBUG c.i.t.m.matcher.OrderFillService Partial fills not allowed for this order. Killing and reverting any limit orders used to fill it
+2015-09-08 20:42:50.645 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.647 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 350 | Limit Price: 80.0 | Partial Fills Allowed: true
+2015-09-08 20:42:50.647 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.650 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:42:50.653 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 250
+2015-09-08 20:42:50.653 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:50.653 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:42:50.653 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:50.653 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 120 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.653 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 120
+2015-09-08 20:42:50.654 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 130
+2015-09-08 20:42:50.654 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:50.654 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:42:50.654 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:50.654 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 130 | Limit Price: 90.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.654 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 130
+2015-09-08 20:42:50.654 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:42:50.654 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:50.654 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 90.0
+2015-09-08 20:42:50.654 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:50.654 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:42:50.745 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.745 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 50.0 | Partial Fills Allowed: true
+2015-09-08 20:42:50.746 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:42:50.746 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:42:50.749 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.750 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: true
+2015-09-08 20:42:50.750 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.750 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:42:50.750 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:42:50.750 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:50.750 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
+2015-09-08 20:42:50.750 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:50.750 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:42:50.753 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.754 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [BAR] doesn't exist. Creating.
+2015-09-08 20:42:50.757 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: true
+2015-09-08 20:42:50.757 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.757 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:42:50.757 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:42:50.757 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:50.757 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
+2015-09-08 20:42:50.757 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:50.757 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:42:50.765 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.766 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 150 | Limit Price: 200.0 | Partial Fills Allowed: true
+2015-09-08 20:42:50.766 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.766 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:42:50.766 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 50
+2015-09-08 20:42:50.766 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:50.766 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
+2015-09-08 20:42:50.766 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:50.766 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:42:50.766 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:42:50.772 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.773 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 300 | Limit Price: 200.0 | Partial Fills Allowed: true
+2015-09-08 20:42:50.773 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.773 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:42:50.773 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 200
+2015-09-08 20:42:50.773 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:50.773 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
+2015-09-08 20:42:50.773 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:50.774 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 150 | Limit Price: 200.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.774 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 150
+2015-09-08 20:42:50.774 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 50
+2015-09-08 20:42:50.774 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:50.774 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
+2015-09-08 20:42:50.774 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:50.774 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:42:50.774 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:42:50.777 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.777 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 100 | Limit Price: 145.0 | Partial Fills Allowed: true
+2015-09-08 20:42:50.777 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.778 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:42:50.778 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:42:50.778 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:50.778 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:42:50.778 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:50.779 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:42:50.850 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.853 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 150 | Limit Price: 100.0 | Partial Fills Allowed: true
+2015-09-08 20:42:50.853 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:42:50.853 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:42:50.858 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.860 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 150 | Limit Price: 100.0 | Partial Fills Allowed: true
+2015-09-08 20:42:50.861 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:42:50.862 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:42:50.870 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.873 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 150 | Limit Price: 200.0 | Partial Fills Allowed: true
+2015-09-08 20:42:50.874 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:42:50.874 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:42:50.982 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.983 DEBUG c.i.t.m.matcher.OrderFillService New order - [Market Order]: Symbol: FOO Side: BUY | Quantity: 300 | Last Traded Price: null
+2015-09-08 20:42:50.983 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.983 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:42:50.983 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 200
+2015-09-08 20:42:50.983 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:50.983 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
+2015-09-08 20:42:50.983 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:50.983 DEBUG c.i.t.m.matcher.OrderFillService No matching order found
+2015-09-08 20:42:50.983 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:42:50.983 DEBUG c.i.t.m.matcher.OrderFillService Partial fills not allowed for this order. Killing and reverting any limit orders used to fill it
+2015-09-08 20:42:50.986 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:50.987 DEBUG c.i.t.m.matcher.OrderFillService New order - [Market Order]: Symbol: FOO Side: BUY | Quantity: 100 | Last Traded Price: null
+2015-09-08 20:42:50.987 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: false
+2015-09-08 20:42:50.987 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:42:50.987 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:42:50.987 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:50.987 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
+2015-09-08 20:42:50.987 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:50.987 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:42:51.050 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:51.051 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 200 | Limit Price: 150.0 | Partial Fills Allowed: true
+2015-09-08 20:42:51.051 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:42:51.051 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:42:51.051 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 100
+2015-09-08 20:42:51.051 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:51.051 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:42:51.051 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:51.051 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:42:51.051 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:42:51.053 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:51.055 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 200 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:42:51.055 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:42:51.055 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:42:51.055 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 100
+2015-09-08 20:42:51.055 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:51.055 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:42:51.055 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:51.055 DEBUG c.i.t.m.matcher.OrderFillService No matching order found
+2015-09-08 20:42:51.055 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:42:51.055 DEBUG c.i.t.m.matcher.OrderFillService Partial fills not allowed for this order. Killing and reverting any limit orders used to fill it
+2015-09-08 20:42:51.058 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:42:51.059 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 350 | Limit Price: 80.0 | Partial Fills Allowed: true
+2015-09-08 20:42:51.059 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:42:51.059 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:42:51.059 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 250
+2015-09-08 20:42:51.059 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:51.059 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:42:51.059 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:51.059 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 120 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:42:51.059 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 120
+2015-09-08 20:42:51.059 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 130
+2015-09-08 20:42:51.059 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:51.059 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:42:51.059 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:51.059 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 130 | Limit Price: 90.0 | Partial Fills Allowed: false
+2015-09-08 20:42:51.059 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 130
+2015-09-08 20:42:51.059 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:42:51.059 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:42:51.059 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 90.0
+2015-09-08 20:42:51.059 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:42:51.060 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:44:05.051 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.055 DEBUG c.i.t.m.matcher.OrderFillService New order - [Market Order]: Symbol: FOO Side: BUY | Quantity: 600 | Last Traded Price: null
+2015-09-08 20:44:05.056 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 700 | Limit Price: 100.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.056 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 600
+2015-09-08 20:44:05.056 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:44:05.056 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 100
+2015-09-08 20:44:05.056 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 100.0
+2015-09-08 20:44:05.095 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:44:05.104 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [BAR] doesn't exist. Creating.
+2015-09-08 20:44:05.104 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.105 DEBUG c.i.t.m.matcher.OrderFillService New order - [Market Order]: Symbol: FOO Side: BUY | Quantity: 600 | Last Traded Price: null
+2015-09-08 20:44:05.105 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 700 | Limit Price: 100.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.105 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 600
+2015-09-08 20:44:05.106 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:44:05.106 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 100
+2015-09-08 20:44:05.106 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 100.0
+2015-09-08 20:44:05.106 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:44:05.110 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.112 DEBUG c.i.t.m.matcher.OrderFillService New order - [Market Order]: Symbol: FOO Side: BUY | Quantity: 600 | Last Traded Price: null
+2015-09-08 20:44:05.112 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 500 | Limit Price: 100.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.112 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 500
+2015-09-08 20:44:05.112 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 100
+2015-09-08 20:44:05.112 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.112 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 100.0
+2015-09-08 20:44:05.112 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.112 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 400 | Limit Price: 100.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.112 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:44:05.112 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:44:05.113 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 300
+2015-09-08 20:44:05.113 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 100.0
+2015-09-08 20:44:05.113 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:44:05.116 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.118 DEBUG c.i.t.m.matcher.OrderFillService New order - [Market Order]: Symbol: FOO Side: BUY | Quantity: 700 | Last Traded Price: null
+2015-09-08 20:44:05.118 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 500 | Limit Price: 100.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.118 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 500
+2015-09-08 20:44:05.118 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 200
+2015-09-08 20:44:05.118 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.118 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 100.0
+2015-09-08 20:44:05.118 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.119 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.119 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:44:05.119 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 100
+2015-09-08 20:44:05.119 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.119 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
+2015-09-08 20:44:05.119 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.119 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:44:05.119 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:44:05.120 DEBUG c.i.t.m.matcher.OrderFillService Converting market order to limit order at last traded price $200.0
+2015-09-08 20:44:05.202 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.205 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 200 | Limit Price: 150.0 | Partial Fills Allowed: true
+2015-09-08 20:44:05.206 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.208 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:44:05.208 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 100
+2015-09-08 20:44:05.208 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.208 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:44:05.209 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.209 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:44:05.209 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:44:05.214 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.215 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 200 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.215 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.215 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:44:05.215 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 100
+2015-09-08 20:44:05.215 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.215 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:44:05.215 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.216 DEBUG c.i.t.m.matcher.OrderFillService No matching order found
+2015-09-08 20:44:05.216 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:44:05.216 DEBUG c.i.t.m.matcher.OrderFillService Partial fills not allowed for this order. Killing and reverting any limit orders used to fill it
+2015-09-08 20:44:05.219 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.219 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 350 | Limit Price: 80.0 | Partial Fills Allowed: true
+2015-09-08 20:44:05.220 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.220 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:44:05.220 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 250
+2015-09-08 20:44:05.220 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.220 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:44:05.220 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.220 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 120 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.220 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 120
+2015-09-08 20:44:05.220 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 130
+2015-09-08 20:44:05.220 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.220 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:44:05.220 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.220 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 130 | Limit Price: 90.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.220 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 130
+2015-09-08 20:44:05.220 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:44:05.220 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.220 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 90.0
+2015-09-08 20:44:05.220 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.220 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:44:05.352 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.353 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 50.0 | Partial Fills Allowed: true
+2015-09-08 20:44:05.353 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:44:05.353 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:44:05.357 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.358 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: true
+2015-09-08 20:44:05.359 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.359 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:44:05.359 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:44:05.359 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.359 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
+2015-09-08 20:44:05.359 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.359 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:44:05.368 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.369 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [BAR] doesn't exist. Creating.
+2015-09-08 20:44:05.370 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: true
+2015-09-08 20:44:05.370 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.370 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:44:05.370 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:44:05.370 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.370 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
+2015-09-08 20:44:05.370 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.371 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:44:05.376 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.377 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 150 | Limit Price: 200.0 | Partial Fills Allowed: true
+2015-09-08 20:44:05.383 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.384 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:44:05.384 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 50
+2015-09-08 20:44:05.384 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.384 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
+2015-09-08 20:44:05.384 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.384 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:44:05.384 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:44:05.388 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.389 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 300 | Limit Price: 200.0 | Partial Fills Allowed: true
+2015-09-08 20:44:05.389 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.389 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:44:05.390 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 200
+2015-09-08 20:44:05.390 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.390 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
+2015-09-08 20:44:05.390 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.390 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 150 | Limit Price: 200.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.390 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 150
+2015-09-08 20:44:05.390 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 50
+2015-09-08 20:44:05.390 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.390 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
+2015-09-08 20:44:05.390 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.390 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:44:05.390 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:44:05.393 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.394 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 100 | Limit Price: 145.0 | Partial Fills Allowed: true
+2015-09-08 20:44:05.395 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.395 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:44:05.395 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:44:05.395 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.395 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:44:05.395 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.395 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:44:05.463 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.464 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 150 | Limit Price: 100.0 | Partial Fills Allowed: true
+2015-09-08 20:44:05.464 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:44:05.464 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:44:05.468 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.468 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 150 | Limit Price: 100.0 | Partial Fills Allowed: true
+2015-09-08 20:44:05.469 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:44:05.469 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:44:05.472 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.473 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 150 | Limit Price: 200.0 | Partial Fills Allowed: true
+2015-09-08 20:44:05.473 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:44:05.473 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:44:05.564 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.572 DEBUG c.i.t.m.matcher.OrderFillService New order - [Market Order]: Symbol: FOO Side: BUY | Quantity: 300 | Last Traded Price: null
+2015-09-08 20:44:05.572 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.572 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:44:05.572 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 200
+2015-09-08 20:44:05.572 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.572 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
+2015-09-08 20:44:05.572 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.572 DEBUG c.i.t.m.matcher.OrderFillService No matching order found
+2015-09-08 20:44:05.572 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:44:05.572 DEBUG c.i.t.m.matcher.OrderFillService Partial fills not allowed for this order. Killing and reverting any limit orders used to fill it
+2015-09-08 20:44:05.576 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.577 DEBUG c.i.t.m.matcher.OrderFillService New order - [Market Order]: Symbol: FOO Side: BUY | Quantity: 100 | Last Traded Price: null
+2015-09-08 20:44:05.577 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 100 | Limit Price: 200.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.577 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:44:05.577 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:44:05.577 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.577 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 200.0
+2015-09-08 20:44:05.577 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.577 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
+2015-09-08 20:44:05.628 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.630 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 200 | Limit Price: 150.0 | Partial Fills Allowed: true
+2015-09-08 20:44:05.630 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.631 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:44:05.631 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 100
+2015-09-08 20:44:05.631 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.631 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:44:05.631 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.631 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:44:05.631 DEBUG c.i.t.m.matcher.OrderFillService Adding to order book
+2015-09-08 20:44:05.634 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.636 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 200 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.637 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.638 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:44:05.638 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 100
+2015-09-08 20:44:05.640 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.640 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:44:05.640 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.640 DEBUG c.i.t.m.matcher.OrderFillService No matching order found
+2015-09-08 20:44:05.640 DEBUG c.i.t.m.matcher.OrderFillService Order is incomplete and no more matches exist in book.
+2015-09-08 20:44:05.640 DEBUG c.i.t.m.matcher.OrderFillService Partial fills not allowed for this order. Killing and reverting any limit orders used to fill it
+2015-09-08 20:44:05.645 DEBUG c.i.t.m.orderbook.OrderBookService Order book for [FOO] doesn't exist. Creating.
+2015-09-08 20:44:05.647 DEBUG c.i.t.m.matcher.OrderFillService New order - [Limit Order]: Symbol: FOO| Side: SELL | Quantity: 350 | Limit Price: 80.0 | Partial Fills Allowed: true
+2015-09-08 20:44:05.648 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 100 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.648 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 100
+2015-09-08 20:44:05.649 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 250
+2015-09-08 20:44:05.649 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.649 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:44:05.649 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.649 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 120 | Limit Price: 150.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.649 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 120
+2015-09-08 20:44:05.649 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 130
+2015-09-08 20:44:05.649 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.650 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 150.0
+2015-09-08 20:44:05.650 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.650 DEBUG c.i.t.m.matcher.OrderFillService Matching order found - [Limit Order]: Symbol: FOO| Side: BUY | Quantity: 130 | Limit Price: 90.0 | Partial Fills Allowed: false
+2015-09-08 20:44:05.650 DEBUG c.i.t.m.matcher.OrderFillService Transaction quantity is 130
+2015-09-08 20:44:05.650 DEBUG c.i.t.m.matcher.OrderFillService Incoming order remaining quantity is 0
+2015-09-08 20:44:05.650 DEBUG c.i.t.m.matcher.OrderFillService Matched order remaining quantity is 0
+2015-09-08 20:44:05.650 INFO  c.i.t.m.matcher.OrderFillService Last traded price: 90.0
+2015-09-08 20:44:05.650 DEBUG c.i.t.m.matcher.OrderFillService Matched order completely filled
+2015-09-08 20:44:05.650 DEBUG c.i.t.m.matcher.OrderFillService Order is completed
