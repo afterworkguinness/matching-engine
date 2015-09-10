@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
  * Need logic to send details of completed trade (matched buy and sell orders and price) 
  * to some endpoint outside the matching engine so it will clear the trade
  */
-@Component
 public class TradeExecutionService implements ITradeExecutionService {
 
 	private static final int THREADS = 20; // TODO: Put this in a config file
@@ -51,8 +50,8 @@ public class TradeExecutionService implements ITradeExecutionService {
 	}
 
 	void sendToClearingEngine(Transaction transaction) {
-		LOGGER.debug("Trade executed. Sending to clearing engine. Trade price $" + transaction.getTradePrice());
-		// TODO: Implement clearing engine
+		LOGGER.debug("Trade { " + transaction +"} executed. Sending to clearing engine.");
+		// TODO: Somone needs to implement a clearing engine
 	}
 
 	protected List<Transaction> getStagedTransactions() {

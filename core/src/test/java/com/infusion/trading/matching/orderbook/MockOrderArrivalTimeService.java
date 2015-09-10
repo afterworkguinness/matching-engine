@@ -2,7 +2,6 @@ package com.infusion.trading.matching.orderbook;
 
 import org.springframework.stereotype.Component;
 
-@Component
 public class MockOrderArrivalTimeService implements IOrderArrivalTimeService {
 
 	public long getArrivalTimeInOrderBook() {
