@@ -1,4 +1,4 @@
-package com.infusion.trading.matching.domain;
+package com.infusion.trading.matching.web.domain;
 
 public class LimitOrderModel {
 
