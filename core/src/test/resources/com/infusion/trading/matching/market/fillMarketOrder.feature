@@ -9,7 +9,8 @@ Feature: Market order
       | symbol | side | quantity | limitPrice |
       | FOO    | sell | 100      | 100        |
       
-  Scenario: A market buy order is placed and does not touch the resting limit order for another stock 
+
+   Scenario: A market buy order is placed and does not touch the resting limit order for another stock
     Given The order book looks like this before the trade is placed:
       | symbol | side | quantity | limitPrice |
       | BAR    | sell | 500      | 500        |
@@ -39,3 +40,6 @@ Feature: Market order
     Then The order book should look like this at the end of the trade:
       | symbol	| side | quantity | limitPrice |
       | FOO		| buy  | 100      | 200        |
+
+  #Scenario: A market buy order is placed against an empty book. It is converted to a limit order and added to the book
+  #TODO: need to get closing price is no last traded price then check rqmts doc

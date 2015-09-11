@@ -1,6 +1,7 @@
 package com.infusion.trading.matching.web.domain;
 
 import com.infusion.trading.matching.domain.Order;
+import com.infusion.trading.matching.domain.OrderDesignation;
 import com.infusion.trading.matching.domain.OrderSide;
 
 public class LimitOrderModel {
@@ -9,15 +10,11 @@ public class LimitOrderModel {
 	private Double limitPrice;
 	private Integer quantity;
 	private OrderSide side;
-	private String tradeId;
+	private OrderDesignation designation;
 
-	public String getTradeId() {
-		return  tradeId;
-	}
+	public OrderDesignation getDesignation() { return this.designation; }
 
-	public void setTradeId(String tradeId) {
-		this.tradeId = tradeId;
-	}
+	public void setDesignation(OrderDesignation designation) {this.designation = designation;}
 
 	public String getSymbol() {
 		return symbol;
