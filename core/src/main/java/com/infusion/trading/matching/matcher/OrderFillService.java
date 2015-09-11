@@ -42,7 +42,7 @@ public class OrderFillService {
 		 */
 		OrderBook orderBook = orderBookService.getOrderBook(order.getSymbol());
 
-//		orderBook.lockForWrite();
+		orderBook.lockForWrite();
 
 		try {
 
@@ -59,9 +59,11 @@ public class OrderFillService {
 				// FIXME: This is UGLY, don't pass orderbook around
 				processIncompleteOrder(order, orderBook);
 			}
+
+			orderBookService.updateOrderBook(orderBook);
 		}
 		finally {
-//			orderBook.unlockWriteLock();
+			orderBook.unlockWriteLock();
 		}
 	}
 
