@@ -40,6 +40,8 @@ public class OrderBook {
 
 	public void addLimitOrder(LimitOrder order) {
 
+		int BOTTOM_OF_BOOK=-1;
+
 		order.setArrivalTimeInOrderBook(arrivalTimeService.getArrivalTimeInOrderBook());
 		LOGGER.trace("order arrival time set: ");
 		LOGGER.trace("Fetching orders for side of book to add to");
@@ -47,10 +49,11 @@ public class OrderBook {
 		LOGGER.trace("Fetched existing orders for correct side of book to add to " + orders);
 		int position = orderPlacementAlgorithm.findPositionToPlaceInBook(orders, order);
 	    LOGGER.trace("Adding limit order to book at pos " + position);
-		if (position == 0) {
+
+		if (position == TOP) {
 			orders.addFirst(order);
 		}
-		else if (position == -1) {
+		else if (position == BOTTOM_OF_BOOK) {
 			orders.addLast(order);
 		}
 		else {
@@ -145,7 +148,6 @@ public class OrderBook {
 
 		List<LimitOrder> orders = getOrders(side);
 
-		// This mess is necessary to avoid concurrent modification exception
 		Iterator<LimitOrder> ordersIterator = orders.iterator();
 
 		while (ordersIterator.hasNext()) {

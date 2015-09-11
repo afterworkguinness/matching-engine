@@ -42,13 +42,13 @@ public class OrderFillService {
 		 * 
 		 * So in any case, the price of the resting order is used
 		 */
+		MDC.put("TRADEID", order.getTradeID());
+
 		OrderBook orderBook = orderBookService.getOrderBook(order.getSymbol());
 
 		orderBook.lockForWrite();
 
 		try {
-			MDC.put("TRADEID", order.getTradeID());
-
 			LOGGER.debug("New order - " + order);
 
 			// FIXME: This is UGLY, don't pass orderbook around
@@ -91,7 +91,6 @@ public class OrderFillService {
 
 	private void fillOrderUntilNoMatchesOrNoLiquidiy(Order order, OrderBook orderBook) {
 
-		LOGGER.debug("All Order Books : " + orderBookService.getAllOrderBooks());
 		while (order.isCompleted() == false && orderBook.isLiquidityLeft(order.getSide())) {
 
 			LimitOrder match = orderMatchService.findMatchingOrder(order);
@@ -137,9 +136,7 @@ public class OrderFillService {
 		}
 		else {
 			limitOrder = (LimitOrder) order;
-			LOGGER.debug("order is a limit order " + order);
 		}
-		LOGGER.debug("Adding to book: " + orderBook);
 		orderBook.addLimitOrder(limitOrder);
 	}
 

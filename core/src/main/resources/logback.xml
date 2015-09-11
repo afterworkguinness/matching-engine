@@ -4,9 +4,9 @@
     <!-- encoders are assigned the type
          ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
     <!--<encoder>-->
-    <layout class="ch.qos.logback.classic.PatternLayout">
+    <encoder>
       <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - TradeID [%{TRADEID}] %msg%n</pattern>
-    </layout>
+    </encoder>
     <!--</encoder>-->
   </appender>
 
@@ -15,11 +15,9 @@
     <append>true</append>
     <!-- encoders are assigned the type
          ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
-    <!--<encoder>-->
-    <layout class="ch.qos.logback.classic.PatternLayout">
-      <pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} %-5level %logger{36} TradeID %X{TRADEID} %msg%n</pattern>
-    </layout>
-    <!--</encoder>-->
+    <encoder>
+      <pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} %-5level %logger{36} TradeID [%X{TRADEID}] %msg%n</pattern>
+    </encoder>
   </appender>
   
   <logger name="com.infusion.trading.matching" level="DEBUG"/>

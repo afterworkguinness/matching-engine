@@ -17,14 +17,18 @@ public class OrderMatchService {
 
 	@Autowired
 	private OrderBookService orderBookService;
+
 	private Logger LOGGER = LoggerFactory.getLogger(OrderMatchService.class);
+
 	public LimitOrder findMatchingOrder(Order order) {
 		OrderBook orderBook = orderBookService.getOrderBook(order.getSymbol());
-		LOGGER.debug("Orderbook selected: " + orderBook);
+		LOGGER.trace("Orderbook selected: " + orderBook);
 		LimitOrder orderAtTopOfBook = orderBook.retrieveOrder(order.getSide().getOppositeSide());
-		LOGGER.debug("Order at top of book: " + orderAtTopOfBook);
-		// Liquidity is checked before calling this method, so if it returns
-		// null that's b/c a it doesn't match the limit orders price limit
+		LOGGER.trace("Order at top of book: " + orderAtTopOfBook);
+
+		/* Liquidity is checked before calling this method, so if it returns
+		* null that's b/c a it doesn't match the limit orders price limit
+		*/
 		if (order instanceof MarketOrder || orderAtTopOfBook == null) {
 			return orderAtTopOfBook;
 		}
