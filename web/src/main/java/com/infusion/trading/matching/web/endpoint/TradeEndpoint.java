@@ -16,17 +16,16 @@ import com.infusion.trading.matching.bootstrap.Bootstrapper;
 import com.infusion.trading.matching.domain.LimitOrder;
 import com.infusion.trading.matching.matcher.OrderFillService;
 import com.infusion.trading.matching.web.domain.LimitOrderModel;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Path("/trade")
 public class TradeEndpoint {
 	// TODO: make this configurable!!
 	private ExecutorService threadPool = Executors.newFixedThreadPool(10);
 
-	private static OrderFillService orderFillService;
+	@Autowired
+	private OrderFillService orderFillService;
 	
-	static {
-		orderFillService = Bootstrapper.getOrderFillService();
-	}
 
 	@GET
 	public String getFoo() {
