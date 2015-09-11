@@ -11,6 +11,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import com.infusion.trading.matching.algo.IOrderPlacementAlgorithm;
 import com.infusion.trading.matching.domain.LimitOrder;
 import com.infusion.trading.matching.domain.OrderSide;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class OrderBook {
 
@@ -21,6 +24,7 @@ public class OrderBook {
 	private final int TOP = 0;
 	private String symbol;
 	private final ReadWriteLock LOCK = new ReentrantReadWriteLock();
+	private Logger LOGGER = LoggerFactory.getLogger(OrderBook.class);
 
 	public OrderBook(IOrderArrivalTimeService arrivalTimeService, IOrderPlacementAlgorithm orderPlacementAlgorithm, String symbol) {
 		this.symbol = symbol;
@@ -124,10 +128,16 @@ public class OrderBook {
 		buyOrders.clear();
 	}
 
+
 	public boolean isLiquidityLeft(OrderSide side) {
+       LOGGER.debug("Liquidity check - orderbook " + this);
 
 		OrderSide sideToCheck = side.getOppositeSide();
-		return getOrders(sideToCheck).isEmpty() == false;
+		LOGGER.debug("checking side: " + sideToCheck);
+		List<LimitOrder> restingOrders = getOrders(sideToCheck);
+		LOGGER.debug("Resting orders: " + restingOrders);
+
+		return restingOrders.isEmpty() == false;
 	}
 
 	public void revertStagedOrders(OrderSide side) {

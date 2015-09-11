@@ -1,10 +1,14 @@
 package com.infusion.trading.matching.web.domain;
 
+import com.infusion.trading.matching.domain.Order;
+import com.infusion.trading.matching.domain.OrderSide;
+
 public class LimitOrderModel {
 
 	private String symbol;
 	private Double limitPrice;
 	private Integer quantity;
+	private OrderSide side;
 
 	public String getSymbol() {
 		return symbol;
@@ -28,6 +32,16 @@ public class LimitOrderModel {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+
+	public void setSide(OrderSide side) {
+
+		this.side = side;
+	}
+
+	public OrderSide getSide() {
+
+		return side;
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.infusion.trading.matching.matcher;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +17,12 @@ public class OrderMatchService {
 
 	@Autowired
 	private OrderBookService orderBookService;
-
+	private Logger LOGGER = LoggerFactory.getLogger(OrderMatchService.class);
 	public LimitOrder findMatchingOrder(Order order) {
 		OrderBook orderBook = orderBookService.getOrderBook(order.getSymbol());
+		LOGGER.debug("Orderbook selected: " + orderBook);
 		LimitOrder orderAtTopOfBook = orderBook.retrieveOrder(order.getSide().getOppositeSide());
+		LOGGER.debug("Order at top of book: " + orderAtTopOfBook);
 		// Liquidity is checked before calling this method, so if it returns
 		// null that's b/c a it doesn't match the limit orders price limit
 		if (order instanceof MarketOrder || orderAtTopOfBook == null) {

@@ -42,7 +42,7 @@ public class OrderFillService {
 		 */
 		OrderBook orderBook = orderBookService.getOrderBook(order.getSymbol());
 
-		orderBook.lockForWrite();
+//		orderBook.lockForWrite();
 
 		try {
 
@@ -61,7 +61,7 @@ public class OrderFillService {
 			}
 		}
 		finally {
-			orderBook.unlockWriteLock();
+//			orderBook.unlockWriteLock();
 		}
 	}
 
@@ -88,6 +88,7 @@ public class OrderFillService {
 
 	private void fillOrderUntilNoMatchesOrNoLiquidiy(Order order, OrderBook orderBook) {
 
+		LOGGER.debug("All Order Books : " + orderBookService.getAllOrderBooks());
 		while (order.isCompleted() == false && orderBook.isLiquidityLeft(order.getSide())) {
 
 			LimitOrder match = orderMatchService.findMatchingOrder(order);

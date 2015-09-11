@@ -103,8 +103,8 @@ public class LimitOrder implements Order {
 			if (orderToTest.getSymbol().equals(getSymbol()) && 
 					orderToTest.getSide() == getSide() && 
 					orderToTest.getLimitPrice().equals(getLimitPrice())
-					&& orderToTest.getQuantity().equals(getQuantity()) && 
-					orderToTest.getArrivalTimeInOrderBook() == getArrivalTimeInOrderBook()
+					&& orderToTest.getQuantity().equals(getQuantity())
+//					orderToTest.getArrivalTimeInOrderBook() == getArrivalTimeInOrderBook()
 					&& orderToTest.isCompleted() == isCompleted()) {
 				// FIXME: Why does adding this break everything ???
 				// && orderToTest.isPartialFillsAllowed() ==

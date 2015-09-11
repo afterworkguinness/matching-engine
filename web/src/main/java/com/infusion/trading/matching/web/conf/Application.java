@@ -8,7 +8,8 @@ import com.infusion.trading.matching.web.endpoint.TradeEndpoint;
 public class Application extends ResourceConfig {
 
 	public Application () {
-		register(TradeEndpoint.class);
+		packages("com.infusion.trading.matching.web.endpoint");
 		register(JacksonFeature.class);
+		//		property("async-supported", "true");
 	}
 }

@@ -8,7 +8,6 @@
             <param-value>com.infusion.trading.matching.web.conf.Application</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
-        <async-supported>true</async-supported>
     </servlet>
     <servlet-mapping>
         <servlet-name>web</servlet-name>

@@ -36,26 +36,28 @@ public class TradeEndpoint {
 	@POST
 	@Path("limit")
 	@Consumes({ MediaType.APPLICATION_JSON })
-	public void limitOrder(@Suspended final AsyncResponse response, LimitOrderModel limitOrder) {
+	public void limitOrder(LimitOrderModel limitOrder) {
 		System.out.println(limitOrder);
-		threadPool.submit(createWorkItem(limitOrder));
 
+		threadPool.submit(createWorkItem(limitOrder));
+		System.out.println("SUBMITTED");
 	}
 
-	private Callable<String> createWorkItem(final LimitOrderModel model) {
-		Callable<String> callable = new Callable<String>() {
+	private Runnable createWorkItem(final LimitOrderModel model) {
+		Runnable workItem = new Runnable(){
 
-			public String call() {
+			public void run() {
 				orderFillService.attemptToFillOrder(transform(model));
-				return "success"; // won't get hit if orderfillservice fails
+				System.out.println("DONE");
 			}
 		};
 
-		return callable;
+		return workItem;
 	}
 
+
 	private LimitOrder transform(LimitOrderModel model) {
-		LimitOrder order = new LimitOrder(model.getSymbol(), model.getQuantity(), model.getLimitPrice(), null);
+		LimitOrder order = new LimitOrder(model.getSymbol(), model.getQuantity(), model.getLimitPrice(), model.getSide());
 		return order;
 	}
 }
