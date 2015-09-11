@@ -43,6 +43,7 @@ public class TradeEndpoint {
 	}
 
 	private Runnable createWorkItem(final LimitOrderModel model) {
+
 		Runnable workItem = new Runnable(){
 
 			public void run() {
@@ -57,6 +58,7 @@ public class TradeEndpoint {
 
 	private LimitOrder transform(LimitOrderModel model) {
 		LimitOrder order = new LimitOrder(model.getSymbol(), model.getQuantity(), model.getLimitPrice(), model.getSide());
+		order.setTradeID(model.getTradeId());
 		return order;
 	}
 }

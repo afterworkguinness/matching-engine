@@ -9,6 +9,15 @@ public class LimitOrderModel {
 	private Double limitPrice;
 	private Integer quantity;
 	private OrderSide side;
+	private String tradeId;
+
+	public String getTradeId() {
+		return  tradeId;
+	}
+
+	public void setTradeId(String tradeId) {
+		this.tradeId = tradeId;
+	}
 
 	public String getSymbol() {
 		return symbol;
