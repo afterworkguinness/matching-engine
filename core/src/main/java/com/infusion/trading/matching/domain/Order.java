@@ -19,4 +19,6 @@ public interface Order {
 	public boolean isPartialFillsAllowed();
 
 	public String getSymbol();
+
+	public String getTradeID();
 }

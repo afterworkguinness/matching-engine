@@ -11,7 +11,7 @@ public class MarketOrder implements Order {
 	private Double lastTradedPrice;
 	private boolean partialFillsAllowed = true;
 	private String symbol;
-
+	private String tradeID;
 	private Logger LOGGER = LoggerFactory.getLogger(com.infusion.trading.matching.domain.MarketOrder.class);
 
 	public MarketOrder(String symbol, OrderSide side, int orderQuantity) {
@@ -25,6 +25,16 @@ public class MarketOrder implements Order {
 		this.quantity = orderQuantity;
 		this.side = side;
 		partialFillsAllowed = (designation == null);
+	}
+
+
+	public void setTradeID(String tradeID) {
+		this.tradeID = tradeID;
+	}
+
+	public String getTradeID() {
+
+		return tradeID;
 	}
 
 	@Override

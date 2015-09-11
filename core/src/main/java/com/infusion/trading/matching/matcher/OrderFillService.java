@@ -11,6 +11,7 @@ import com.infusion.trading.matching.domain.Order;
 import com.infusion.trading.matching.execution.ITradeExecutionService;
 import com.infusion.trading.matching.orderbook.OrderBook;
 import com.infusion.trading.matching.orderbook.OrderBookService;
+import org.slf4j.MDC;
 
 @Component
 public class OrderFillService {
@@ -23,6 +24,7 @@ public class OrderFillService {
 
 	@Autowired
 	private OrderMatchService orderMatchService;
+
 
 	private Logger LOGGER = LoggerFactory.getLogger(com.infusion.trading.matching.matcher.OrderFillService.class);
 
@@ -45,6 +47,7 @@ public class OrderFillService {
 		orderBook.lockForWrite();
 
 		try {
+			MDC.put("TRADEID", order.getTradeID());
 
 			LOGGER.debug("New order - " + order);
 
@@ -59,8 +62,6 @@ public class OrderFillService {
 				// FIXME: This is UGLY, don't pass orderbook around
 				processIncompleteOrder(order, orderBook);
 			}
-
-			orderBookService.updateOrderBook(orderBook);
 		}
 		finally {
 			orderBook.unlockWriteLock();
@@ -136,7 +137,9 @@ public class OrderFillService {
 		}
 		else {
 			limitOrder = (LimitOrder) order;
+			LOGGER.debug("order is a limit order " + order);
 		}
+		LOGGER.debug("Adding to book: " + orderBook);
 		orderBook.addLimitOrder(limitOrder);
 	}
 

@@ -14,6 +14,7 @@ public class LimitOrder implements Order {
 	private boolean holdInStaging;
 	private boolean partialFillsAllowed = true;
 	private String symbol;
+	private String tradeID;
 
 	private Logger LOGGER = LoggerFactory.getLogger(com.infusion.trading.matching.domain.LimitOrder.class);
 
@@ -47,6 +48,15 @@ public class LimitOrder implements Order {
 		if (quantity == 0) {
 			completed = true;
 		}
+	}
+
+	public String getTradeID() {
+		return this.tradeID;
+	}
+
+	public void setTradeID(String tradeID) {
+
+		this.tradeID = tradeID;
 	}
 
 	@Override
@@ -86,11 +96,12 @@ public class LimitOrder implements Order {
 
 	public void setArrivalTimeInOrderBook(long arrivalTimeInOrderBook) {
 
-		if (arrivalTimeInOrderBook == 0) {
+		if (this.arrivalTimeInOrderBook == 0) {
 
 			this.arrivalTimeInOrderBook = arrivalTimeInOrderBook;
 		}
 		else {
+			LOGGER.error("An attempt was made to set arrival time in order book after it was already set.");
 			throw new UnsupportedOperationException("Arrival time in orderbook can only be set once!");
 		}
 	}
@@ -123,7 +134,7 @@ public class LimitOrder implements Order {
 	@Override
 	public String toString() {
 
-		return "[Limit Order]: Symbol: " + symbol + "| Side: " + side.name() + " | Quantity: " + quantity + " | Limit Price: " + limitPrice + " | Partial Fills Allowed: "
+		return "[Limit Order]: TradeID: " + tradeID + " | Symbol: " + symbol + "| Side: " + side.name() + " | Quantity: " + quantity + " | Limit Price: " + limitPrice + " | Partial Fills Allowed: "
 				+ partialFillsAllowed;
 	}
 

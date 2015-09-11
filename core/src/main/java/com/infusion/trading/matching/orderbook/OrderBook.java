@@ -1,19 +1,14 @@
 package com.infusion.trading.matching.orderbook;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-
 import com.infusion.trading.matching.algo.IOrderPlacementAlgorithm;
 import com.infusion.trading.matching.domain.LimitOrder;
 import com.infusion.trading.matching.domain.OrderSide;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.*;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class OrderBook {
 
@@ -46,16 +41,12 @@ public class OrderBook {
 	public void addLimitOrder(LimitOrder order) {
 
 		order.setArrivalTimeInOrderBook(arrivalTimeService.getArrivalTimeInOrderBook());
-
-		/*
-		 * Want to lock the entire order book at one time. Only one order,
-		 * regardless if it's buy or sell allowed in at one time
-		 */
-
+		LOGGER.trace("order arrival time set: ");
+		LOGGER.trace("Fetching orders for side of book to add to");
 		LinkedList<LimitOrder> orders = (LinkedList<LimitOrder>) getOrders(order.getSide());
-
+		LOGGER.trace("Fetched existing orders for correct side of book to add to " + orders);
 		int position = orderPlacementAlgorithm.findPositionToPlaceInBook(orders, order);
-
+	    LOGGER.trace("Adding limit order to book at pos " + position);
 		if (position == 0) {
 			orders.addFirst(order);
 		}
@@ -65,8 +56,9 @@ public class OrderBook {
 		else {
 			orders.add(position, order);
 		}
+		LOGGER.trace("Order Added: >>  " + this);
 
-		/*
+		/*TODO:
 		 * Backup to DB while still locking. If you do it after lock is
 		 * released, it could be stale
 		 */
@@ -130,12 +122,9 @@ public class OrderBook {
 
 
 	public boolean isLiquidityLeft(OrderSide side) {
-       LOGGER.debug("Liquidity check - orderbook " + this);
 
 		OrderSide sideToCheck = side.getOppositeSide();
-		LOGGER.debug("checking side: " + sideToCheck);
 		List<LimitOrder> restingOrders = getOrders(sideToCheck);
-		LOGGER.debug("Resting orders: " + restingOrders);
 
 		return restingOrders.isEmpty() == false;
 	}
