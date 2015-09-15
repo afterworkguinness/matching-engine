@@ -42,8 +42,6 @@ public class OrderFillService {
 		 * 
 		 * So in any case, the price of the resting order is used
 		 */
-		MDC.put("TRADEID", order.getTradeID());
-
 		OrderBook orderBook = orderBookService.getOrderBook(order.getSymbol());
 
 		orderBook.lockForWrite();
