@@ -13,6 +13,9 @@ import com.infusion.trading.matching.orderbook.OrderBook;
 import com.infusion.trading.matching.orderbook.OrderBookService;
 import org.slf4j.MDC;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 @Component
 public class OrderFillService {
 
@@ -25,9 +28,18 @@ public class OrderFillService {
 	@Autowired
 	private OrderMatchService orderMatchService;
 
+	//CONFIGURE THIS!
+	private ExecutorService workerPool = Executors.newFixedThreadPool(10);
 
 	private Logger LOGGER = LoggerFactory.getLogger(com.infusion.trading.matching.matcher.OrderFillService.class);
 
+	//This is called from the web tier to run things asynchronously
+	public void placeTrade(Order order) {
+
+		workerPool.submit(() -> attemptToFillOrder(order));
+	}
+
+	//This is called directly from the tests to run things synchronously
 	public void attemptToFillOrder(Order order) {
 
 		/*
@@ -42,6 +54,7 @@ public class OrderFillService {
 		 * 
 		 * So in any case, the price of the resting order is used
 		 */
+
 		OrderBook orderBook = orderBookService.getOrderBook(order.getSymbol());
 
 		orderBook.lockForWrite();
@@ -60,6 +73,9 @@ public class OrderFillService {
 				// FIXME: This is UGLY, don't pass orderbook around
 				processIncompleteOrder(order, orderBook);
 			}
+		}
+		catch(RuntimeException rex) {
+			LOGGER.error("Exception encountered placing trade: ", rex);
 		}
 		finally {
 			orderBook.unlockWriteLock();
