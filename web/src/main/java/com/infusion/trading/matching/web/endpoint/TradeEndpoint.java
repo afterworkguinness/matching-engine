@@ -3,6 +3,7 @@ package com.infusion.trading.matching.web.endpoint;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -21,8 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Path("/trade")
 public class TradeEndpoint {
-	// TODO: make this configurable!!
-	private ExecutorService threadPool = Executors.newFixedThreadPool(10);
+
 	private Logger LOGGER = LoggerFactory.getLogger(TradeEndpoint.class);
 
 	@Autowired
@@ -31,7 +31,7 @@ public class TradeEndpoint {
 	@POST
 	@Path("limit")
 	@Consumes({ MediaType.APPLICATION_JSON })
-	public void limitOrder(LimitOrderModel limitOrder) {
+	public void limitOrder(@Valid LimitOrderModel limitOrder) {
 
 		placeTrade(limitOrder);
 	}
