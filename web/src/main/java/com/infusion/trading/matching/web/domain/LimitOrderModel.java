@@ -4,11 +4,17 @@ import com.infusion.trading.matching.domain.Order;
 import com.infusion.trading.matching.domain.OrderDesignation;
 import com.infusion.trading.matching.domain.OrderSide;
 
+import javax.validation.constraints.NotNull;
+
 public class LimitOrderModel {
 
+	@NotNull
 	private String symbol;
+	@NotNull
 	private Double limitPrice;
+	@NotNull
 	private Integer quantity;
+	@NotNull
 	private OrderSide side;
 	private OrderDesignation designation;
 
